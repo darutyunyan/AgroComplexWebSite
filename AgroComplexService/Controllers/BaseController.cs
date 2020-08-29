@@ -2,7 +2,7 @@ using AgroComplexService.Dto;
 using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TeacherService.Controllers
+namespace AgroComplexService.Controllers
 {
 	[ApiController]
 	[Route("[controller]")]
