@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AgroComplexService.Models.DataBase;
+using AgroComplexService.Models.Services.AccountManagment;
 using AgroComplexService.Models.Services.Mail;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AgroComplexService
 {
@@ -24,8 +20,9 @@ namespace AgroComplexService
         }
 
         public IConfiguration Configuration { get; }
+		private readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-        public void ConfigureServices(IServiceCollection services)
+		public void ConfigureServices(IServiceCollection services)
         {
 			// Sql server.
 			services.AddDbContext<AgroComplexDBContext>(options =>
@@ -35,6 +32,44 @@ namespace AgroComplexService
 			EmailSetting settings = new EmailSetting();
 			Configuration.GetSection("AppSettings:EmailSetting").Bind(settings);
 			services.AddTransient<IMailService>(x => new MailService(settings));
+
+			// Init Cors service.
+			string clientUrl = Configuration.GetValue<string>("AppSettings:ClientUrl:Url");
+			services.AddCors(options =>
+			{
+				options.AddPolicy(name: MyAllowSpecificOrigins, builder => builder
+					.WithOrigins(clientUrl)
+					.AllowAnyHeader()
+					.AllowAnyMethod());
+			});
+
+			// Init Authentication token.
+			services.AddAuthentication(options =>
+			{
+				options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+				options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+				options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+			}).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+			{
+				options.RequireHttpsMetadata = true;
+				options.RequireHttpsMetadata = true;
+				options.TokenValidationParameters = new TokenValidationParameters
+				{
+					ValidateIssuer = true,
+
+					ValidIssuer = AuthOptions.ISSUER,
+
+					ValidateAudience = true,
+
+					ValidAudience = AuthOptions.AUDIENCE,
+
+					ValidateLifetime = true,
+
+					IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+
+					ValidateIssuerSigningKey = true,
+				};
+			});
 
 			services.AddControllers();
         }
@@ -50,7 +85,9 @@ namespace AgroComplexService
 
             app.UseRouting();
 
-            app.UseAuthorization();
+			app.UseCors(MyAllowSpecificOrigins);
+
+			app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
