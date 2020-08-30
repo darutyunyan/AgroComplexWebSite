@@ -1,0 +1,27 @@
+<ul>
+    <li routerLinkActive="active">
+        <a [routerLink]="['']">Главная</a>
+    </li>
+    <li routerLinkActive="active">
+        <a [routerLink]="['/seeds']">Семена</a>
+    </li>
+    <li routerLinkActive="active">
+        <a [routerLink]="['/cropProtaction']">СЗР</a>
+    </li>
+    <li routerLinkActive="active">
+        <a [routerLink]="['/mineralFertilizers']">Мин. удобрения</a>
+    </li>
+    <li routerLinkActive="active">
+        <a [routerLink]="['/feeds']">Корма</a>
+    </li>
+    <li routerLinkActive="active">
+        <a [routerLink]="['/about']">О Компании</a>
+    </li>
+    <li routerLinkActive="active">
+        <a [routerLink]="['/contactUs']">Контакты</a>
+    </li>
+</ul>
+
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

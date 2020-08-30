@@ -23,7 +23,7 @@ namespace AgroComplexService.Controllers
             LoginResponse response = new LoginResponse();
 
             try
-            {
+            {		
                 Account account = await _accountServ.GetAccount(request.Email, request.Password); // exception
 
                 if (account == null)
