@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AgroComplexService.Dto;
 using AgroComplexService.Dto.ColumnType;
+using AgroComplexService.Dto.Product;
 using AgroComplexService.Dto.ProductName;
 using AgroComplexService.Dto.ProductType;
 using AgroComplexService.Models.DataBase;
@@ -33,13 +34,13 @@ namespace AgroComplexService.Controllers
 		[Route("InitAddProduct")]
 		[HttpGet]
 		[Authorize(AuthenticationSchemes = "Bearer")]
-		public async Task<ColumnTypesResponse> InitAddProduct()
+		public async Task<InitAddProductResponse> InitAddProduct()
 		{
-			ColumnTypesResponse response = new ColumnTypesResponse();
+			InitAddProductResponse response = new InitAddProductResponse();
 
 			try
 			{
-				response = await _productServ.GetColumnTypes();
+				response = await _productServ.InitAddProduct();
 			}
 			catch (Exception ex)
 			{

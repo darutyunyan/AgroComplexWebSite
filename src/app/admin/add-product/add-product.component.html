@@ -1,1 +1,44 @@
-<p>add-product works!</p>
+<h2>Добавление продука</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="form-group">
+        <label for="info">Информацию о продукте</label>
+        <input id="info" class="form-control" type="text" formControlName="info">
+        <div *ngIf="form.get('info').touched && form.get('info').invalid" class="validation">
+            <small *ngIf="form.get('info').errors.required">Введите информацию</small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="productType">Вид продукта</label>
+        <select class="form-control" formControlName="productType">
+            <option *ngFor="let productType of productTypes;" [value]="productType.id">{{productType.name}}</option>
+        </select>
+        <div *ngIf="form.get('productType').touched && form.get('productType').invalid" class="validation">
+            <small *ngIf="form.get('productType').errors.required">Выберите вид продукта</small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="productName">Название продукта</label>
+        <select class="form-control" formControlName="productName">
+            <option *ngFor="let productName of productNames;" [value]="productName.id">{{productName.name}}</option>
+        </select>
+        <div *ngIf="form.get('productName').touched && form.get('productName').invalid" class="validation">
+            <small *ngIf="form.get('productName').errors.required">Выберите название продукта</small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="columnType">Вид таблицы</label>
+        <select class="form-control" formControlName="columnType">
+            <option *ngFor="let column of columns;" [value]="column.id">{{column.name}}</option>
+        </select>
+        <div *ngIf="form.get('columnType').touched && form.get('columnType').invalid" class="validation">
+            <small *ngIf="form.get('columnType').errors.required">Выбирите вид таблицы</small>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid || submitted">Добавить</button>
+</form>

@@ -1,5 +1,6 @@
 using AgroComplexService.Dto;
 using AgroComplexService.Dto.ColumnType;
+using AgroComplexService.Dto.Product;
 using AgroComplexService.Dto.ProductName;
 using AgroComplexService.Dto.ProductType;
 using AgroComplexService.Models.DataBase;
@@ -26,6 +27,47 @@ namespace AgroComplexService.Models.Services.Product
 		#endregion
 
 		#region Public methods
+
+		public async Task<InitAddProductResponse> InitAddProduct()
+		{
+			InitAddProductResponse response = new InitAddProductResponse();
+
+			List<ProductTypeItem> productTypes = new List<ProductTypeItem>();
+			foreach (var item in await _productTypeRepo.GetAll())
+			{
+				productTypes.Add(new ProductTypeItem() {
+					Id=item.Id,
+					Name = item.Name
+				});
+			}
+
+			List<ProductNameItem> productNames = new List<ProductNameItem>();
+			foreach (var item in await _productNameRepo.GetAll())
+			{
+				productNames.Add(new ProductNameItem()
+				{
+					Id = item.Id,
+					Name = item.Name
+				});
+			}
+
+			List<ColumnTypeItem> columnTypes = new List<ColumnTypeItem>();
+			foreach (var item in await _columnTypeRepo.GetAll())
+			{
+				columnTypes.Add(new ColumnTypeItem()
+				{
+					Id = item.Id,
+					Name = item.Name
+				});
+			}
+
+			response.ProductTypes = productTypes.ToArray();
+			response.ProductNames = productNames.ToArray();
+			response.ColumnTypes = columnTypes.ToArray();
+
+			return response;
+
+		}
 
 		public async Task AddColumnType(AddColumnTypeRequest request)
 		{

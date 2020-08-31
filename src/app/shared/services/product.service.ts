@@ -9,6 +9,10 @@ export class ProductService {
 
     constructor(private http: HttpClient) { }
 
+    initAddProduct() {
+        return this.http.get(`${environment.agroComplexWebServiceUrl}/product/initAddProduct`);
+    }
+
     addColumnType(request) {
         return this.http.post(`${environment.agroComplexWebServiceUrl}/product/addColumnType`, request);
     }
