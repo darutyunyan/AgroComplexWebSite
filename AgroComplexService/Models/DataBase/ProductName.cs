@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace AgroComplexService.Models.DataBase
 {
-	public class ProductType
-	{
+    public class ProductName
+    {
 		public Guid Id { get; set; }
 		public string Name { get; set; }
 		public List<Product> Products { get; set; }

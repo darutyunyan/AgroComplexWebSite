@@ -1,0 +1,22 @@
+<p>add-column-type works!</p>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group">
+        <label for="name">Введите имена столбцов через '/'!</label>
+        <input id="name" class="form-control" type="text" formControlName="name">
+        <div *ngIf="form.get('name').touched && form.get('name').invalid" class="validation">
+            <small *ngIf="form.get('name').errors.required">Введите имена</small>
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid || submitted">Добавить</button>
+</form>
+
+<div *ngIf="tables.length" class="form-group">
+    <label for="students-list">Список таблиц</label>
+    <ul>
+        <li *ngFor="let table of tables;">{{table.name}}
+            <span >X</span>
+        </li>
+    </ul>
+</div>

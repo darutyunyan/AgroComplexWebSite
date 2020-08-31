@@ -6,6 +6,7 @@ namespace AgroComplexService.Models.DataBase
 	{
 		public virtual DbSet<Account> Accounts { get; set; }
 		public virtual DbSet<Product> Products { get; set; }
+		public virtual DbSet<ProductName> ProductNames{ get; set; }
 		public virtual DbSet<ProductType> ProductTypes { get; set; }
 		public virtual DbSet<ColumnType> ColumnTypes { get; set; }
 

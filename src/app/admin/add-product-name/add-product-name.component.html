@@ -1,0 +1,22 @@
+<p>add-product-name works!</p>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group">
+        <label for="name">Введите имя</label>
+        <input id="name" class="form-control" type="text" formControlName="name">
+        <div *ngIf="form.get('name').touched && form.get('name').invalid" class="validation">
+            <small *ngIf="form.get('name').errors.required">Введите имя</small>
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid || submitted">Добавить</button>
+</form>
+
+<div *ngIf="productNames.length" class="form-group">
+    <label for="students-list">Список Имен</label>
+    <ul>
+        <li *ngFor="let productName of productNames;">{{productName.name}}
+            <span >X</span>
+        </li>
+    </ul>
+</div>
