@@ -27,11 +27,19 @@ export class AddProductNameComponent implements OnInit {
 
   
   getProductNames() {
-    this.productServ.getproductNames().subscribe((res: any) => {
+    this.productServ.getProductNames().subscribe((res: any) => {
       this.productNames = [];
       res.productNames.forEach(element => {
         this.productNames = this.productNames.concat(element);
       });
+    }, () => {
+
+    });
+  }
+
+  remove(id) {
+    this.productServ.removeProductName({ id: id }).subscribe((res: any) => {
+      this.productNames = this.productNames.filter(student => student.id !== id);
     }, () => {
 
     });
@@ -48,7 +56,7 @@ export class AddProductNameComponent implements OnInit {
       name: this.form.value.name
     };
 
-    this.productServ.addProdcutName(request).subscribe((res: any) => {
+    this.productServ.addProductName(request).subscribe((res: any) => {
       if (res.serviceError == null) {
         this.form.reset();
         this.getProductNames();

@@ -8,10 +8,10 @@ namespace AgroComplexService.Models.Repository
 {
 	public interface IProductNameRepository
 	{
-		Task AddProductName(ProductName productName);
+		Task Add(ProductName productName);
 
-		Task<List<ProductName>> GetProductNames();
+		Task<List<ProductName>> GetAll();
 
-		Task RemoveProductName(Guid id);
+		Task Remove(Guid id);
 	}
 }

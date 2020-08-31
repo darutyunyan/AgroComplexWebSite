@@ -20,32 +20,32 @@ namespace AgroComplexService.Models.Repository
 
 		#region Public methods
 
-		public async Task AddColumnType(ColumnType columnType)
+		public async Task Add(ColumnType columnType)
 		{
 			if (columnType == null)
 				throw new ArgumentNullException("columnType");
 
-			await _context.ColumnTypes.AddAsync(columnType);
+			await _context.ColumnType.AddAsync(columnType);
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<List<ColumnType>> GetColumnTypes()
+		public async Task<List<ColumnType>> GetAll()
 		{
-			return await _context.ColumnTypes.ToListAsync();
+			return await _context.ColumnType.ToListAsync();
 		}
 
-		public async Task RemovColumnType(Guid id)
+		public async Task Remove(Guid id)
 		{
 			if (id == Guid.Empty)
 				throw new ArgumentException("id");
 
 
 			ColumnType columnType = await _context
-				.ColumnTypes
+				.ColumnType
 				.Where(c => c.Id == id)
 				.FirstOrDefaultAsync();
 
-			_context.ColumnTypes.Remove(columnType);
+			_context.ColumnType.Remove(columnType);
 			await _context.SaveChangesAsync();
 		}
 

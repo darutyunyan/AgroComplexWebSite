@@ -1,5 +1,6 @@
 using AgroComplexService.Dto.ColumnType;
 using AgroComplexService.Dto.ProductName;
+using AgroComplexService.Dto.ProductType;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,20 @@ namespace AgroComplexService.Models.Services.Product
 	{
 		Task AddColumnType(AddColumnTypeRequest request);
 
+		Task RemoveColumnType(RemoveColumnTypeRequest request);
+
 		Task<ColumnTypesResponse> GetColumnTypes();
 
 		Task AddProductName(AddProductNameRequest request);
 
+		Task RemoveProductName(RemoveProductNameRequest request);
+
 		Task<GetProductNamesResponse> GetProductNames();
+
+		Task AddProductType(AddProductTypeRequest request);
+
+		Task RemoveProductType(RemoveProductTypeRequest request);
+
+		Task<GetProductTypesResponse> GetProductTypes();
 	}
 }

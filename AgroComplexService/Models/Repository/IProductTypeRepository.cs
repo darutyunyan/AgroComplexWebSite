@@ -7,10 +7,10 @@ namespace AgroComplexService.Models.Repository
 {
 	public interface IProductTypeRepository
 	{
-		Task AddProductType(ProductType productType);
+		Task Add(ProductType productType);
 
-		Task<List<ProductType>> GetProductTypes();
+		Task<List<ProductType>> GetAll();
 
-		Task RemovProductType(Guid id);
+		Task Remove(Guid id);
 	}
 }

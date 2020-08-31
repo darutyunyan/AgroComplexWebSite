@@ -9,6 +9,7 @@ import { AuthGuard } from '../shared/auth.guard';
 import { AddProductComponent } from './add-product/add-product.component';
 import { AddColumnTypeComponent } from './add-column-type/add-column-type.component';
 import { AddProductNameComponent } from './add-product-name/add-product-name.component';
+import { AddProductTypeComponent } from './add-product-type/add-product-type.component';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { AddProductNameComponent } from './add-product-name/add-product-name.com
         DashboardComponent,
         AddProductComponent,
         AddColumnTypeComponent,
-        AddProductNameComponent
+        AddProductNameComponent,
+        AddProductTypeComponent
     ],
     imports: [
         CommonModule,
@@ -32,7 +34,7 @@ import { AddProductNameComponent } from './add-product-name/add-product-name.com
                     { path: 'add-product-name', component: AddProductNameComponent, canActivate: [AuthGuard]},
                     { path: 'add-product', component: AddProductComponent, canActivate: [AuthGuard]},
                     { path: 'add-column-type', component: AddColumnTypeComponent, canActivate: [AuthGuard]},
-                    
+                    { path: 'add-product-type', component: AddProductTypeComponent, canActivate: [AuthGuard]}
                 ]
             }
         ])

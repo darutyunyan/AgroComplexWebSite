@@ -1,5 +1,4 @@
-<h2>Добавление название нового продукта</h2>
-
+<h2>Добавление нового вида продукции</h2>
 <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="form-group">
         <label for="name">Введите имя</label><br>
@@ -12,11 +11,11 @@
     <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid || submitted">Добавить</button>
 </form>
 <br>
-<div *ngIf="productNames.length" class="form-group">
-    <label for="students-list">Список продуктов</label>
+<div *ngIf="productTypes.length" class="form-group">
+    <label for="students-list">Список продукции</label>
     <ul>
-        <li *ngFor="let productName of productNames;">{{productName.name}}
-            <button type="button"  (click)="remove(productName.id)">Удалить</button>
+        <li *ngFor="let productType of productTypes;">{{productType.name}}
+            <button type="button"  (click)="remove(productType.id)">Удалить</button>
         </li>
     </ul>
 </div>

@@ -2,18 +2,37 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AgroComplexService.Models.DataBase
 {
-	public class AgroComplexDBContext : DbContext
+	public partial class AgroComplexDBContext : DbContext
 	{
-		public virtual DbSet<Account> Accounts { get; set; }
-		public virtual DbSet<Product> Products { get; set; }
-		public virtual DbSet<ProductName> ProductNames{ get; set; }
-		public virtual DbSet<ProductType> ProductTypes { get; set; }
-		public virtual DbSet<ColumnType> ColumnTypes { get; set; }
-
-
 		public AgroComplexDBContext(DbContextOptions<AgroComplexDBContext> options)
 			: base(options)
 		{
 		}
+
+		public virtual DbSet<Account> Account { get; set; }
+		public virtual DbSet<Product> Product { get; set; }
+		public virtual DbSet<ProductName> ProductName { get; set; }
+		public virtual DbSet<ProductType> ProductType { get; set; }
+		public virtual DbSet<ColumnType> ColumnType { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<Account>(entity =>
+			{
+				entity.Property(e => e.Id).ValueGeneratedNever();
+
+				entity.Property(e => e.Email)
+					.IsRequired()
+					.HasMaxLength(120);
+
+				entity.Property(e => e.Password)
+					.IsRequired()
+					.HasMaxLength(120);
+			});
+
+			OnModelCreatingPartial(modelBuilder);
+		}
+
+		partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 	}
 }

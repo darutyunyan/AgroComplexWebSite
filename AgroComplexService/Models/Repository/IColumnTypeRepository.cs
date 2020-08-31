@@ -7,10 +7,10 @@ namespace AgroComplexService.Models.Repository
 {
 	public interface IColumnTypeRepository
 	{
-		Task AddColumnType(ColumnType columbType);
+		Task Add(ColumnType columbType);
 
-		Task<List<ColumnType>> GetColumnTypes();
+		Task<List<ColumnType>> GetAll();
 
-		Task RemovColumnType(Guid id);
+		Task Remove(Guid id);
 	}
 }

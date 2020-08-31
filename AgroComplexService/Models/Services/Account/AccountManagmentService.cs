@@ -30,7 +30,7 @@ namespace AgroComplexService.Models.Services.AccountManagment
             if (string.IsNullOrEmpty(password))
                 throw new ArgumentNullException("password");
 
-            Account account = await _context.Accounts
+            Account account = await _context.Account
                 .FirstOrDefaultAsync(x => x.Email == login && x.Password == password);
 
             return account;

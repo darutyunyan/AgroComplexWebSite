@@ -20,31 +20,31 @@ namespace AgroComplexService.Models.Repository
 
 		#region Public methods
 
-		public async Task AddProductName(ProductName productName)
+		public async Task Add(ProductName productName)
 		{
 			if (productName == null)
 				throw new ArgumentNullException("productName");
 
-			await _context.ProductNames.AddAsync(productName);
+			await _context.ProductName.AddAsync(productName);
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<List<ProductName>> GetProductNames()
+		public async Task<List<ProductName>> GetAll()
 		{
-			return await _context.ProductNames.ToListAsync();
+			return await _context.ProductName.ToListAsync();
 		}
 
-		public async Task RemoveProductName(Guid id)
+		public async Task Remove(Guid id)
 		{
 			if (id == Guid.Empty)
 				throw new ArgumentException("id");
 
 			ProductName productName = await _context
-				.ProductNames
+				.ProductName
 				.Where(p => p.Id == id)
 				.FirstOrDefaultAsync();
 
-			_context.ProductNames.Remove(productName);
+			_context.ProductName.Remove(productName);
 			await _context.SaveChangesAsync();
 		}
 

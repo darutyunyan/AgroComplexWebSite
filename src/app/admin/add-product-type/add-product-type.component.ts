@@ -3,16 +3,15 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
-  selector: 'app-add-column-type',
-  templateUrl: './add-column-type.component.html',
-  styleUrls: ['./add-column-type.component.css']
+  selector: 'app-add-product-type',
+  templateUrl: './add-product-type.component.html',
+  styleUrls: ['./add-product-type.component.css']
 })
-export class AddColumnTypeComponent implements OnInit {
-
+export class AddProductTypeComponent implements OnInit {
   public form: FormGroup;
   submitted = false;
 
-  tables = [];
+  productTypes = [];
 
   constructor(
     private productServ: ProductService
@@ -22,15 +21,15 @@ export class AddColumnTypeComponent implements OnInit {
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required])
     });
-    this.getColumnTypes();
+    this.getProductTypes();
   }
 
   
-  getColumnTypes() {
-    this.productServ.getColumnTypes().subscribe((res: any) => {
-      this.tables = [];
-      res.columnTypes.forEach(element => {
-        this.tables = this.tables.concat(element);
+  getProductTypes() {
+    this.productServ.getProductTypes().subscribe((res: any) => {
+      this.productTypes = [];
+      res.productTypes.forEach(element => {
+        this.productTypes = this.productTypes.concat(element);
       });
     }, () => {
 
@@ -38,13 +37,12 @@ export class AddColumnTypeComponent implements OnInit {
   }
 
   remove(id) {
-    this.productServ.removeColumnType({ id: id }).subscribe((res: any) => {
-      this.tables = this.tables.filter(student => student.id !== id);
+    this.productServ.removeProductType({ id: id }).subscribe((res: any) => {
+      this.productTypes = this.productTypes.filter(student => student.id !== id);
     }, () => {
 
     });
   }
-
 
   submit() {
     if (this.form.invalid) {
@@ -57,10 +55,10 @@ export class AddColumnTypeComponent implements OnInit {
       name: this.form.value.name
     };
 
-    this.productServ.addColumnType(request).subscribe((res: any) => {
+    this.productServ.addProductType(request).subscribe((res: any) => {
       if (res.serviceError == null) {
         this.form.reset();
-        this.getColumnTypes();
+        this.getProductTypes();
       }
 
       this.submitted = false;
@@ -68,5 +66,4 @@ export class AddColumnTypeComponent implements OnInit {
       this.submitted = false;
     });
   }
-
 }
