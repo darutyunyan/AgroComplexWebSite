@@ -11,6 +11,14 @@ import { AddColumnTypeComponent } from './add-column-type/add-column-type.compon
 import { AddProductNameComponent } from './add-product-name/add-product-name.component';
 import { AddProductTypeComponent } from './add-product-type/add-product-type.component';
 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 @NgModule({
     declarations: [
         AdminLayoutComponent,
@@ -25,6 +33,12 @@ import { AddProductTypeComponent } from './add-product-type/add-product-type.com
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatListModule,
+        FlexLayoutModule,
         RouterModule.forChild([
             {
                 path: '', component: AdminLayoutComponent, children: [

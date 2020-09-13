@@ -14,6 +14,10 @@ export class AdminLayoutComponent implements OnInit {
   ngOnInit() {
   }
 
+  isAuthenicated() {
+    return this.auth.isAuthenicated();
+  }
+
   public logout(): void {
     this.auth.logout();
     this.router.navigate(['/']);

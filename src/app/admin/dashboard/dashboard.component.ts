@@ -17,12 +17,10 @@ export class DashboardComponent implements OnInit {
 
   getAllProduct() {
     this.productServ.getAllProducts().subscribe((res: any) => {
-      console.log(res);
       this.products = [];
       res.productItems.forEach(product => {
         this.products = this.products.concat(product);
       });
-      console.log(this.products);
     }, () => {
 
     });
