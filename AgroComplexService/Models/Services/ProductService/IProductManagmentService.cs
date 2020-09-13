@@ -7,11 +7,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AgroComplexService.Models.Services.Product
+namespace AgroComplexService.Models.Services.ProductService
 {
 	public interface IProductManagmentService
 	{
 		Task<InitAddProductResponse> InitAddProduct();
+
+		Task AddProduct(AddProductRequest request);
+
+		Task<GetAllProductsResponse> GetAllProducts();
 
 
 		Task AddColumnType(AddColumnTypeRequest request);

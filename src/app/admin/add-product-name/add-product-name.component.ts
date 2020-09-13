@@ -25,7 +25,6 @@ export class AddProductNameComponent implements OnInit {
     this.getProductNames();
   }
 
-  
   getProductNames() {
     this.productServ.getProductNames().subscribe((res: any) => {
       this.productNames = [];
@@ -38,7 +37,7 @@ export class AddProductNameComponent implements OnInit {
   }
 
   remove(id) {
-    this.productServ.removeProductName({ id: id }).subscribe((res: any) => {
+    this.productServ.removeProductName({ id }).subscribe((res: any) => {
       this.productNames = this.productNames.filter(student => student.id !== id);
     }, () => {
 

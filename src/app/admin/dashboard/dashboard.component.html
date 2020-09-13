@@ -1,1 +1,18 @@
-<p>dashboard works!</p>
+<h1>Список продуктов</h1>
+
+<table>
+    <tr>
+      <th>№</th>
+      <th>Название продукта</th>
+      <th>Информация о продукте</th>
+       <th>Вид продукта</th>
+       <th>Наименования столбцов таблицы в которой будет отображаться информация о продукте</th>
+    </tr>
+    <tr *ngFor="let product of products;let i = index">
+      <td>{{i+1}}</td>
+      <td>{{product.productName}}</td>
+      <td>{{product.info}}</td>
+      <td>{{product.productType}}</td>
+      <td>{{product.columnType}}</td>
+    </tr>
+  </table>

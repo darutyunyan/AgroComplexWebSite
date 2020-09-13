@@ -8,7 +8,7 @@ using AgroComplexService.Dto.Product;
 using AgroComplexService.Dto.ProductName;
 using AgroComplexService.Dto.ProductType;
 using AgroComplexService.Models.DataBase;
-using AgroComplexService.Models.Services.Product;
+using AgroComplexService.Models.Services.ProductService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -50,6 +50,43 @@ namespace AgroComplexService.Controllers
 			return response;
 		}
 
+		[Route("AddProduct")]
+		[HttpPost]
+		[Authorize(AuthenticationSchemes = "Bearer")]
+		public async Task<Response> AddProduct(AddProductRequest request)
+		{
+			Response response = new Response();
+
+			try
+			{
+				await _productServ.AddProduct(request);
+			}
+			catch (Exception ex)
+			{
+				SetResponse(response, ex);
+			}
+
+			return response;
+		}
+
+		[Route("GetAllProducts")]
+		[HttpGet]
+		[Authorize(AuthenticationSchemes = "Bearer")]
+		public async Task<GetAllProductsResponse> GetAllProducts()
+		{
+			GetAllProductsResponse response = new GetAllProductsResponse();
+
+			try
+			{
+				response = await _productServ.GetAllProducts();
+			}
+			catch (Exception ex)
+			{
+				SetResponse(response, ex);
+			}
+
+			return response;
+		}
 
 		[Route("AddColumnType")]
 		[HttpPost]

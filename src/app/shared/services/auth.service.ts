@@ -13,20 +13,20 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private cookieServ: MyCookieService) { }
-        
+
     login(request) {
       return this.http.post(`${environment.agroComplexWebServiceUrl}/Account/Login`, request);
     }
 
   setToken(response) {
     if (response) {
-      this.cookieServ.set(this.TOKEN, response.token, { expiresInString: response.liveTime, 'SameSite': 'Strict' });
+      this.cookieServ.set(this.TOKEN, response.token, { expiresInString: response.liveTime, SameSite: 'Strict' });
     } else {
       this.deleteToken();
     }
   }
 
-  deleteToken(){
+  deleteToken() {
     this.cookieServ.delete(this.TOKEN);
   }
 

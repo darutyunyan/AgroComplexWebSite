@@ -1,5 +1,5 @@
 export interface CookieOptions {
-    expiresInString?: string,
+    expiresInString?: string;
     expires?: Date;
     'max-age'?: string;
     secure?: boolean;

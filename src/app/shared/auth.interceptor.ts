@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { HttpInterceptor } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
@@ -13,14 +13,14 @@ export class AuthInterceptor implements HttpInterceptor {
     ) { }
 
     intercept(
-        req: import("@angular/common/http").HttpRequest<any>,
-        next: import("@angular/common/http").HttpHandler): import("rxjs").Observable<import("@angular/common/http").HttpEvent<any>> {
+        req: import('@angular/common/http').HttpRequest<any>,
+        next: import('@angular/common/http').HttpHandler): import('rxjs').Observable<import('@angular/common/http').HttpEvent<any>> {
 
         if (this.auth.isAuthenicated()) {
             req = req.clone({
                 setHeaders: {
                     'Authorization': `Bearer ${this.auth.getToken()}`
-                }   
+                }
             });
         }
 
@@ -33,6 +33,6 @@ export class AuthInterceptor implements HttpInterceptor {
                     }
                     return throwError(error);
                 })
-            )
+            );
     }
 }

@@ -33,7 +33,6 @@ export class AddProductComponent implements OnInit {
 
   init() {
     this.productServ.initAddProduct().subscribe((res: any) => {
-      console.log(res)
       res.columnTypes.forEach(element => {
         this.columns = this.columns.concat(element);
       });
@@ -45,14 +44,6 @@ export class AddProductComponent implements OnInit {
       res.productTypes.forEach(element => {
         this.productTypes = this.productTypes.concat(element);
       });
-    }, () => {
-
-    });
-  }
-
-  remove(id) {
-    this.productServ.removeProductName({ id: id }).subscribe((res: any) => {
-      this.productNames = this.productNames.filter(student => student.id !== id);
     }, () => {
 
     });
@@ -72,15 +63,14 @@ export class AddProductComponent implements OnInit {
       columnTypeId: this.form.value.columnType
     };
 
-   /*  this.productServ.addProductName(request).subscribe((res: any) => {
+    this.productServ.addProduct(request).subscribe((res: any) => {
       if (res.serviceError == null) {
         this.form.reset();
-        //this.getProductNames();
       }
 
       this.submitted = false;
     }, () => {
       this.submitted = false;
-    }); */
+    });
   }
 }

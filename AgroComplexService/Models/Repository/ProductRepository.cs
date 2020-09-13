@@ -54,9 +54,9 @@ namespace AgroComplexService.Models.Repository
 			return await _context.Product.Where(p => p.ProductType.Name == name).ToListAsync();
 		}
 
-		public async Task<List<ProductType>> GetAll()
+		public async Task<List<Product>> GetAll()
 		{
-			return await _context.ProductType.ToListAsync();
+			return await _context.Product.Include(pN=>pN.ProductName).Include(pT=>pT.ProductType).Include(cT=>cT.ColumnType).ToListAsync();
 		}
 
 		public async Task Remove(Guid id)

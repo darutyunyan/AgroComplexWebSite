@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AgroComplexService.Models.Services.Product
+namespace AgroComplexService.Models.Services.ProductService
 {
 	public class ProductManagmentService : IProductManagmentService
 	{
@@ -35,8 +35,9 @@ namespace AgroComplexService.Models.Services.Product
 			List<ProductTypeItem> productTypes = new List<ProductTypeItem>();
 			foreach (var item in await _productTypeRepo.GetAll())
 			{
-				productTypes.Add(new ProductTypeItem() {
-					Id=item.Id,
+				productTypes.Add(new ProductTypeItem()
+				{
+					Id = item.Id,
 					Name = item.Name
 				});
 			}
@@ -69,6 +70,57 @@ namespace AgroComplexService.Models.Services.Product
 
 		}
 
+		public async Task AddProduct(AddProductRequest request)
+		{
+			if (request == null)
+				throw new ArgumentException("request");
+
+			if (string.IsNullOrEmpty(request.Info))
+				throw new ArgumentException("info");
+
+			if (string.IsNullOrEmpty(request.ProductNameId))
+				throw new ArgumentException("productNameId");
+
+			if (string.IsNullOrEmpty(request.ProductTypeId))
+				throw new ArgumentException("productTypeId");
+
+			if (string.IsNullOrEmpty(request.ColumnTypeId))
+				throw new ArgumentException("columnTypeId");
+
+			Product product = new Product()
+			{
+				Id = Guid.NewGuid(),
+				Info = request.Info,
+				ColumnTypeId = Guid.Parse(request.ColumnTypeId),
+				ProductNameId = Guid.Parse(request.ProductNameId),
+				ProductTypeId = Guid.Parse(request.ProductTypeId)
+			};
+
+			await _productRepo.Add(product);
+		}
+
+		public async Task<GetAllProductsResponse> GetAllProducts()
+		{
+			GetAllProductsResponse response = new GetAllProductsResponse();
+			List<ProductItem> items = new List<ProductItem>();
+
+			foreach (var item in await _productRepo.GetAll())
+			{
+				items.Add(new ProductItem()
+				{
+					Id = item.Id,
+					Info = item.Info,
+					ProductType = item.ProductType.Name,
+					ProductName = item.ProductName.Name,
+					ColumnType = item.ColumnType.Name
+				});
+			}
+
+			response.ProductItems = items.ToArray();
+
+			return response;
+		}
+
 		public async Task AddColumnType(AddColumnTypeRequest request)
 		{
 			if (request == null)
@@ -82,7 +134,7 @@ namespace AgroComplexService.Models.Services.Product
 
 			await _columnTypeRepo.Add(columnType);
 		}
-		
+
 		public async Task RemoveColumnType(RemoveColumnTypeRequest request)
 		{
 			if (request == null)

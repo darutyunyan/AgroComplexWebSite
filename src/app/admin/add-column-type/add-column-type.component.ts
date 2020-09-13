@@ -25,7 +25,6 @@ export class AddColumnTypeComponent implements OnInit {
     this.getColumnTypes();
   }
 
-  
   getColumnTypes() {
     this.productServ.getColumnTypes().subscribe((res: any) => {
       this.tables = [];
@@ -38,7 +37,7 @@ export class AddColumnTypeComponent implements OnInit {
   }
 
   remove(id) {
-    this.productServ.removeColumnType({ id: id }).subscribe((res: any) => {
+    this.productServ.removeColumnType({ id }).subscribe((res: any) => {
       this.tables = this.tables.filter(student => student.id !== id);
     }, () => {
 
