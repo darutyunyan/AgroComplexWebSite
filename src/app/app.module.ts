@@ -12,6 +12,7 @@ import { MineralFertilizersComponent } from './mineral-fertilizers/mineral-ferti
 import { FeedsComponent } from './feeds/feeds.component';
 import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
