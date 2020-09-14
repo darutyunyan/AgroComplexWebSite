@@ -19,12 +19,12 @@
                 <label for="info">Введите информацию о продукте через символ '/'</label> 
                 <small id="emailHelp" class="form-text text-muted">Пример: Вика яровая/Льговская 22/от 23 руб/кг.</small>
                 <small id="emailHelp" class="form-text text-muted">Если какое-то значение надо пропустить, то вставте знак #. Пример: Вика яровая/#/от 23 руб/кг.</small>
-                <input class="form-control" id="info" class="form-control" type="text" formControlName="info">
+                <input id="info" class="form-control" type="text" formControlName="info">
             </div>
 
             <div class="form-group">
                 <label for="productType">Выберите вид продукта</label>
-                <select class="form-control" class="form-control" formControlName="productType">
+                <select class="form-control" formControlName="productType">
                     <option *ngFor="let productType of productTypes;" [value]="productType.id">
                         {{productType.name}}
                     </option>
@@ -33,7 +33,7 @@
 
             <div class="form-group">
                 <label for="productName">Выберите название продукта</label>
-                <select class="form-control" class="form-control" formControlName="productName">
+                <select class="form-control" formControlName="productName">
                     <option *ngFor="let productName of productNames;" [value]="productName.id">
                         {{productName.name}}
                     </option>
@@ -42,7 +42,7 @@
 
             <div class="form-group">
                 <label for="columnType">Выберите вид таблицы</label>
-                <select class="form-control" class="form-control" formControlName="columnType">
+                <select class="form-control" formControlName="columnType">
                     <option *ngFor="let column of columns;" [value]="column.id">{{column.name}}</option>
                 </select>
             </div>

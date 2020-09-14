@@ -121,6 +121,14 @@ namespace AgroComplexService.Models.Services.ProductService
 			return response;
 		}
 
+		public async Task RemoveProduct(RemoveProductRequest request)
+		{
+			if (request == null)
+				throw new ArgumentException("request");
+
+			await _productRepo.Remove(Guid.Parse(request.Id));
+		}
+
 		public async Task AddColumnType(AddColumnTypeRequest request)
 		{
 			if (request == null)

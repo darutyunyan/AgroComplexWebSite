@@ -8,11 +8,20 @@ import { ProductService } from 'src/app/shared/services/product.service';
 })
 export class DashboardComponent implements OnInit {
   public products = [];
+  public productName: string;
 
   constructor(private productServ: ProductService) { }
 
   ngOnInit() {
     this.getAllProduct();
+  }
+
+  remove(id: string) {
+    this.productServ.removeProduct({ id }).subscribe((res: any) => {
+      this.products = this.products.filter(student => student.id !== id);
+    }, () => {
+
+    });
   }
 
   getAllProduct() {

@@ -18,6 +18,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SearchPipe } from '../shared/search.pipe';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         AddProductComponent,
         AddColumnTypeComponent,
         AddProductNameComponent,
-        AddProductTypeComponent
+        AddProductTypeComponent,
+        SearchPipe
     ],
     imports: [
         CommonModule,

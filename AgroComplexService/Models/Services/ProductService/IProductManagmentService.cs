@@ -17,6 +17,8 @@ namespace AgroComplexService.Models.Services.ProductService
 
 		Task<GetAllProductsResponse> GetAllProducts();
 
+		Task RemoveProduct(RemoveProductRequest request);
+
 
 		Task AddColumnType(AddColumnTypeRequest request);
 

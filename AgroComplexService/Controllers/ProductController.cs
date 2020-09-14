@@ -88,6 +88,25 @@ namespace AgroComplexService.Controllers
 			return response;
 		}
 
+		[Route("RemoveProduct")]
+		[HttpPost]
+		[Authorize(AuthenticationSchemes = "Bearer")]
+		public async Task<Response> RemoveProduct(RemoveProductRequest request)
+		{
+			Response response = new Response();
+
+			try
+			{
+				await _productServ.RemoveProduct(request);
+			}
+			catch (Exception ex)
+			{
+				SetResponse(response, ex);
+			}
+
+			return response;
+		}
+
 		[Route("AddColumnType")]
 		[HttpPost]
 		[Authorize(AuthenticationSchemes = "Bearer")]

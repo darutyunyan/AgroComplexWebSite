@@ -1,5 +1,8 @@
 <h1 class="m-4 text-right">Список продуктов</h1>
 
+<div class="form-group">
+  <input class="form-control" type="text" [(ngModel)]="productName" placeholder="Найти продукт">
+</div>
 <table class="table">
   <thead>
     <tr>
@@ -12,14 +15,14 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of products;let i = index">
+    <tr *ngFor="let product of products | search : productName ; let i = index">
       <td scope="row">{{i+1}}</td>
       <td>{{product.productName}}</td>
       <td>{{product.info}}</td>
       <td>{{product.productType}}</td>
       <td>{{product.columnType}}</td>
       <td>
-        <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+        <button (click)="remove(product.id)" mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
           <mat-icon>delete</mat-icon>
         </button>
       </td>

@@ -22,6 +22,10 @@ export class ProductService {
         return this.http.get(`${environment.agroComplexWebServiceUrl}/product/getAllProducts`);
     }
 
+    removeProduct(request) {
+        return this.http.post(`${environment.agroComplexWebServiceUrl}/product/removeProduct`, request);
+    }
+
     addColumnType(request) {
         return this.http.post(`${environment.agroComplexWebServiceUrl}/product/addColumnType`, request);
     }
