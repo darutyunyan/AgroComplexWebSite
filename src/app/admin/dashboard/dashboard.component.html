@@ -1,18 +1,28 @@
-<h1>Список продуктов</h1>
+<h1 class="m-4 text-right">Список продуктов</h1>
 
-<table>
+<table class="table">
+  <thead>
     <tr>
-      <th>№</th>
-      <th>Название продукта</th>
-      <th>Информация о продукте</th>
-       <th>Вид продукта</th>
-       <th>Наименования столбцов таблицы в которой будет отображаться информация о продукте</th>
+      <th scope="col" class="font-weight-bold">№</th>
+      <th scope="col" class="font-weight-bold">Название продукта</th>
+      <th scope="col" class="font-weight-bold">Информация о продукте</th>
+      <th scope="col" class="font-weight-bold">Вид продукта</th>
+      <th scope="col" class="font-weight-bold">Наименования столбцов таблицы в которой будет отображаться информация о продукте</th>
+      <th></th>
     </tr>
+  </thead>
+  <tbody>
     <tr *ngFor="let product of products;let i = index">
-      <td>{{i+1}}</td>
+      <td scope="row">{{i+1}}</td>
       <td>{{product.productName}}</td>
       <td>{{product.info}}</td>
       <td>{{product.productType}}</td>
       <td>{{product.columnType}}</td>
+      <td>
+        <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
     </tr>
-  </table>
+  </tbody>
+</table>

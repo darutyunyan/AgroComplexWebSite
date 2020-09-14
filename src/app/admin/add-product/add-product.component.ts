@@ -9,13 +9,12 @@ import { ProductService } from 'src/app/shared/services/product.service';
 })
 export class AddProductComponent implements OnInit {
   public form: FormGroup;
-  submitted = false;
+  public submitted = false;
+  public isShowError = false;
 
-  columns = [];
-  productNames = [];
-  productTypes = [];
-
-  qwe: any = null;
+  public columns = [];
+  public productNames = [];
+  public productTypes = [];
 
   constructor(
     private productServ: ProductService
@@ -28,6 +27,7 @@ export class AddProductComponent implements OnInit {
       productName: new FormControl(null, [Validators.required]),
       columnType: new FormControl(null, [Validators.required])
     });
+
     this.init();
   }
 
@@ -44,6 +44,10 @@ export class AddProductComponent implements OnInit {
       res.productTypes.forEach(element => {
         this.productTypes = this.productTypes.concat(element);
       });
+
+      if (this.columns.length === 0 || this.productNames.length === 0 || this.productTypes.length === 0) {
+        this.isShowError = true;
+      }
     }, () => {
 
     });

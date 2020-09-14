@@ -1,21 +1,30 @@
-<h2>Добавление нового вида продукции</h2>
-<form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="form-group">
-        <label for="name">Введите имя</label><br>
-        <input id="name" class="form-control" type="text" formControlName="name">
-        <div *ngIf="form.get('name').touched && form.get('name').invalid" class="validation">
-            <small *ngIf="form.get('name').errors.required">Введите имя</small>
+<h1 class="m-4 text-right">Добавление нового вида продукции</h1>
+
+<div class="row justify-content-end">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <div class="form-group">
+                <label for="name">Введите имя</label>
+                <small id="emailHelp" class="form-text text-muted">Пример: Семена</small>
+                <input id="name" class="form-control" type="text" formControlName="name">
+            </div>
+
+            <button type="submit" [disabled]="form.invalid || submitted" mat-raised-button color="primary"
+                class="float-right">Добавить</button>
+        </form>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-4">
+        <div *ngIf="productTypes.length" class="form-group">
+            <h2>Список продукции</h2>
+            <ul class="list-group max-height overflow-auto">
+                <li *ngFor="let productType of productTypes;"
+                    class="list-group-item d-flex justify-content-between align-items-center">{{productType.name}}
+                    <button type="button" (click)="remove(productType.id)" mat-icon-button color="warn"
+                        aria-label="Example icon button with a heart icon">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </li>
+            </ul>
         </div>
     </div>
-    
-    <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid || submitted">Добавить</button>
-</form>
-<br>
-<div *ngIf="productTypes.length" class="form-group">
-    <label for="students-list">Список продукции</label>
-    <ul>
-        <li *ngFor="let productType of productTypes;">{{productType.name}}
-            <button type="button"  (click)="remove(productType.id)">Удалить</button>
-        </li>
-    </ul>
 </div>
