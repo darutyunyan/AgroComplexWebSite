@@ -7,3 +7,6 @@
     text-decoration: none;
   }
 
+  mat-sidenav-container {
+    height: calc(100% - 65px);
+  }
