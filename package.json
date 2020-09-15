@@ -24,7 +24,7 @@
     "@angular/router": "~10.1.1",
     "bootstrap": "^4.5.2",
     "ngx-cookie-service": "^10.0.1",
-    "reset-css": "^5.0.1",
+    "normalize.css": "^8.0.1",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
