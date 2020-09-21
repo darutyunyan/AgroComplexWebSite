@@ -26,6 +26,7 @@ import { AuthService } from './shared/services/auth.service';
 import { ProductService } from './shared/services/product.service';
 import { MyCookieService } from './shared/services/cookie.service';
 import { SearchPipe } from './shared/search.pipe';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
     declarations: [
@@ -68,6 +69,10 @@ import { SearchPipe } from './shared/search.pipe';
             provide: HTTP_INTERCEPTORS,
             multi: true,
             useClass: AuthInterceptor
+        },
+        {
+            provide: 'baseUrl',
+            useValue: environment.baseUrl
         },
         CookieService,
         MyCookieService,

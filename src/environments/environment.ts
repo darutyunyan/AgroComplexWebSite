@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  agroComplexWebServiceUrl: 'https://localhost:44332'
+  baseUrl: 'https://localhost:44332'
 };
 
 /*

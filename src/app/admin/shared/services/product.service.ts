@@ -1,61 +1,61 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ProductService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, @Inject('baseUrl') private baseUrl: string) { }
 
     initAddProduct() {
-        return this.http.get(`${environment.agroComplexWebServiceUrl}/product/initAddProduct`);
+        return this.http.get(`${this.baseUrl}/product/initAddProduct`);
     }
 
     addProduct(request) {
-        return this.http.post(`${environment.agroComplexWebServiceUrl}/product/addProduct`, request);
+        return this.http.post(`${this.baseUrl}/product/addProduct`, request);
     }
 
     getAllProducts() {
-        return this.http.get(`${environment.agroComplexWebServiceUrl}/product/getAllProducts`);
+        return this.http.get(`${this.baseUrl}/product/getAllProducts`);
     }
 
     removeProduct(request) {
-        return this.http.post(`${environment.agroComplexWebServiceUrl}/product/removeProduct`, request);
+        return this.http.post(`${this.baseUrl}/product/removeProduct`, request);
     }
 
     addColumnType(request) {
-        return this.http.post(`${environment.agroComplexWebServiceUrl}/product/addColumnType`, request);
+        return this.http.post(`${this.baseUrl}/product/addColumnType`, request);
     }
 
     removeColumnType(request) {
-        return this.http.post(`${environment.agroComplexWebServiceUrl}/product/removeColumnType`, request);
+        return this.http.post(`${this.baseUrl}/product/removeColumnType`, request);
     }
 
     getColumnTypes() {
-        return this.http.get(`${environment.agroComplexWebServiceUrl}/product/getColumnTypes`);
+        return this.http.get(`${this.baseUrl}/product/getColumnTypes`);
     }
 
     addProductName(request) {
-        return this.http.post(`${environment.agroComplexWebServiceUrl}/product/addProductName`, request);
+        return this.http.post(`${this.baseUrl}/product/addProductName`, request);
     }
 
     removeProductName(request) {
-        return this.http.post(`${environment.agroComplexWebServiceUrl}/product/removeProductName`, request);
+        return this.http.post(`${this.baseUrl}/product/removeProductName`, request);
     }
 
     getProductNames() {
-        return this.http.get(`${environment.agroComplexWebServiceUrl}/product/getproductNames`);
+        return this.http.get(`${this.baseUrl}/product/getproductNames`);
     }
 
     addProductType(request) {
-        return this.http.post(`${environment.agroComplexWebServiceUrl}/product/addProductType`, request);
+        return this.http.post(`${this.baseUrl}/product/addProductType`, request);
     }
 
     removeProductType(request) {
-        return this.http.post(`${environment.agroComplexWebServiceUrl}/product/removeProductType`, request);
+        return this.http.post(`${this.baseUrl}/product/removeProductType`, request);
     }
 
     getProductTypes() {
-        return this.http.get(`${environment.agroComplexWebServiceUrl}/product/getproductTypes`);
+        return this.http.get(`${this.baseUrl}/product/getproductTypes`);
     }
 }
