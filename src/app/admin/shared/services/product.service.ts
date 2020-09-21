@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { ObserveOnSubscriber } from 'rxjs/internal/operators/observeOn';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class ProductService {
 
     constructor(private http: HttpClient) { }

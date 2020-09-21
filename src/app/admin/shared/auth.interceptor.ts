@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -12,14 +12,11 @@ export class AuthInterceptor implements HttpInterceptor {
         private router: Router
     ) { }
 
-    intercept(
-        req: import('@angular/common/http').HttpRequest<any>,
-        next: import('@angular/common/http').HttpHandler): import('rxjs').Observable<import('@angular/common/http').HttpEvent<any>> {
-
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (this.auth.isAuthenicated()) {
             req = req.clone({
                 setHeaders: {
-                    'Authorization': `Bearer ${this.auth.getToken()}`
+                    Authorization: `Bearer ${this.auth.getToken()}`
                 }
             });
         }

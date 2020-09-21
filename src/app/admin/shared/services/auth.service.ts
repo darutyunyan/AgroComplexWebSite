@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MyCookieService } from './cookie.service';
 import { environment } from 'src/environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
   readonly TOKEN = 'admin_token';

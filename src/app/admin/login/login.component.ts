@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     };
 
     this.lSub = this.auth.login(request).subscribe((res: any) => {
+
       if (res.serviceError == null) {
         if (res.token) {
           this.auth.setToken(res);

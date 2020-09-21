@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ProductService } from 'src/app/shared/services/product.service';
+import { ProductService } from '../shared/services/product.service';
 
 @Component({
   selector: 'app-dashboard',

@@ -1,15 +1,13 @@
 import { Injectable, isDevMode } from '@angular/core';
-import { CookieOptions } from '../interfaces';
 import { CookieService } from 'ngx-cookie-service';
+import { CookieOptions } from 'src/app/shared/interfaces';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class MyCookieService {
 
     constructor(private cookiesServ: CookieService) { }
 
-    set(name, value, options: CookieOptions) {
+    set(name: string, value: string, options: CookieOptions) {
         options.secure = isDevMode ? false : true;
 
         options.expires = new Date(new Date().getTime() + +options.expiresInString * 1000);
@@ -17,15 +15,15 @@ export class MyCookieService {
         this.cookiesServ.set(name, value, options.expires, '/', null, options.secure);
     }
 
-    get(name) {
+    get(name: string) {
         return this.cookiesServ.get(name);
     }
 
-    check(name) {
+    check(name: string) {
         return this.cookiesServ.check(name);
     }
 
-    delete(name) {
+    delete(name: string) {
         this.cookiesServ.delete(name, '/', null, isDevMode() ? false : true);
     }
 
