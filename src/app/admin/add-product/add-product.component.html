@@ -5,7 +5,6 @@
             Добавьте в базу данных информацию о:
             <ul>
                 <li *ngIf="productNames.length === 0">виде продукта</li>
-                <li *ngIf="productTypes.length === 0">названии продукта</li>
                 <li *ngIf="columns.length === 0">таблице в которой будет отображатсья продук</li>
             </ul>
         </div>
@@ -16,19 +15,10 @@
         <form [formGroup]="form" (ngSubmit)="submit()">
 
             <div class="form-group">
-                <label for="info">Введите информацию о продукте через символ '/'</label> 
-                <small id="emailHelp" class="form-text text-muted">Пример: Вика яровая/Льговская 22/от 23 руб/кг.</small>
-                <small id="emailHelp" class="form-text text-muted">Если какое-то значение надо пропустить, то вставте знак #. Пример: Вика яровая/#/от 23 руб/кг.</small>
+                <label for="info">Введите информацию о продукте через символ '/'</label>
+                <small class="form-text text-muted">Пример: Вика яровая/Льговская 22/от 23 руб/кг.</small>
+                <small class="form-text text-muted">Если какое-то значение надо пропустить, то вставте знак #. Пример: Вика яровая/#/от 23 руб/кг.</small>
                 <input id="info" class="form-control" type="text" formControlName="info">
-            </div>
-
-            <div class="form-group">
-                <label for="productType">Выберите вид продукта</label>
-                <select class="form-control" formControlName="productType">
-                    <option *ngFor="let productType of productTypes;" [value]="productType.id">
-                        {{productType.name}}
-                    </option>
-                </select>
             </div>
 
             <div class="form-group">
@@ -42,6 +32,7 @@
 
             <div class="form-group">
                 <label for="columnType">Выберите вид таблицы</label>
+                <small class="form-text text-muted">Таблица должна соответствовать введенной информации о продукте.</small>
                 <select class="form-control" formControlName="columnType">
                     <option *ngFor="let column of columns;" [value]="column.id">{{column.name}}</option>
                 </select>

@@ -4,7 +4,7 @@
             <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
                 <mat-icon>menu</mat-icon>
             </button>
-            <span>AgroComplex</span>
+            <span class="logo" (click)="goHome()">AgroComplex</span>
             <span class="menu-spacer"></span>
             <div fxShow="true" fxHide.lt-md>
                 <a mat-button [routerLink]="['/admin','dashboard']"> Продукты </a>

@@ -18,6 +18,10 @@ export class AdminLayoutComponent implements OnInit {
     return this.auth.isAuthenicated();
   }
 
+  public goHome(): void {
+    this.router.navigate(['/']);
+  }
+
   public logout(): void {
     this.auth.logout();
     this.router.navigate(['/']);

@@ -32,16 +32,6 @@ namespace AgroComplexService.Models.Services.ProductService
 		{
 			InitAddProductResponse response = new InitAddProductResponse();
 
-			List<ProductTypeItem> productTypes = new List<ProductTypeItem>();
-			foreach (var item in await _productTypeRepo.GetAll())
-			{
-				productTypes.Add(new ProductTypeItem()
-				{
-					Id = item.Id,
-					Name = item.Name
-				});
-			}
-
 			List<ProductNameItem> productNames = new List<ProductNameItem>();
 			foreach (var item in await _productNameRepo.GetAll())
 			{
@@ -62,7 +52,6 @@ namespace AgroComplexService.Models.Services.ProductService
 				});
 			}
 
-			response.ProductTypes = productTypes.ToArray();
 			response.ProductNames = productNames.ToArray();
 			response.ColumnTypes = columnTypes.ToArray();
 
@@ -81,9 +70,6 @@ namespace AgroComplexService.Models.Services.ProductService
 			if (string.IsNullOrEmpty(request.ProductNameId))
 				throw new ArgumentException("productNameId");
 
-			if (string.IsNullOrEmpty(request.ProductTypeId))
-				throw new ArgumentException("productTypeId");
-
 			if (string.IsNullOrEmpty(request.ColumnTypeId))
 				throw new ArgumentException("columnTypeId");
 
@@ -92,8 +78,7 @@ namespace AgroComplexService.Models.Services.ProductService
 				Id = Guid.NewGuid(),
 				Info = request.Info,
 				ColumnTypeId = Guid.Parse(request.ColumnTypeId),
-				ProductNameId = Guid.Parse(request.ProductNameId),
-				ProductTypeId = Guid.Parse(request.ProductTypeId)
+				ProductNameId = Guid.Parse(request.ProductNameId)
 			};
 
 			await _productRepo.Add(product);
@@ -110,7 +95,7 @@ namespace AgroComplexService.Models.Services.ProductService
 				{
 					Id = item.Id,
 					Info = item.Info,
-					ProductType = item.ProductType.Name,
+					ProductType = item.ProductName.ProductType.Name,
 					ProductName = item.ProductName.Name,
 					ColumnType = item.ColumnType.Name
 				});
@@ -175,10 +160,14 @@ namespace AgroComplexService.Models.Services.ProductService
 			if (request == null)
 				throw new ArgumentException("request");
 
+			if (string.IsNullOrEmpty(request.ProductTypeId))
+				throw new ArgumentException("productTypeId");
+
 			ProductName productName = new ProductName()
 			{
 				Id = Guid.NewGuid(),
-				Name = request.Name
+				Name = request.Name,
+				ProductTypeId = Guid.Parse(request.ProductTypeId)
 			};
 
 			await _productNameRepo.Add(productName);

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
@@ -7,11 +8,14 @@ import { ProductService } from 'src/app/shared/services/product.service';
   templateUrl: './add-product-type.component.html',
   styleUrls: ['./add-product-type.component.css']
 })
-export class AddProductTypeComponent implements OnInit {
-  public form: FormGroup;
-  submitted = false;
+export class AddProductTypeComponent implements OnInit, OnDestroy {
 
-  productTypes = [];
+  public form: FormGroup;
+  public submitted = false;
+  public productTypes = [];
+  public gSub: Subscription;
+  public rSub: Subscription;
+  public aSub: Subscription;
 
   constructor(
     private productServ: ProductService
@@ -25,7 +29,7 @@ export class AddProductTypeComponent implements OnInit {
   }
 
   getProductTypes() {
-    this.productServ.getProductTypes().subscribe((res: any) => {
+    this.gSub = this.productServ.getProductTypes().subscribe((res: any) => {
       this.productTypes = [];
       res.productTypes.forEach(element => {
         this.productTypes = this.productTypes.concat(element);
@@ -36,7 +40,7 @@ export class AddProductTypeComponent implements OnInit {
   }
 
   remove(id) {
-    this.productServ.removeProductType({ id }).subscribe((res: any) => {
+    this.rSub = this.productServ.removeProductType({ id }).subscribe((res: any) => {
       this.productTypes = this.productTypes.filter(student => student.id !== id);
     }, () => {
 
@@ -54,7 +58,7 @@ export class AddProductTypeComponent implements OnInit {
       name: this.form.value.name
     };
 
-    this.productServ.addProductType(request).subscribe((res: any) => {
+    this.aSub = this.productServ.addProductType(request).subscribe((res: any) => {
       if (res.serviceError == null) {
         this.form.reset();
         this.getProductTypes();
@@ -64,5 +68,19 @@ export class AddProductTypeComponent implements OnInit {
     }, () => {
       this.submitted = false;
     });
+  }
+
+  ngOnDestroy() {
+    if (this.gSub) {
+      this.gSub.unsubscribe();
+    }
+
+    if (this.rSub) {
+      this.rSub.unsubscribe();
+    }
+
+    if (this.aSub) {
+      this.aSub.unsubscribe();
+    }
   }
 }

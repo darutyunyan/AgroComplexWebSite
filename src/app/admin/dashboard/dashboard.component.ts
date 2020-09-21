@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
@@ -6,9 +7,12 @@ import { ProductService } from 'src/app/shared/services/product.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
+
   public products = [];
   public productName: string;
+  public gSub: Subscription;
+  public rSub: Subscription;
 
   constructor(private productServ: ProductService) { }
 
@@ -17,7 +21,7 @@ export class DashboardComponent implements OnInit {
   }
 
   remove(id: string) {
-    this.productServ.removeProduct({ id }).subscribe((res: any) => {
+    this.rSub = this.productServ.removeProduct({ id }).subscribe((res: any) => {
       this.products = this.products.filter(student => student.id !== id);
     }, () => {
 
@@ -25,7 +29,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllProduct() {
-    this.productServ.getAllProducts().subscribe((res: any) => {
+    this.gSub = this.productServ.getAllProducts().subscribe((res: any) => {
       this.products = [];
       res.productItems.forEach(product => {
         this.products = this.products.concat(product);
@@ -33,6 +37,16 @@ export class DashboardComponent implements OnInit {
     }, () => {
 
     });
+  }
+
+  ngOnDestroy() {
+    if (this.gSub) {
+      this.gSub.unsubscribe();
+    }
+
+    if (this.rSub) {
+      this.rSub.unsubscribe();
+    }
   }
 
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
@@ -7,12 +8,16 @@ import { ProductService } from 'src/app/shared/services/product.service';
   templateUrl: './add-product-name.component.html',
   styleUrls: ['./add-product-name.component.css']
 })
-export class AddProductNameComponent implements OnInit {
+export class AddProductNameComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
-  submitted = false;
-
-  productNames = [];
+  public submitted = false;
+  public productNames = [];
+  public productTypes = [];
+  public gSub: Subscription;
+  public rSub: Subscription;
+  public aSub: Subscription;
+  public gSubSecond: Subscription;
 
   constructor(
     private productServ: ProductService
@@ -20,13 +25,15 @@ export class AddProductNameComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      name: new FormControl(null, [Validators.required])
+      name: new FormControl(null, [Validators.required]),
+      productType: new FormControl(null, [Validators.required])
     });
     this.getProductNames();
+    this.getProductTypes();
   }
 
   getProductNames() {
-    this.productServ.getProductNames().subscribe((res: any) => {
+    this.gSub = this.productServ.getProductNames().subscribe((res: any) => {
       this.productNames = [];
       res.productNames.forEach(element => {
         this.productNames = this.productNames.concat(element);
@@ -36,8 +43,19 @@ export class AddProductNameComponent implements OnInit {
     });
   }
 
+  getProductTypes() {
+    this.gSubSecond = this.productServ.getProductTypes().subscribe((res: any) => {
+      this.productTypes = [];
+      res.productTypes.forEach(element => {
+        this.productTypes = this.productTypes.concat(element);
+      });
+    }, () => {
+
+    });
+  }
+
   remove(id) {
-    this.productServ.removeProductName({ id }).subscribe((res: any) => {
+    this.rSub = this.productServ.removeProductName({ id }).subscribe((res: any) => {
       this.productNames = this.productNames.filter(student => student.id !== id);
     }, () => {
 
@@ -52,10 +70,11 @@ export class AddProductNameComponent implements OnInit {
     this.submitted = true;
 
     const request = {
-      name: this.form.value.name
+      name: this.form.value.name,
+      productTypeId: this.form.value.productType
     };
 
-    this.productServ.addProductName(request).subscribe((res: any) => {
+    this.aSub = this.productServ.addProductName(request).subscribe((res: any) => {
       if (res.serviceError == null) {
         this.form.reset();
         this.getProductNames();
@@ -65,5 +84,19 @@ export class AddProductNameComponent implements OnInit {
     }, () => {
       this.submitted = false;
     });
+  }
+
+  ngOnDestroy() {
+    if (this.gSub) {
+      this.gSub.unsubscribe();
+    }
+
+    if (this.rSub) {
+      this.rSub.unsubscribe();
+    }
+
+    if (this.aSub) {
+      this.aSub.unsubscribe();
+    }
   }
 }

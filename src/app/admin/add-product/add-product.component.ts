@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
@@ -7,14 +8,16 @@ import { ProductService } from 'src/app/shared/services/product.service';
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css']
 })
-export class AddProductComponent implements OnInit {
+export class AddProductComponent implements OnInit, OnDestroy {
+
   public form: FormGroup;
   public submitted = false;
   public isShowError = false;
-
   public columns = [];
   public productNames = [];
-  public productTypes = [];
+
+  public iSub: Subscription;
+  public aSub: Subscription;
 
   constructor(
     private productServ: ProductService
@@ -23,7 +26,6 @@ export class AddProductComponent implements OnInit {
   ngOnInit() {
     this.form = new FormGroup({
       info: new FormControl(null, [Validators.required]),
-      productType: new FormControl(null, [Validators.required]),
       productName: new FormControl(null, [Validators.required]),
       columnType: new FormControl(null, [Validators.required])
     });
@@ -32,7 +34,7 @@ export class AddProductComponent implements OnInit {
   }
 
   init() {
-    this.productServ.initAddProduct().subscribe((res: any) => {
+    this.iSub = this.productServ.initAddProduct().subscribe((res: any) => {
       res.columnTypes.forEach(element => {
         this.columns = this.columns.concat(element);
       });
@@ -41,11 +43,7 @@ export class AddProductComponent implements OnInit {
         this.productNames = this.productNames.concat(element);
       });
 
-      res.productTypes.forEach(element => {
-        this.productTypes = this.productTypes.concat(element);
-      });
-
-      if (this.columns.length === 0 || this.productNames.length === 0 || this.productTypes.length === 0) {
+      if (this.columns.length === 0 || this.productNames.length === 0) {
         this.isShowError = true;
       }
     }, () => {
@@ -62,12 +60,11 @@ export class AddProductComponent implements OnInit {
 
     const request = {
       info: this.form.value.info,
-      productTypeId: this.form.value.productType,
       productNameId: this.form.value.productName,
       columnTypeId: this.form.value.columnType
     };
 
-    this.productServ.addProduct(request).subscribe((res: any) => {
+    this.aSub = this.productServ.addProduct(request).subscribe((res: any) => {
       if (res.serviceError == null) {
         this.form.reset();
       }
@@ -76,5 +73,15 @@ export class AddProductComponent implements OnInit {
     }, () => {
       this.submitted = false;
     });
+  }
+
+  ngOnDestroy() {
+    if (this.iSub) {
+      this.iSub.unsubscribe();
+    }
+
+    if (this.aSub) {
+      this.aSub.unsubscribe();
+    }
   }
 }

@@ -43,20 +43,18 @@ namespace AgroComplexService.Models.Repository
 			if (id == Guid.Empty)
 				throw new ArgumentException("id");
 
-			return await _context.Product.Where(p => p.Id == id).FirstOrDefaultAsync();
-		}
-
-		public async Task<List<Product>> GetByType(string name)
-		{
-			if (string.IsNullOrEmpty(name))
-				throw new ArgumentException("name");
-
-			return await _context.Product.Where(p => p.ProductType.Name == name).ToListAsync();
+			return await _context.Product
+				.Where(p => p.Id == id)
+				.FirstOrDefaultAsync();
 		}
 
 		public async Task<List<Product>> GetAll()
 		{
-			return await _context.Product.Include(pN=>pN.ProductName).Include(pT=>pT.ProductType).Include(cT=>cT.ColumnType).ToListAsync();
+			return await _context.Product
+				.Include(pN=>pN.ProductName)
+				.Include(cT=>cT.ColumnType)
+				.Include(pT=>pT.ProductName.ProductType)
+				.ToListAsync();
 		}
 
 		public async Task Remove(Guid id)

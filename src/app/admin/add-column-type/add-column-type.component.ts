@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
@@ -7,12 +8,14 @@ import { ProductService } from 'src/app/shared/services/product.service';
   templateUrl: './add-column-type.component.html',
   styleUrls: ['./add-column-type.component.css']
 })
-export class AddColumnTypeComponent implements OnInit {
+export class AddColumnTypeComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
-  submitted = false;
-
-  tables = [];
+  public submitted = false;
+  public tables = [];
+  public gSub: Subscription;
+  public rSub: Subscription;
+  public aSub: Subscription;
 
   constructor(
     private productServ: ProductService
@@ -26,7 +29,7 @@ export class AddColumnTypeComponent implements OnInit {
   }
 
   getColumnTypes() {
-    this.productServ.getColumnTypes().subscribe((res: any) => {
+    this.gSub = this.productServ.getColumnTypes().subscribe((res: any) => {
       this.tables = [];
       res.columnTypes.forEach(element => {
         this.tables = this.tables.concat(element);
@@ -36,14 +39,13 @@ export class AddColumnTypeComponent implements OnInit {
     });
   }
 
-  remove(id) {
-    this.productServ.removeColumnType({ id }).subscribe((res: any) => {
+  remove(id: string) {
+    this.rSub = this.productServ.removeColumnType({ id }).subscribe((res: any) => {
       this.tables = this.tables.filter(student => student.id !== id);
     }, () => {
 
     });
   }
-
 
   submit() {
     if (this.form.invalid) {
@@ -56,7 +58,7 @@ export class AddColumnTypeComponent implements OnInit {
       name: this.form.value.name
     };
 
-    this.productServ.addColumnType(request).subscribe((res: any) => {
+    this.aSub = this.productServ.addColumnType(request).subscribe((res: any) => {
       if (res.serviceError == null) {
         this.form.reset();
         this.getColumnTypes();
@@ -66,6 +68,20 @@ export class AddColumnTypeComponent implements OnInit {
     }, () => {
       this.submitted = false;
     });
+  }
+
+  ngOnDestroy() {
+    if (this.gSub) {
+      this.gSub.unsubscribe();
+    }
+
+    if (this.rSub) {
+      this.rSub.unsubscribe();
+    }
+
+    if (this.aSub) {
+      this.aSub.unsubscribe();
+    }
   }
 
 }
