@@ -191,7 +191,8 @@ namespace AgroComplexService.Models.Services.ProductService
 				items.Add(new ProductNameItem()
 				{
 					Id = item.Id,
-					Name = item.Name
+					Name = item.Name,
+					ProductType = item.ProductType.Name
 				});
 			}
 

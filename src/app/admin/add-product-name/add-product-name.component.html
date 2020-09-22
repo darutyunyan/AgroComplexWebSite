@@ -25,7 +25,9 @@
             <h2>Список продуктов</h2>
             <ul class="list-group max-height overflow-auto">
                 <li *ngFor="let productName of productNames;"
-                    class="list-group-item d-flex justify-content-between align-items-center">{{productName.name}}
+                    class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="w-33">{{productName.name}}</span>
+                    <span class="w-33">{{productName.productType}}</span>
                     <button type="button" (click)="remove(productName.id)" mat-icon-button color="warn"
                         aria-label="Example icon button with a heart icon">
                         <mat-icon>delete</mat-icon>

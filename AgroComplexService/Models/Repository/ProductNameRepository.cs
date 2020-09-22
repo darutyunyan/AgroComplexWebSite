@@ -31,7 +31,7 @@ namespace AgroComplexService.Models.Repository
 
 		public async Task<List<ProductName>> GetAll()
 		{
-			return await _context.ProductName.ToListAsync();
+			return await _context.ProductName.Include(pT=>pT.ProductType).ToListAsync();
 		}
 
 		public async Task Remove(Guid id)

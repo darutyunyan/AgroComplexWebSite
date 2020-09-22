@@ -15,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of products | search : productName ; let i = index">
+    <tr *ngFor="let product of products | search : productName; let i = index">
       <td scope="row">{{i+1}}</td>
       <td>{{product.productName}}</td>
       <td>{{product.info}}</td>

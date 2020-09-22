@@ -10,5 +10,7 @@ namespace AgroComplexService.Dto.ProductName
 		public Guid Id { get; set; }
 
 		public string Name { get; set; }
+
+		public string ProductType { get; set; }
 	}
 }
