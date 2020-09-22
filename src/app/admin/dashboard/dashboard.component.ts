@@ -23,8 +23,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   remove(id: string) {
     this.rSub = this.productServ.removeProduct({ id }).subscribe((res: any) => {
       this.products = this.products.filter(student => student.id !== id);
-    }, () => {
-
     });
   }
 
@@ -34,8 +32,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       res.productItems.forEach(product => {
         this.products = this.products.concat(product);
       });
-    }, () => {
-
     });
   }
 

@@ -46,8 +46,6 @@ export class AddProductComponent implements OnInit, OnDestroy {
       if (this.columns.length === 0 || this.productNames.length === 0) {
         this.isShowError = true;
       }
-    }, () => {
-
     });
   }
 

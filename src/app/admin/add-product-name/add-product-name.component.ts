@@ -38,8 +38,6 @@ export class AddProductNameComponent implements OnInit, OnDestroy {
       res.productNames.forEach(element => {
         this.productNames = this.productNames.concat(element);
       });
-    }, () => {
-
     });
   }
 
@@ -49,16 +47,12 @@ export class AddProductNameComponent implements OnInit, OnDestroy {
       res.productTypes.forEach(element => {
         this.productTypes = this.productTypes.concat(element);
       });
-    }, () => {
-
     });
   }
 
   remove(id) {
     this.rSub = this.productServ.removeProductName({ id }).subscribe((res: any) => {
       this.productNames = this.productNames.filter(student => student.id !== id);
-    }, () => {
-
     });
   }
 

@@ -45,6 +45,9 @@ namespace AgroComplexService.Models.Repository
 				.Where(c => c.Id == id)
 				.FirstOrDefaultAsync();
 
+			if (columnType == null)
+				throw new ArgumentNullException();
+
 			_context.ColumnType.Remove(columnType);
 			await _context.SaveChangesAsync();
 		}

@@ -34,16 +34,12 @@ export class AddProductTypeComponent implements OnInit, OnDestroy {
       res.productTypes.forEach(element => {
         this.productTypes = this.productTypes.concat(element);
       });
-    }, () => {
-
     });
   }
 
   remove(id) {
     this.rSub = this.productServ.removeProductType({ id }).subscribe((res: any) => {
       this.productTypes = this.productTypes.filter(student => student.id !== id);
-    }, () => {
-
     });
   }
 

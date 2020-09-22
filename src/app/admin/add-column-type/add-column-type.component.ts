@@ -34,16 +34,12 @@ export class AddColumnTypeComponent implements OnInit, OnDestroy {
       res.columnTypes.forEach(element => {
         this.tables = this.tables.concat(element);
       });
-    }, () => {
-
     });
   }
 
   remove(id: string) {
     this.rSub = this.productServ.removeColumnType({ id }).subscribe((res: any) => {
       this.tables = this.tables.filter(student => student.id !== id);
-    }, () => {
-
     });
   }
 

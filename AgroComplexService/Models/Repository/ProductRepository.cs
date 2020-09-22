@@ -68,6 +68,9 @@ namespace AgroComplexService.Models.Repository
 				.Where(p => p.Id == id)
 				.FirstOrDefaultAsync();
 
+			if (product == null)
+				throw new ArgumentNullException();
+
 			_context.Product.Remove(product);
 			await _context.SaveChangesAsync();
 		}
