@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MyCookieService } from './cookie.service';
-import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +12,7 @@ export class AuthService {
     private cookieServ: MyCookieService) { }
 
     login(request) {
-      return this.http.post(`${environment.agroComplexWebServiceUrl}/Account/Login`, request);
+      return this.http.post(`/Account/Login`, request);
     }
 
   setToken(response) {
