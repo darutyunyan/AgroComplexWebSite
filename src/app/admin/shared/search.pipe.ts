@@ -10,10 +10,8 @@ export class SearchPipe implements PipeTransform {
       return products;
     }
 
-    return products.filter(product => {
-      return product.productName.toLocaleLowerCase().includes(productName.toLocaleLowerCase()) ||
-      product.productType.toLocaleLowerCase().includes(productName.toLocaleLowerCase());
-    });
+    return products.filter(product =>
+      `${product.productName} ${product.productType}`.toLocaleLowerCase().includes(productName.toLocaleLowerCase()));
   }
 
 }
