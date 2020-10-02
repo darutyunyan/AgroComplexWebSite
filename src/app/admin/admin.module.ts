@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AuthGuard } from './shared/auth.guard';
 
 import { AdminLayoutComponent } from './shared/admin-layout/admin-layout.component';
@@ -11,24 +11,16 @@ import { AddProductNameComponent } from './add-product-name/add-product-name.com
 import { AddProductTypeComponent } from './add-product-type/add-product-type.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
-
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 import { CookieService } from 'ngx-cookie-service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { AuthService } from './shared/services/auth.service';
 import { ProductService } from './shared/services/product.service';
 import { MyCookieService } from './shared/services/cookie.service';
 import { SearchPipe } from './shared/search.pipe';
-import { environment } from 'src/environments/environment';
-import { LoaderComponent } from './shared/loader/loader.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -39,21 +31,11 @@ import { LoaderComponent } from './shared/loader/loader.component';
         AddColumnTypeComponent,
         AddProductNameComponent,
         AddProductTypeComponent,
+        LoaderComponent,
         SearchPipe,
-        LoaderComponent
     ],
     imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatListModule,
-        MatProgressSpinnerModule,
-        FlexLayoutModule,
-        HttpClientModule,
+        SharedModule,
         RouterModule.forChild([
             {
                 path: '', component: AdminLayoutComponent, children: [
@@ -73,10 +55,6 @@ import { LoaderComponent } from './shared/loader/loader.component';
             provide: HTTP_INTERCEPTORS,
             multi: true,
             useClass: AuthInterceptor
-        },
-        {
-            provide: 'baseUrl',
-            useValue: environment.baseUrl
         },
         CookieService,
         MyCookieService,
