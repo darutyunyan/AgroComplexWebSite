@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -27,6 +28,7 @@ import { ProductService } from './shared/services/product.service';
 import { MyCookieService } from './shared/services/cookie.service';
 import { SearchPipe } from './shared/search.pipe';
 import { environment } from 'src/environments/environment';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 @NgModule({
     declarations: [
@@ -37,7 +39,8 @@ import { environment } from 'src/environments/environment';
         AddColumnTypeComponent,
         AddProductNameComponent,
         AddProductTypeComponent,
-        SearchPipe
+        SearchPipe,
+        LoaderComponent
     ],
     imports: [
         CommonModule,
@@ -48,6 +51,7 @@ import { environment } from 'src/environments/environment';
         MatButtonModule,
         MatSidenavModule,
         MatListModule,
+        MatProgressSpinnerModule,
         FlexLayoutModule,
         HttpClientModule,
         RouterModule.forChild([

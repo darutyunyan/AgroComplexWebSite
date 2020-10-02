@@ -13,6 +13,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public submitted = false;
   public isShowError = false;
+  public isShowForm = false;
   public columns = [];
   public productNames = [];
 
@@ -45,6 +46,8 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
       if (this.columns.length === 0 || this.productNames.length === 0) {
         this.isShowError = true;
+      }else{
+        this.isShowForm = true;
       }
     });
   }

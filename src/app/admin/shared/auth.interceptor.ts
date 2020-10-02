@@ -1,19 +1,22 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 import { catchError, filter, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
+import { ProductService } from './services/product.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
     constructor(
         private auth: AuthService,
         private router: Router,
-        @Inject('baseUrl') private baseUrl: string
+        @Inject('baseUrl') private baseUrl: string,
+        private prodServ: ProductService
     ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        this.prodServ.runLoader(true);
 
         if (this.auth.isAuthenicated()) {
             req = req.clone({
@@ -34,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     if (res.body.serviceError != null) {
                         console.log(res.body.serviceError.message);
                     }
-
+                    this.prodServ.runLoader(false);
                     return res;
                 }),
                 catchError(error => {
@@ -44,6 +47,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     }
 
                     console.log(error);
+                    this.prodServ.runLoader(false);
                     return throwError(error);
                 })
             );
