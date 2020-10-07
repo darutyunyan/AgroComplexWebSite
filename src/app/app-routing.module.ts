@@ -7,12 +7,16 @@ import { MineralFertilizersComponent } from './main-layout/mineral-fertilizers/m
 import { SeedsComponent } from './main-layout/seeds/seeds.component';
 import { AboutComponent } from './main-layout/about/about.component';
 import { ContactUsComponent } from './main-layout/contact-us/contact-us.component';
+import { HomeComponent } from './main-layout/home/home.component';
 
 const routes: Routes = [
   {
-    path: '', component: MainLayoutComponent, children: [
-      { path: '', redirectTo: '/', pathMatch: 'full' },
-      { path: 'seeds', component: SeedsComponent },
+    path: '',
+    component: MainLayoutComponent,
+    children: [
+      { path: '', redirectTo: '/home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
+      { path: 'seeds/:id', component: SeedsComponent },
       { path: 'cropProtaction', component: CropProtactionComponent },
       { path: 'mineralFertilizers', component: MineralFertilizersComponent },
       { path: 'feeds', component: FeedsComponent },

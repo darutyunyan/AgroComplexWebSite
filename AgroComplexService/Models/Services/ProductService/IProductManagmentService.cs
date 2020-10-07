@@ -1,10 +1,8 @@
+using AgroComplexService.Dto.Client;
 using AgroComplexService.Dto.ColumnType;
 using AgroComplexService.Dto.Product;
 using AgroComplexService.Dto.ProductName;
 using AgroComplexService.Dto.ProductType;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AgroComplexService.Models.Services.ProductService
@@ -39,5 +37,14 @@ namespace AgroComplexService.Models.Services.ProductService
 		Task RemoveProductType(RemoveProductTypeRequest request);
 
 		Task<GetProductTypesResponse> GetProductTypes();
+
+
+		Task<InitHomePageResponse> InitHomePage();
+
+		Task<GetProductNamesByTypeResponse> GetProductNamesByType(GetProductNamesByTypeRequest request);
+
+		Task<GetProductByIdResponse> GetProductById(GetProductByIdRequest request);
+
+		Task<GetFirstProductByTypeResponse> GetFirstProductByType(GetFirstProductByTypeRequest name);
 	}
 }

@@ -1,0 +1,4 @@
+<h1>Виты продукции</h1>
+<div class="list-group" *ngFor="let item of items">
+    <a class="list-group-item list-group-item-action" [routerLink]="['/seeds', item.id]" (click)="loadProduct(item.id)">{{item.name}}</a>
+</div>

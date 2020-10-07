@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,6 +11,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { environment } from 'src/environments/environment';
 
@@ -26,13 +30,24 @@ import { environment } from 'src/environments/environment';
     MatSidenavModule,
     MatListModule,
     MatProgressSpinnerModule,
+    MatMenuModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
     FlexLayoutModule,
   ],
-  providers: [
-    {
-      provide: 'baseUrl',
-      useValue: environment.baseUrl
-    },
-  ],
 })
-export class SharedModule { }
+export class SharedModule {
+  public static forRoot(): ModuleWithProviders<any> {
+    return {
+      ngModule: SharedModule,
+      providers: [
+        {
+          provide: 'baseUrl',
+          useValue: environment.baseUrl
+        }
+      ]
+    };
+  }
+
+}

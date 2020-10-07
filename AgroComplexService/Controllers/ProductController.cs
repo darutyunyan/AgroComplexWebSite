@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AgroComplexService.Dto;
+using AgroComplexService.Dto.Client;
 using AgroComplexService.Dto.ColumnType;
 using AgroComplexService.Dto.Product;
 using AgroComplexService.Dto.ProductName;
@@ -28,7 +29,7 @@ namespace AgroComplexService.Controllers
 
 		#endregion
 
-		#region Public methods
+		#region Admin public methods
 
 
 		[Route("InitAddProduct")]
@@ -270,6 +271,82 @@ namespace AgroComplexService.Controllers
 			try
 			{
 				response = await _productServ.GetProductTypes();
+			}
+			catch (Exception ex)
+			{
+				SetResponse(response, ex);
+			}
+
+			return response;
+		}
+
+		#endregion
+
+		#region Client public methods
+
+		[Route("InitHomePage")]
+		[HttpGet]
+		public async Task<InitHomePageResponse> InitHomePage()
+		{
+			InitHomePageResponse response = new InitHomePageResponse();
+
+			try
+			{
+				response = await _productServ.InitHomePage();
+			}
+			catch (Exception ex)
+			{
+				SetResponse(response, ex);
+			}
+
+			return response;
+		}
+		
+		[Route("GetProductNamesByType")]
+		[HttpPost]
+		public async Task<Response> GetProductNamesByType(GetProductNamesByTypeRequest request)
+		{
+			GetProductNamesByTypeResponse response = new GetProductNamesByTypeResponse();
+
+			try
+			{
+				response = await _productServ.GetProductNamesByType(request);
+			}
+			catch (Exception ex)
+			{
+				SetResponse(response, ex);
+			}
+
+			return response;
+		}
+
+		[Route("GetProductById")]
+		[HttpPost]
+		public async Task<Response> GetProductById(GetProductByIdRequest request)
+		{
+			GetProductByIdResponse response = new GetProductByIdResponse();
+
+			try
+			{
+				response = await _productServ.GetProductById(request);
+			}
+			catch (Exception ex)
+			{
+				SetResponse(response, ex);
+			}
+
+			return response;
+		}
+
+		[Route("GetFirstProductByType")]
+		[HttpPost]
+		public async Task<Response> GetFirstProductByType(GetFirstProductByTypeRequest request)
+		{
+			GetFirstProductByTypeResponse response = new GetFirstProductByTypeResponse();
+
+			try
+			{
+				response = await _productServ.GetFirstProductByType(request);
 			}
 			catch (Exception ex)
 			{

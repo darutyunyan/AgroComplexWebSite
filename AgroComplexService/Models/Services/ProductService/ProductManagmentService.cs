@@ -1,4 +1,4 @@
-using AgroComplexService.Dto;
+using AgroComplexService.Dto.Client;
 using AgroComplexService.Dto.ColumnType;
 using AgroComplexService.Dto.Product;
 using AgroComplexService.Dto.ProductName;
@@ -26,7 +26,7 @@ namespace AgroComplexService.Models.Services.ProductService
 
 		#endregion
 
-		#region Public methods
+		#region Admin public methods
 
 		public async Task<InitAddProductResponse> InitAddProduct()
 		{
@@ -56,7 +56,6 @@ namespace AgroComplexService.Models.Services.ProductService
 			response.ColumnTypes = columnTypes.ToArray();
 
 			return response;
-
 		}
 
 		public async Task AddProduct(AddProductRequest request)
@@ -243,6 +242,122 @@ namespace AgroComplexService.Models.Services.ProductService
 			return response;
 		}
 
+
+		#endregion
+
+		#region Client public methods
+
+		public async Task<InitHomePageResponse> InitHomePage()
+		{
+			InitHomePageResponse response = new InitHomePageResponse();
+
+			List<ProductNameItem> seeds = new List<ProductNameItem>();
+			foreach (var item in await _productNameRepo.GetByProductType(SEED))
+			{
+				seeds.Add(new ProductNameItem()
+				{
+					Id = item.Id,
+					Name = item.Name
+				});
+			}
+
+			List<ProductNameItem> planProtectionProducts = new List<ProductNameItem>();
+			foreach (var item in await _productNameRepo.GetByProductType(PPP))
+			{
+				planProtectionProducts.Add(new ProductNameItem()
+				{
+					Id = item.Id,
+					Name = item.Name
+				});
+			}
+
+			response.Seeds = seeds.ToArray();
+			response.PlanProtectionProducts = planProtectionProducts.ToArray();
+
+			return response;
+		}
+
+		public async Task<GetProductNamesByTypeResponse> GetProductNamesByType(GetProductNamesByTypeRequest request)
+		{
+			GetProductNamesByTypeResponse response = new GetProductNamesByTypeResponse();
+
+			List<ProductNameItem> items = new List<ProductNameItem>();
+			foreach (var item in await _productNameRepo.GetByProductType(request.ProductType))
+			{
+				items.Add(new ProductNameItem()
+				{
+					Id = item.Id,
+					Name = item.Name
+				});
+			}
+
+			response.Items = items.ToArray();
+
+			return response;
+		}
+
+		public async Task<GetProductByIdResponse> GetProductById(GetProductByIdRequest request)
+		{
+			GetProductByIdResponse response = new GetProductByIdResponse();
+			var products = await _productRepo.GetProductsByProductTypeId(Guid.Parse(request.Id));
+
+			if (products.Count > 0)
+			{
+				string productName = products.First().ProductName.Name;
+				string[] columnNames = products.First().ColumnType.Name.Split('|').ToArray();
+				List<string[]> rows = new List<string[]>();
+				foreach (var product in products)
+				{
+					var info = product.Info.Split('|').ToArray();
+					rows.Add(info);
+				}
+
+				response.ProductName = productName;
+				response.ColumnNames = columnNames;
+				response.Info = rows.ToArray();
+			}
+
+			return response;
+		}
+
+		public async Task<GetFirstProductByTypeResponse> GetFirstProductByType(GetFirstProductByTypeRequest requet)
+		{
+			GetFirstProductByTypeResponse response = new GetFirstProductByTypeResponse();
+			var productNames = await _productNameRepo.GetAll();
+
+			var firstProductName = productNames
+				.Where(p => p.ProductType.Name == requet.Name)
+				.OrderBy(p => p.Name)
+				.First();
+
+			var products = await _productRepo.GetAll();
+
+			var fristProduct = products
+				.Where(p => p.ProductNameId == firstProductName.Id)
+				.ToList();
+
+
+			List<string[]> rows = new List<string[]>();
+			foreach (var product in fristProduct)
+			{
+				var info = product.Info.Split('|').ToArray();
+				rows.Add(info);
+			}
+
+			response.ProductName = fristProduct.First().ProductName.Name;
+			response.ColumnNames = fristProduct.First().ColumnType.Name.Split('|').ToArray();
+			response.Info = rows.ToArray();
+
+			return response;
+		}
+
+		#endregion
+
+		#region Private constant
+
+		private const string SEED = "Семена";
+
+		private const string PPP = "СЗР";
 
 		#endregion
 

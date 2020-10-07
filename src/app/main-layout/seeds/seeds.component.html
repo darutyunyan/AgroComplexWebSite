@@ -1,1 +1,22 @@
-<p>seeds works!</p>
+<h1 class="mat-display-2 text-center mt-5">СЕМЕНА</h1>
+
+<div class="row">
+  <div class="col-3">
+    <app-left-menu (loadNewProduct)="loadProduct($event)"></app-left-menu>
+  </div>
+  <div class="col-9" *ngIf="product">
+    <h1>{{product.productName}}</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th *ngFor="let column of product.columnNames" scope="col">{{column}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let info of product.info">
+          <td *ngFor="let item of info">{{item}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

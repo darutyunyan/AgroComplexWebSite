@@ -6,3 +6,15 @@ export interface CookieOptions {
     path?: string;
     'SameSite'?: string;
 }
+
+export interface Item {
+    id: string;
+    name: string;
+}
+
+export interface Product {
+    productName?: string;
+    columnNames?: string[];
+    info?: string[][];
+    serviceError: any;
+}

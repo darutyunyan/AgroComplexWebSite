@@ -1,27 +1,69 @@
-<ul>
-    <li routerLinkActive="active">
-        <a [routerLink]="['']">Главная</a>
-    </li>
-    <li routerLinkActive="active">
-        <a [routerLink]="['/seeds']">Семена</a>
-    </li>
-    <li routerLinkActive="active">
-        <a [routerLink]="['/cropProtaction']">СЗР</a>
-    </li>
-    <li routerLinkActive="active">
-        <a [routerLink]="['/mineralFertilizers']">Мин. удобрения</a>
-    </li>
-    <li routerLinkActive="active">
-        <a [routerLink]="['/feeds']">Корма</a>
-    </li>
-    <li routerLinkActive="active">
-        <a [routerLink]="['/about']">О Компании</a>
-    </li>
-    <li routerLinkActive="active">
-        <a [routerLink]="['/contactUs']">Контакты</a>
-    </li>
-</ul>
+<div>
+    <mat-toolbar class="d-flex">
+        <div class="d-flex ml-5">
+            <span class="d-flex align-items-center">
+                <mat-icon class="mr-1">phone</mat-icon>
+                <small>8 800 555 79 88</small>
+            </span>
+            <span class="mr-3 ml-3 separate">|</span>
+            <span class="d-flex align-items-center">
+                <mat-icon class="mr-1">location_on</mat-icon>
+                <small>2903 Avenue Z, Brooklyn, NY, USA</small>
+            </span>
+            <span class="mr-3 ml-3 separate">|</span>
+            <span class="d-flex align-items-center">
+                <mat-icon class="mr-1">mail_outline</mat-icon>
+                <small>darutyunyan95@mail.ru</small>
+            </span>
+            <span class="mr-3 ml-3 separate">|</span>
+            <div class="social">
+                <a href="https://instagram.com/autovikuprus.ru?igshid=1ijtabxir4uxs" class="fa fa-instagram"
+                    target="_blank"></a>
+                <a href="https://wa.me/79383000735" class="fa fa-whatsapp pl-3" target="_blank"></a>
+                <a href="tg://resolve?domain=autovikuprus" class="fa fa-telegram pl-3"></a>
+            </div>
+        </div>
+    </mat-toolbar>
 
-<div class="container">
+    <mat-toolbar class="d-flex justify-content-around">
+        <span class="logo">AGRO COMPLEX</span>
+        <div>
+            <a mat-icon-button class="pri-link menu-icon" [routerLink]="['/home']">
+                <mat-icon>home</mat-icon>
+            </a>
+            <a mat-flat-button class="pri-link" [routerLink]="['/seeds', 'first']"> СЕМЕНА </a>
+            <a mat-icon-button class="pri-link width-dropdown-arrow menu-icon" [matMenuTriggerFor]="menu">
+                <mat-icon>expand_more</mat-icon>
+            </a>
+            <a mat-flat-button class="pri-link" [routerLink]="['/cropProtaction']"> СЗР </a>
+            <a mat-icon-button class="pri-link width-dropdown-arrow menu-icon" [matMenuTriggerFor]="menu">
+                <mat-icon>expand_more</mat-icon>
+            </a>
+            <a mat-flat-button class="pri-link" [routerLink]="['/mineralFertilizers']"> МИН. УДОБРЕНИЯ </a>
+            <a mat-flat-button class="pri-link" [routerLink]="['/feeds']"> КОРМА </a>
+            <a mat-flat-button class="pri-link" [routerLink]="['/about']"> О КОМПАНИИ </a>
+            <a mat-flat-button class="pri-link" [routerLink]="['/contactUs']"> КОНТАКТЫ </a>
+        </div>
+        <button mat-raised-button color="warn">ОНЛАЙН ЗАЯВКА</button>
+    </mat-toolbar>
+</div>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>
+        <mat-icon>dialpad</mat-icon>
+        <span>Redial</span>
+    </button>
+    <button mat-menu-item disabled>
+        <mat-icon>voicemail</mat-icon>
+        <span>Check voice mail</span>
+    </button>
+    <button mat-menu-item>
+        <mat-icon>notifications_off</mat-icon>
+        <span>Disable alerts</span>
+    </button>
+</mat-menu>
+
+<div class="container mb-5" style="min-height: 80vh;">
     <router-outlet></router-outlet>
 </div>
+<app-footer></app-footer>

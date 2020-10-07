@@ -1,0 +1,51 @@
+mat-toolbar {
+    
+    background-color: #1976d2;
+}
+
+div mat-toolbar:first-child {
+    min-height: 0;
+    height: auto;
+    color: #fff;
+}
+
+div mat-toolbar:last-child {
+    background-color: white;
+    color: #fff;
+    box-shadow: 
+    0 3px 1px -2px rgba(0,0,0,.2), 
+    0 2px 2px 0 rgba(0,0,0,.14), 
+    0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.logo {
+    color: rgba(0,0,0,.87);
+    font-weight: bold;
+    font-family: cursive;
+    letter-spacing: 2px;
+}
+
+small {
+    font-size: 65%;
+}
+
+.separate {
+    color:#cecece;
+}
+
+.menu-icon {
+    color: rgba(0,0,0,.87);
+}
+
+.width-dropdown-arrow {
+    width: auto;
+}
+
+
+.cdk-focused.cdk-mouse-focused {
+    background-color: rgba(0,0,0,.1);
+}
+
+.social a {
+    color:white;
+}

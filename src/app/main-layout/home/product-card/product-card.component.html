@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{name}}</mat-card-title>
+    </mat-card-header>
+<div class="text-center p-2">
+    <i *ngIf="isSeeds;else notSeed" class="fa fa-leaf" aria-hidden="true"></i>
+    <ng-template #notSeed><i class="fa fa-shield" aria-hidden="true"></i></ng-template>
+</div>
+    <mat-card-actions class="text-center">
+        <button mat-flat-button color="primary" (click)="goToProduct()">ПЕРЕЙТИ</button>
+    </mat-card-actions>
+</mat-card>

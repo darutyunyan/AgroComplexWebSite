@@ -12,6 +12,12 @@ import { FeedsComponent } from './main-layout/feeds/feeds.component';
 import { AboutComponent } from './main-layout/about/about.component';
 import { ContactUsComponent } from './main-layout/contact-us/contact-us.component';
 import { SharedModule } from './shared/shared.module';
+import { HomeComponent } from './main-layout/home/home.component';
+import { FooterComponent } from './main-layout/footer/footer.component';
+
+import { ClientProductService } from './shared/services/client-product.service';
+import { ProductCardComponent } from './main-layout/home/product-card/product-card.component';
+import { LeftMenuComponent } from './main-layout/left-menu/left-menu.component';
 
 @NgModule({
   declarations: [
@@ -22,15 +28,21 @@ import { SharedModule } from './shared/shared.module';
     MineralFertilizersComponent,
     FeedsComponent,
     AboutComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    HomeComponent,
+    FooterComponent,
+    ProductCardComponent,
+    LeftMenuComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule.forRoot()
   ],
-  providers: [],
+  providers:[
+    ClientProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

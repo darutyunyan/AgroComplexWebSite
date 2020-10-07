@@ -48,6 +48,18 @@ namespace AgroComplexService.Models.Repository
 				.FirstOrDefaultAsync();
 		}
 
+		public async Task<List<Product>> GetProductsByProductTypeId(Guid id)
+		{
+			if (id == Guid.Empty)
+				throw new ArgumentException("id");
+
+			return await _context.Product
+				.Include(pN => pN.ProductName)
+				.Include(cT => cT.ColumnType)
+				.Where(p => p.ProductNameId == id)
+				.ToListAsync();
+		}
+
 		public async Task<List<Product>> GetAll()
 		{
 			return await _context.Product

@@ -1,0 +1,29 @@
+<h1 class="mat-display-2 text-center mt-5">КАТАЛОГ ПРОДУКЦИИ НА 2020</h1>
+
+<mat-card class="d-flex align-items-center justify-content-between p-2 pl-3 pr-3">
+    <h1 class="mb-0">СЕМЕНА</h1>
+    <a mat-icon-button color="warn" [routerLink]="['/seeds']">
+        <mat-icon>arrow_forward_ios</mat-icon>
+    </a>
+</mat-card>
+
+<div class="d-flex flex-wrap justify-content-around mt-4">
+    <div class="p-3 justify-content-center" *ngFor="let seed of seeds">
+        <app-product-card [name]="seed.name" [isSeeds]="true" [productId]="seed.id"></app-product-card>
+    </div>
+</div>
+
+<mat-card class="d-flex align-items-center justify-content-between p-2 pl-3 pr-3 mt-4">
+    <h1 class="mb-0">СЭР</h1>
+    <a mat-icon-button color="warn" [routerLink]="['/cropProtaction']">
+        <mat-icon>arrow_forward_ios</mat-icon>
+    </a>
+</mat-card>
+
+<div class="d-flex flex-wrap justify-content-around mt-4">
+    <div class="p-3 justify-content-center" *ngFor="let productProtect of planProtectionProducts">
+        <app-product-card [name]="productProtect.name" [isSeeds]="false" [productId]="productProtect.id"></app-product-card>
+    </div>
+</div>
+    
+

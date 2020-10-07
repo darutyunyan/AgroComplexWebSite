@@ -1,0 +1,44 @@
+footer {
+    background: rgba(33,33,33,.93);
+    color: #fff;
+}
+
+.logo {
+    font-weight: bold;
+    font-family: cursive;
+    letter-spacing: 2px;
+    font-size: 30px;
+}
+
+.feedback {
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 25px;
+}
+
+.location {
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 25px;
+}
+
+mat-icon {
+    color:#1976d2;
+}
+
+mat-label {
+    color: white;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: white !important;
+}
+
+  
+  .full-width {
+    width: 100%;
+  }
+
+  .social a{
+      font-size: 25px;
+  }

@@ -1,7 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #fafafa; }
+
+/* Start of override styles */
+
+a:hover {
+    text-decoration: none;
+}
 
 input.ng-invalid.ng-touched,
 select.ng-invalid.ng-touched{
@@ -13,10 +19,23 @@ select.ng-valid {
     border: 2px solid green;
 }
 
+
 label {
     margin-bottom: 0;
 }
 
+/* End of overrid styles */
+
+
+/* Start of common styles */
+
+.menu-spacer {
+    flex: 1 1 auto;
+}
+
+
 .form-text {
     margin-top: 0;
 }
+
+/* End of common styles */
