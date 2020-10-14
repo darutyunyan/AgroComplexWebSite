@@ -1,5 +1,10 @@
+mat-icon {
+    cursor: pointer;
+}
+
+/* Styles of first menu */
+
 mat-toolbar {
-    
     background-color: #1976d2;
 }
 
@@ -8,6 +13,21 @@ div mat-toolbar:first-child {
     height: auto;
     color: #fff;
 }
+
+.social a {
+    color:white;
+    text-decoration: none;
+}
+
+.separate {
+    color:#cecece;
+}
+
+small {
+    font-size: 65%;
+}
+
+/* Styles of second menu */
 
 div mat-toolbar:last-child {
     background-color: white;
@@ -23,14 +43,7 @@ div mat-toolbar:last-child {
     font-weight: bold;
     font-family: cursive;
     letter-spacing: 2px;
-}
-
-small {
-    font-size: 65%;
-}
-
-.separate {
-    color:#cecece;
+    cursor: pointer;
 }
 
 .menu-icon {
@@ -39,8 +52,4 @@ small {
 
 .cdk-focused.cdk-mouse-focused {
     background-color: rgba(0,0,0,.1);
-}
-
-.social a {
-    color:white;
 }

@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ProductService } from 'src/app/admin/shared/services/product.service';
 import { Product } from 'src/app/shared/interfaces';
 import { ClientProductService } from 'src/app/shared/services/client-product.service';
 
@@ -18,13 +17,17 @@ export class SeedsComponent implements OnInit, OnDestroy {
   private gSub: Subscription;
   private fSub: Subscription;
 
-  constructor(private activateRoute: ActivatedRoute, private prodServ: ClientProductService) {
+  constructor(
+    private activateRoute: ActivatedRoute,
+    private prodServ: ClientProductService) {
     this.sSub = this.activateRoute.params.subscribe(({ id }) => {
       this.productId = id;
     });
   }
 
   ngOnInit() {
+    window.scroll(0, 0);
+
     if (this.productId === 'first') {
       this.fSub = this.prodServ.getFirstProductByType({ name: 'Семена' }).subscribe((res: Product) => {
         this.product = res;

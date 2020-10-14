@@ -1,22 +1,15 @@
-<h1 class="mat-display-2 text-center mt-5">СЕМЕНА</h1>
+<div class="main-container" fxFlexFill fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="20px"
+  fxFlex.lt-md="100%" fxFlex.lt-xl="70%">
+  <h1 fxFlexAlign="center" class="mat-display-2">СЕМЕНА</h1>
 
-<div class="row">
-  <div class="col-3">
-    <app-left-menu (loadNewProduct)="loadProduct($event)"></app-left-menu>
-  </div>
-  <div class="col-9" *ngIf="product">
-    <h1>{{product.productName}}</h1>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th *ngFor="let column of product.columnNames" scope="col">{{column}}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let info of product.info">
-          <td *ngFor="let item of info">{{item}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div fxLayout="row" fxLayoutGap="20px">
+
+    <div fxFlex="30%">
+      <app-left-menu (loadNewProduct)="loadProduct($event)" [productType]="'Семена'"></app-left-menu>
+    </div>
+
+    <div *ngIf="product" fxFlex="70%">
+      <app-table [product]="product"></app-table>
+    </div>
   </div>
 </div>

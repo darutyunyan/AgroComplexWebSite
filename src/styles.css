@@ -3,7 +3,22 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #fafafa; }
 
+a:hover {
+    text-decoration: none;
+}
+
 /* Start of common styles */
+
+.main-container {
+    margin: 0 auto;
+    margin-bottom: 40px;
+    min-height: 500px;
+}
+
+h1.mat-display-2{
+    margin-top: 35px !important;
+    margin-bottom: 35px !important;
+}
 
 .menu-spacer {
     flex: 1 1 auto;
@@ -17,8 +32,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
     padding: 20px;
 }
 
+.p-10 {
+    padding: 10px;
+}
+
 .pb-20 {
     padding-bottom: 20px;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
 }
 
 /* End of common styles */

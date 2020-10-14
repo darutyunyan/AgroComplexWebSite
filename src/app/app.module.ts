@@ -18,6 +18,7 @@ import { FooterComponent } from './main-layout/footer/footer.component';
 import { ClientProductService } from './shared/services/client-product.service';
 import { ProductCardComponent } from './main-layout/home/product-card/product-card.component';
 import { LeftMenuComponent } from './main-layout/left-menu/left-menu.component';
+import { TableComponent } from './shared/table/table.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LeftMenuComponent } from './main-layout/left-menu/left-menu.component';
     HomeComponent,
     FooterComponent,
     ProductCardComponent,
-    LeftMenuComponent
+    LeftMenuComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,7 @@ import { LeftMenuComponent } from './main-layout/left-menu/left-menu.component';
     BrowserAnimationsModule,
     SharedModule.forRoot()
   ],
-  providers:[
+  providers: [
     ClientProductService
   ],
   bootstrap: [AppComponent]

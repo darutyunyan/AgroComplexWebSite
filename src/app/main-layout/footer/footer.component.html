@@ -1,53 +1,52 @@
 <footer>
-    <div class="container d-flex justify-content-around align-items-stretch pt-5">
-        <div class="col-3">
+    <div fxLayout="row" fxLayoutAlign="space-around stretch" fxLayoutGap="20px">
+        <div fxLayout="column" fxLayoutGap="20px">
             <span class="logo">AGRO_OMPLEX</span>
-            <div class="d-flex flex-column mt-5">
-                <span class="d-flex align-items-center">
-                    <mat-icon class="mr-1">phone</mat-icon>
-                    <span>8 800 555 79 88</span>
-                </span>
-                <span class="d-flex align-items-center mt-3">
-                    <mat-icon class="mr-1">location_on</mat-icon>
-                    <span>2903 Avenue Z, Brooklyn, NY, USA</span>
-                </span>
-                <span class="d-flex align-items-center mt-3">
-                    <mat-icon class="mr-1">mail_outline</mat-icon>
-                    <span>darutyunyan95@mail.ru</span>
-                </span>
-                <div class="social mt-3">
-                    <a href="https://instagram.com/autovikuprus.ru?igshid=1ijtabxir4uxs" class="fa fa-instagram"
-                        target="_blank"></a>
-                    <a href="https://wa.me/79383000735" class="fa fa-whatsapp pl-3" target="_blank"></a>
-                    <a href="tg://resolve?domain=autovikuprus" class="fa fa-telegram pl-3"></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <span class="feedback">ОБРАТНАЯ СВЯЗЬ</span><br>
-            <div class="d-flex flex-column mt-4 justify-content-center">
-                <mat-form-field class="full-width">
-                    <mat-label>Ваша почта</mat-label>
-                    <input matInput>
-                </mat-form-field>
 
-                <mat-form-field class="full-width">
-                    <mat-label>Сообщение для нас</mat-label>
-                    <textarea matInput></textarea>
-                </mat-form-field>
-                <br>
-                <button mat-raised-button color="primary" class="mb-3">ОТПРАВИТЬ</button>
+            <span fxLayoutAlign="start center" fxLayoutGap="5px">
+                <mat-icon>phone</mat-icon>
+                <span>8 800 555 79 88</span>
+            </span>
+            <span fxLayoutAlign="start center" fxLayoutGap="5px">
+                <mat-icon>location_on</mat-icon>
+                <span>2903 Avenue Z, Brooklyn, NY, USA</span>
+            </span>
+            <span fxLayoutAlign="start center" fxLayoutGap="5px">
+                <mat-icon>mail_outline</mat-icon>
+                <span>darutyunyan95@mail.ru</span>
+            </span>
+            <div class="social" fxLayoutGap="30px">
+                <a href="https://instagram.com/autovikuprus.ru?igshid=1ijtabxir4uxs" class="fa fa-instagram"
+                    target="_blank"></a>
+                <a href="https://wa.me/79383000735" class="fa fa-whatsapp" target="_blank"></a>
+                <a href="tg://resolve?domain=autovikuprus" class="fa fa-telegram" target="_blank"></a>
             </div>
         </div>
-        <div class="col-3">
+        <div fxLayout="column" fxLayoutGap="10px">
+            <span class="feedback">ОБРАТНАЯ СВЯЗЬ</span>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Ваша почта</mat-label>
+                <input matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Сообщение для нас</mat-label>
+                <input matInput>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary">ОТПРАВИТЬ</button>
+        </div>
+        <div>
             <span class="location">РАСПОЛОЖЕНИЕ</span>
         </div>
     </div>
-    <div class="container">
-        <hr style="background: #fff;margin-bottom: 2px;">
+
+    <div>
+        <hr class="line">
     </div>
-    
-    <div class="container pt-2 pb-2 text-muted">
+
+    <div class="text-muted p-10">
         <small>&copy; AgroComplex, 2020 | Все права защищены</small>
     </div>
 </footer>

@@ -25,7 +25,11 @@ export class ProductCardComponent implements OnInit {
   }
 
   goToProduct(): void {
-    this.route.navigate(['/seeds', this.productId]);
+    if (this.isSeeds) {
+      this.route.navigate(['/seeds', this.productId]);
+    } else {
+      this.route.navigate(['/cropProtaction', this.productId]);
+    }
   }
 
 }

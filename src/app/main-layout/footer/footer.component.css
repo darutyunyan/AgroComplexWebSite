@@ -3,6 +3,10 @@ footer {
     color: #fff;
 }
 
+footer > div:first-child {
+    padding-top: 40px;
+}
+
 .logo {
     font-weight: bold;
     font-family: cursive;
@@ -42,3 +46,27 @@ mat-label {
   .social a{
       font-size: 25px;
   }
+
+  .social a:hover {
+      text-decoration: none;
+      color: #0056b3;
+  }
+
+  mat-icon {
+      cursor: pointer;
+  }
+
+  mat-icon:hover {
+    cursor: pointer;
+    color: #0056b3;
+}
+
+.line {
+    background: #fff; 
+    margin-bottom: 2px;
+}
+
+.fa {
+    text-decoration: none;
+    color: #1976d2;
+}

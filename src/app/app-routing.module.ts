@@ -17,7 +17,7 @@ const routes: Routes = [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'seeds/:id', component: SeedsComponent },
-      { path: 'cropProtaction', component: CropProtactionComponent },
+      { path: 'cropProtaction/:id', component: CropProtactionComponent },
       { path: 'mineralFertilizers', component: MineralFertilizersComponent },
       { path: 'feeds', component: FeedsComponent },
       { path: 'about', component: AboutComponent },

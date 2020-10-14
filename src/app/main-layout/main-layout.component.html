@@ -1,38 +1,37 @@
 <div>
-    <mat-toolbar class="d-flex">
-        <div class="d-flex ml-5">
-            <span class="d-flex align-items-center">
-                <mat-icon class="mr-1">phone</mat-icon>
+    <mat-toolbar>
+        <div fxFlexFill fxLayout="row" fxLayoutAlign="space-around center">
+            <span fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-around center">
+                <mat-icon>phone</mat-icon>
                 <small>8 800 555 79 88</small>
             </span>
-            <span class="mr-3 ml-3 separate">|</span>
-            <span class="d-flex align-items-center">
-                <mat-icon class="mr-1">location_on</mat-icon>
+            <span class="separate">|</span>
+            <span fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-around center">
+                <mat-icon>location_on</mat-icon>
                 <small>2903 Avenue Z, Brooklyn, NY, USA</small>
             </span>
-            <span class="mr-3 ml-3 separate">|</span>
-            <span class="d-flex align-items-center">
-                <mat-icon class="mr-1">mail_outline</mat-icon>
+            <span class="separate">|</span>
+            <span fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-around center">
+                <mat-icon>mail_outline</mat-icon>
                 <small>darutyunyan95@mail.ru</small>
             </span>
-            <span class="mr-3 ml-3 separate">|</span>
-            <div class="social">
-                <a href="https://instagram.com/autovikuprus.ru?igshid=1ijtabxir4uxs" class="fa fa-instagram"
-                    target="_blank"></a>
-                <a href="https://wa.me/79383000735" class="fa fa-whatsapp pl-3" target="_blank"></a>
-                <a href="tg://resolve?domain=autovikuprus" class="fa fa-telegram pl-3"></a>
+            <span class="separate">|</span>
+            <div class="social" fxLayoutGap="20px">
+                <a href="https://instagram.com/autovikuprus.ru?igshid=1ijtabxir4uxs" class="fa fa-instagram" target="_blank"></a>
+                <a href="https://wa.me/79383000735" class="fa fa-whatsapp" target="_blank"></a>
+                <a href="tg://resolve?domain=autovikuprus" class="fa fa-telegram" target="_blank"></a>
             </div>
         </div>
     </mat-toolbar>
 
-    <mat-toolbar class="d-flex justify-content-around">
-        <span class="logo">AGRO COMPLEX</span>
+    <mat-toolbar fxLayout="row" fxLayoutAlign="space-around center">
+        <span class="logo" (click)="toHome()">AGRO COMPLEX</span>
         <div>
             <a mat-icon-button class="pri-link menu-icon" [routerLink]="['/home']">
                 <mat-icon>home</mat-icon>
             </a>
             <a mat-flat-button class="pri-link" [routerLink]="['/seeds', 'first']"> СЕМЕНА </a>
-            <a mat-flat-button class="pri-link" [routerLink]="['/cropProtaction']"> СЗР </a>
+            <a mat-flat-button class="pri-link" [routerLink]="['/cropProtaction', 'first']"> СЗР </a>
             <a mat-flat-button class="pri-link" [routerLink]="['/mineralFertilizers']"> МИН. УДОБРЕНИЯ </a>
             <a mat-flat-button class="pri-link" [routerLink]="['/feeds']"> КОРМА </a>
             <a mat-flat-button class="pri-link" [routerLink]="['/about']"> О КОМПАНИИ </a>
@@ -42,7 +41,7 @@
     </mat-toolbar>
 </div>
 
-<div class="container mb-5" style="min-height: 50vh;">
+<div class="default-container">
     <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>

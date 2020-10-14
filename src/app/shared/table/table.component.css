@@ -1,0 +1,20 @@
+table {
+    width: 100%;
+  }
+
+  .mat-cell, .mat-header-cell {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  th.mat-header-cell {
+      text-align: left;
+  } 
+
+  th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+      padding-left: 24px;
+  }
+
+  tr th {
+      border-bottom: 1px solid rgba(0,0,0,.12);
+  }
