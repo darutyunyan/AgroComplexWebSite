@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { SearchPipe } from '../../shared/search.pipe';
 import { ProductService } from '../../shared/services/product.service';
 
 @Component({
@@ -9,15 +11,24 @@ import { ProductService } from '../../shared/services/product.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
+  displayedColumns: string[] = ['productName', 'info', 'type', 'columnType', 'action'];
+  dataSource: any;
+
   public products = [];
   public productName: string;
   public gSub: Subscription;
   public rSub: Subscription;
+  public searchPipe: SearchPipe = new SearchPipe();
 
   constructor(private productServ: ProductService) { }
 
   ngOnInit() {
     this.getAllProduct();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource = this.searchPipe.transform(this.products, filterValue);
   }
 
   remove(id: string) {
@@ -32,6 +43,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       res.productItems.forEach(product => {
         this.products = this.products.concat(product);
       });
+      this.dataSource = new MatTableDataSource(this.products);
     });
   }
 

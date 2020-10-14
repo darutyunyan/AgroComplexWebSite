@@ -37,11 +37,6 @@ small {
     color: rgba(0,0,0,.87);
 }
 
-.width-dropdown-arrow {
-    width: auto;
-}
-
-
 .cdk-focused.cdk-mouse-focused {
     background-color: rgba(0,0,0,.1);
 }

@@ -3,39 +3,43 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #fafafa; }
 
-/* Start of override styles */
-
-a:hover {
-    text-decoration: none;
-}
-
-input.ng-invalid.ng-touched,
-select.ng-invalid.ng-touched{
-    border:2px solid red;
-}
-
-input.ng-valid,
-select.ng-valid {
-    border: 2px solid green;
-}
-
-
-label {
-    margin-bottom: 0;
-}
-
-/* End of overrid styles */
-
-
 /* Start of common styles */
 
 .menu-spacer {
     flex: 1 1 auto;
 }
 
-
 .form-text {
     margin-top: 0;
 }
 
+.p-20 {
+    padding: 20px;
+}
+
+.pb-20 {
+    padding-bottom: 20px;
+}
+
 /* End of common styles */
+
+/* Start of admin styles */
+
+.product-list {
+    background-color: white;
+    max-height: 340px !important;
+    overflow: auto;
+}
+
+.product-list > div {
+    padding: 0 20px;
+    margin-bottom: 0 !important;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.product-list > h2 {
+    margin: 0;
+    padding: 10px;  
+}
+
+/* End of admin styles */

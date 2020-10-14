@@ -10,3 +10,7 @@
   mat-sidenav-container {
     height: calc(100% - 65px);
   }
+
+  .main-container {
+    margin: 0.5rem;
+  }

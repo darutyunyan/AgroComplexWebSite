@@ -1,44 +1,32 @@
-<h1 class="m-4 text-center text-md-right text-lg-right text-xl-right">Добавление продука</h1>
-<div *ngIf="isShowError" class="row justify-content-center">
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-        <div class="alert alert-danger" role="alert">
-            Добавьте в базу данных информацию о:
-            <ul>
-                <li *ngIf="productNames.length === 0">имя продукта</li>
-                <li *ngIf="columns.length === 0">таблице в которой будет отображатсья продук</li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div *ngIf="isShowForm" class="row justify-content-center">
-    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 col-xl-5">
-        <form [formGroup]="form" (ngSubmit)="submit()">
-
-            <div class="form-group">
-                <label for="info">Введите информацию о продукте через символ '/'</label>
-                <small class="form-text text-muted">Пример: Вика яровая/Льговская 22/от 23 руб/кг.</small>
-                <small class="form-text text-muted">Если какое-то значение надо пропустить, то вставте знак #. Пример: Вика яровая/#/от 23 руб/кг.</small>
-                <input id="info" class="form-control" type="text" formControlName="info">
-            </div>
-
-            <div class="form-group">
-                <label for="productName">Выберите название продукта</label>
-                <select class="form-control" formControlName="productName">
-                    <option *ngFor="let productName of productNames;" [value]="productName.id">
-                        {{productName.name}}
-                    </option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="columnType">Выберите вид таблицы</label>
-                <small class="form-text text-muted">Таблица должна соответствовать введенной информации о продукте.</small>
-                <select class="form-control" formControlName="columnType">
-                    <option *ngFor="let column of columns;" [value]="column.id">{{column.name}}</option>
-                </select>
-            </div>
-            <button type="submit" [disabled]="form.invalid || submitted" mat-raised-button color="primary"
-                class="float-right">Добавить</button>
-        </form>
-    </div>
+<div  fxLayout="column" fxLayoutAlign="space-between stretch">
+    <h1 fxFlexAlign.lt-md="center" fxFlexAlign.lt-xl="end">Добавление продука</h1>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="mat-elevation-z8 p-20" fxLayout="column">
+        <mat-form-field appearance="outline" class="pb-20">
+            <mat-label>Информация о продукте</mat-label>
+            <input matInput placeholder="Пример: Вика яровая|Льговская 22|от 23 руб/кг" formControlName="info">
+            <mat-hint>Введите информацию о продукте через символ '|'. Пример: Вика яровая|Льговская 22|от 23 руб/кг.
+                <br>Если какое-то значение надо пропустить, то вставте знак #. Пример: Вика яровая|#|от 23 руб/кг.
+            </mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Выберите название продукта</mat-label>
+            <mat-select formControlName="productName">
+                <mat-option *ngFor="let productName of productNames;" [value]="productName.id">
+                    {{productName.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="pb-20">
+            <mat-label>Выберите вид таблицы</mat-label>
+            <mat-select formControlName="columnType">
+                <mat-option *ngFor="let column of columns;" [value]="column.id">
+                    {{column.name}}
+                </mat-option>
+            </mat-select>
+            <mat-hint>
+                Таблица должна соответствовать введенной информации о продукте.
+            </mat-hint>
+        </mat-form-field>
+        <button type="submit" [disabled]="form.invalid || submitted" mat-raised-button color="primary">Добавить</button>
+    </form>
 </div>

@@ -32,13 +32,7 @@
                 <mat-icon>home</mat-icon>
             </a>
             <a mat-flat-button class="pri-link" [routerLink]="['/seeds', 'first']"> СЕМЕНА </a>
-            <a mat-icon-button class="pri-link width-dropdown-arrow menu-icon" [matMenuTriggerFor]="menu">
-                <mat-icon>expand_more</mat-icon>
-            </a>
             <a mat-flat-button class="pri-link" [routerLink]="['/cropProtaction']"> СЗР </a>
-            <a mat-icon-button class="pri-link width-dropdown-arrow menu-icon" [matMenuTriggerFor]="menu">
-                <mat-icon>expand_more</mat-icon>
-            </a>
             <a mat-flat-button class="pri-link" [routerLink]="['/mineralFertilizers']"> МИН. УДОБРЕНИЯ </a>
             <a mat-flat-button class="pri-link" [routerLink]="['/feeds']"> КОРМА </a>
             <a mat-flat-button class="pri-link" [routerLink]="['/about']"> О КОМПАНИИ </a>
@@ -48,22 +42,7 @@
     </mat-toolbar>
 </div>
 
-<mat-menu #menu="matMenu">
-    <button mat-menu-item>
-        <mat-icon>dialpad</mat-icon>
-        <span>Redial</span>
-    </button>
-    <button mat-menu-item disabled>
-        <mat-icon>voicemail</mat-icon>
-        <span>Check voice mail</span>
-    </button>
-    <button mat-menu-item>
-        <mat-icon>notifications_off</mat-icon>
-        <span>Disable alerts</span>
-    </button>
-</mat-menu>
-
-<div class="container mb-5" style="min-height: 80vh;">
+<div class="container mb-5" style="min-height: 50vh;">
     <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>

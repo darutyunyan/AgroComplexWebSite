@@ -1,9 +1,0 @@
-.admin-panel-top {
-    padding-top: 100px;
-}
-
-@media only screen and (max-width: 600px) {
-    .admin-panel-top {
-        padding-top: 20px;
-    }
-  }
