@@ -10,63 +10,63 @@ export class ProductService {
         this.isShowLoader = new BehaviorSubject<boolean>(false);
     }
 
-    getLoaderStatus(): Observable<boolean> {
+    public getLoaderStatus(): Observable<boolean> {
         return this.isShowLoader.asObservable();
     }
 
-    runLoader(newValue): void {
+    public runLoader(newValue): void {
         this.isShowLoader.next(newValue);
     }
 
-    initAddProduct() {
+    public initAddProduct(): Observable<object> {
         return this.http.get(`/product/initAddProduct`);
     }
 
-    addProduct(request) {
+    public addProduct(request): Observable<object> {
         return this.http.post(`/product/addProduct`, request);
     }
 
-    getAllProducts() {
+    public getAllProducts(): Observable<object> {
         return this.http.get(`/product/getAllProducts`);
     }
 
-    removeProduct(request) {
+    public removeProduct(request): Observable<object> {
         return this.http.post(`/product/removeProduct`, request);
     }
 
-    addColumnType(request) {
+    public addColumnType(request): Observable<object> {
         return this.http.post(`/product/addColumnType`, request);
     }
 
-    removeColumnType(request) {
+    public removeColumnType(request): Observable<object> {
         return this.http.post(`/product/removeColumnType`, request);
     }
 
-    getColumnTypes() {
+    public getColumnTypes(): Observable<object> {
         return this.http.get(`/product/getColumnTypes`);
     }
 
-    addProductName(request) {
+    public addProductName(request): Observable<object> {
         return this.http.post(`/product/addProductName`, request);
     }
 
-    removeProductName(request) {
+    public removeProductName(request): Observable<object> {
         return this.http.post(`/product/removeProductName`, request);
     }
 
-    getProductNames() {
+    public getProductNames(): Observable<object> {
         return this.http.get(`/product/getproductNames`);
     }
 
-    addProductType(request) {
+    public addProductType(request): Observable<object> {
         return this.http.post(`/product/addProductType`, request);
     }
 
-    removeProductType(request) {
+    public removeProductType(request): Observable<object> {
         return this.http.post(`/product/removeProductType`, request);
     }
 
-    getProductTypes() {
+    public getProductTypes(): Observable<object> {
         return this.http.get(`/product/getproductTypes`);
     }
 }

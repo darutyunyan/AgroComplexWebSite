@@ -11,10 +11,10 @@ export class AdminLayoutComponent implements OnInit {
 
   constructor(private auth: AuthService, private router: Router) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
   }
 
-  isAuthenicated() {
+  public isAuthenicated(): boolean {
     return this.auth.isAuthenicated();
   }
 

@@ -11,8 +11,8 @@ import { ProductService } from '../../shared/services/product.service';
 export class AddColumnTypeComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
-  public submitted = false;
-  public tables = [];
+  public submitted: any = false;
+  public tables: any = [];
   public gSub: Subscription;
   public rSub: Subscription;
   public aSub: Subscription;
@@ -21,14 +21,14 @@ export class AddColumnTypeComponent implements OnInit, OnDestroy {
     private productServ: ProductService
   ) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required])
     });
     this.getColumnTypes();
   }
 
-  getColumnTypes() {
+  public getColumnTypes(): void {
     this.gSub = this.productServ.getColumnTypes().subscribe((res: any) => {
       this.tables = [];
       res.columnTypes.forEach(element => {
@@ -37,13 +37,13 @@ export class AddColumnTypeComponent implements OnInit, OnDestroy {
     });
   }
 
-  remove(id: string) {
+  public remove(id: string): void {
     this.rSub = this.productServ.removeColumnType({ id }).subscribe((res: any) => {
       this.tables = this.tables.filter(student => student.id !== id);
     });
   }
 
-  submit() {
+  public submit(): void {
     if (this.form.invalid) {
       return;
     }
@@ -66,7 +66,7 @@ export class AddColumnTypeComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     if (this.gSub) {
       this.gSub.unsubscribe();
     }

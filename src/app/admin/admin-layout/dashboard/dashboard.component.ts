@@ -11,10 +11,10 @@ import { ProductService } from '../../shared/services/product.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['productName', 'info', 'type', 'columnType', 'action'];
-  dataSource: any;
+  public displayedColumns: string[] = ['productName', 'info', 'type', 'columnType', 'action'];
+  public dataSource: any;
 
-  public products = [];
+  public products: any = [];
   public productName: string;
   public gSub: Subscription;
   public rSub: Subscription;
@@ -22,23 +22,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(private productServ: ProductService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.getAllProduct();
   }
 
-  applyFilter(event: Event) {
+  public applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource = this.searchPipe.transform(this.products, filterValue);
   }
 
-  remove(id: string) {
+  public remove(id: string): void {
     this.rSub = this.productServ.removeProduct({ id }).subscribe((res: any) => {
       this.products = this.products.filter(student => student.id !== id);
       this.dataSource = this.products;
     });
   }
 
-  getAllProduct() {
+  public getAllProduct(): void {
     this.gSub = this.productServ.getAllProducts().subscribe((res: any) => {
       this.products = [];
       res.productItems.forEach(product => {
@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     if (this.gSub) {
       this.gSub.unsubscribe();
     }

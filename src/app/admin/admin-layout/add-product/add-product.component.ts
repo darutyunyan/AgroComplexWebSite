@@ -11,9 +11,9 @@ import { ProductService } from '../../shared/services/product.service';
 export class AddProductComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
-  public submitted = false;
-  public columns = [];
-  public productNames = [];
+  public submitted: any = false;
+  public columns: any = [];
+  public productNames: any = [];
 
   public iSub: Subscription;
   public aSub: Subscription;
@@ -22,7 +22,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     private productServ: ProductService
   ) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.form = new FormGroup({
       info: new FormControl(null, [Validators.required]),
       productName: new FormControl(null, [Validators.required]),
@@ -32,7 +32,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.init();
   }
 
-  init() {
+  public init(): void {
     this.iSub = this.productServ.initAddProduct().subscribe((res: any) => {
       res.columnTypes.forEach(element => {
         this.columns = this.columns.concat(element);
@@ -44,7 +44,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     });
   }
 
-  submit() {
+  public submit(): void {
     if (this.form.invalid) {
       return;
     }
@@ -68,7 +68,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     if (this.iSub) {
       this.iSub.unsubscribe();
     }

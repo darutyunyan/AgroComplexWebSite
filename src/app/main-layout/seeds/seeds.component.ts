@@ -25,7 +25,7 @@ export class SeedsComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     window.scroll(0, 0);
 
     if (this.productId === 'first') {
@@ -47,7 +47,7 @@ export class SeedsComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     if (this.sSub) {
       this.sSub.unsubscribe();
     }

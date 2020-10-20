@@ -12,7 +12,7 @@ import { AuthService } from '../../shared/services/auth.service';
 export class LoginComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
-  public submitted = false;
+  public submitted: any = false;
   public lSub: Subscription;
 
   constructor(
@@ -24,14 +24,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required])
     });
   }
 
-  submit() {
+  public submit(): void {
     if (this.form.invalid) {
       return;
     }
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     if (this.lSub) {
       this.lSub.unsubscribe();
     }

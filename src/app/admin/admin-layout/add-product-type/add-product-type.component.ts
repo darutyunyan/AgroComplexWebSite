@@ -11,8 +11,8 @@ import { ProductService } from '../../shared/services/product.service';
 export class AddProductTypeComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
-  public submitted = false;
-  public productTypes = [];
+  public submitted: any = false;
+  public productTypes: any = [];
   public gSub: Subscription;
   public rSub: Subscription;
   public aSub: Subscription;
@@ -21,14 +21,14 @@ export class AddProductTypeComponent implements OnInit, OnDestroy {
     private productServ: ProductService
   ) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required])
     });
     this.getProductTypes();
   }
 
-  getProductTypes() {
+  public getProductTypes(): void {
     this.gSub = this.productServ.getProductTypes().subscribe((res: any) => {
       this.productTypes = [];
       res.productTypes.forEach(element => {
@@ -37,13 +37,13 @@ export class AddProductTypeComponent implements OnInit, OnDestroy {
     });
   }
 
-  remove(id) {
+  public remove(id): void {
     this.rSub = this.productServ.removeProductType({ id }).subscribe((res: any) => {
       this.productTypes = this.productTypes.filter(student => student.id !== id);
     });
   }
 
-  submit() {
+  public submit(): void {
     if (this.form.invalid) {
       return;
     }
@@ -66,7 +66,7 @@ export class AddProductTypeComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     if (this.gSub) {
       this.gSub.unsubscribe();
     }

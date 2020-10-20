@@ -14,7 +14,8 @@ export class LeftMenuComponent implements OnInit, OnDestroy {
   @Input()
   public productType: string;
 
-  @Output() loadNewProduct = new EventEmitter<string>();
+  @Output()
+  public loadNewProduct: EventEmitter<string> = new EventEmitter<string>();
 
   public items: Item[] = [];
   public lSub: Subscription;
@@ -40,7 +41,7 @@ export class LeftMenuComponent implements OnInit, OnDestroy {
     this.loadNewProduct.emit(id);
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     if (this.lSub) {
       this.lSub.unsubscribe();
     }

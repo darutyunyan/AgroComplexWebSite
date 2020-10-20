@@ -7,7 +7,7 @@ export class MyCookieService {
 
     constructor(private cookiesServ: CookieService) { }
 
-    set(name: string, value: string, options: CookieOptions) {
+    public set(name: string, value: string, options: CookieOptions): void {
         options.secure = isDevMode ? false : true;
 
         options.expires = new Date(new Date().getTime() + +options.expiresInString * 1000);
@@ -15,15 +15,15 @@ export class MyCookieService {
         this.cookiesServ.set(name, value, options.expires, '/', null, options.secure);
     }
 
-    get(name: string) {
+    public get(name: string): string {
         return this.cookiesServ.get(name);
     }
 
-    check(name: string) {
+    public check(name: string): boolean {
         return this.cookiesServ.check(name);
     }
 
-    delete(name: string) {
+    public delete(name: string): void {
         this.cookiesServ.delete(name, '/', null, isDevMode() ? false : true);
     }
 

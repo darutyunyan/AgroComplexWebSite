@@ -11,9 +11,9 @@ import { ProductService } from '../../shared/services/product.service';
 export class AddProductNameComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
-  public submitted = false;
-  public productNames = [];
-  public productTypes = [];
+  public submitted: any = false;
+  public productNames: any = [];
+  public productTypes: any = [];
   public gSub: Subscription;
   public rSub: Subscription;
   public aSub: Subscription;
@@ -23,7 +23,7 @@ export class AddProductNameComponent implements OnInit, OnDestroy {
     private productServ: ProductService
   ) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       productType: new FormControl(null, [Validators.required])
@@ -32,7 +32,7 @@ export class AddProductNameComponent implements OnInit, OnDestroy {
     this.getProductTypes();
   }
 
-  getProductNames() {
+  public getProductNames(): void {
     this.gSub = this.productServ.getProductNames().subscribe((res: any) => {
       this.productNames = [];
       res.productNames.forEach(element => {
@@ -41,7 +41,7 @@ export class AddProductNameComponent implements OnInit, OnDestroy {
     });
   }
 
-  getProductTypes() {
+  public getProductTypes(): void {
     this.gSubSecond = this.productServ.getProductTypes().subscribe((res: any) => {
       this.productTypes = [];
       res.productTypes.forEach(element => {
@@ -50,13 +50,13 @@ export class AddProductNameComponent implements OnInit, OnDestroy {
     });
   }
 
-  remove(id) {
+  public remove(id): void {
     this.rSub = this.productServ.removeProductName({ id }).subscribe((res: any) => {
       this.productNames = this.productNames.filter(student => student.id !== id);
     });
   }
 
-  submit() {
+  public submit(): void {
     if (this.form.invalid) {
       return;
     }
@@ -80,7 +80,7 @@ export class AddProductNameComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     if (this.gSub) {
       this.gSub.unsubscribe();
     }

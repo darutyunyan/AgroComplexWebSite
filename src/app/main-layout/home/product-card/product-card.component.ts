@@ -20,11 +20,11 @@ export class ProductCardComponent implements OnInit {
 
   constructor(private route: Router) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
 
   }
 
-  goToProduct(): void {
+  public goToProduct(): void {
     if (this.isSeeds) {
       this.route.navigate(['/seeds', this.productId]);
     } else {

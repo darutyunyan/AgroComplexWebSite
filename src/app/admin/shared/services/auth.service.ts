@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MyCookieService } from './cookie.service';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
 
-  readonly TOKEN = 'admin_token';
+  private readonly TOKEN: string = 'admin_token';
 
   constructor(
     private http: HttpClient,
     private cookieServ: MyCookieService) { }
 
-    login(request) {
-      return this.http.post(`/Account/Login`, request);
-    }
+  public login(request): Observable<object> {
+    return this.http.post(`/Account/Login`, request);
+  }
 
-  setToken(response) {
+  public setToken(response): void {
     if (response) {
       this.cookieServ.set(this.TOKEN, response.token, { expiresInString: response.liveTime, SameSite: 'Strict' });
     } else {
@@ -23,19 +24,19 @@ export class AuthService {
     }
   }
 
-  deleteToken() {
+  public deleteToken(): void {
     this.cookieServ.delete(this.TOKEN);
   }
 
-  getToken() {
+  public getToken(): string {
     return this.cookieServ.get(this.TOKEN);
   }
 
-  logout() {
+  public logout(): void {
     this.deleteToken();
   }
 
-  isAuthenicated() {
+  public isAuthenicated(): boolean {
     const isExist = this.cookieServ.check(this.TOKEN);
 
     if (!isExist) {

@@ -15,7 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
         private prodServ: ProductService
     ) { }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this.prodServ.runLoader(true);
 
         if (this.auth.isAuthenicated()) {
