@@ -7,7 +7,6 @@ import { Product } from '../interfaces';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent {
-
   @Input()
-  public product: Product;
+  public product: Product | null;
 }

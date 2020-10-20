@@ -19,9 +19,7 @@ export class LeftMenuComponent implements OnInit, OnDestroy {
   public items: Item[] = [];
   public lSub: Subscription;
 
-  constructor(private prodServ: ClientProductService,
-    private router: Router) {
-
+  constructor(private prodServ: ClientProductService, private router: Router) {
   }
 
   public ngOnInit(): void {

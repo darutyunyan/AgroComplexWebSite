@@ -1,8 +1,12 @@
 <h1>Виты продукции</h1>
-
-<mat-nav-list>
-    <a mat-list-item routerLink="." *ngFor="let item of items"
-        (click)="loadProduct(item.id)">
+<mat-nav-list *ngIf="items.length;else loading">
+    <a mat-list-item routerLink="." *ngFor="let item of items" (click)="loadProduct(item.id)">
         {{item.name}}
     </a>
 </mat-nav-list>
+
+<ng-template #loading>
+    <div fxFlexFill fxLayoutAlign="center center">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

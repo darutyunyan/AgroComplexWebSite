@@ -291,7 +291,7 @@ namespace AgroComplexService.Models.Services.ProductService
 				});
 			}
 
-			response.Items = items.ToArray();
+			response.Items = items.OrderBy(i => i.Name).ToArray();
 
 			return response;
 		}
