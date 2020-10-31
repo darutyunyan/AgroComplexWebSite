@@ -10,7 +10,7 @@
         <button type="submit" [disabled]="form.invalid || submitted" mat-raised-button color="primary">Добавить</button>
     </form>
     <div *ngIf="productTypes.length" class="product-list mat-elevation-z8" fxFlexFill> 
-        <h2>Список продукции</h2>
+        <h2>Виды продуктов</h2>
         <div fxLayout="row" fxLayoutAlign="space-between center"
             *ngFor="let productType of productTypes;">
             <div>

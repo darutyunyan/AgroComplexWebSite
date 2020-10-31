@@ -14,6 +14,7 @@ export class AddProductNameComponent implements OnInit, OnDestroy {
   public submitted: any = false;
   public productNames: any = [];
   public productTypes: any = [];
+  public searchItem: string;
   public gSub: Subscription;
   public rSub: Subscription;
   public aSub: Subscription;

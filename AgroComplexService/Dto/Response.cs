@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace AgroComplexService.Dto
 {
     public class Response
@@ -8,8 +6,6 @@ namespace AgroComplexService.Dto
 
         public Response(ServiceError error)
         {
-            Debug.Assert(error != null);
-
             ServiceError = error;
         }
 
@@ -22,8 +18,6 @@ namespace AgroComplexService.Dto
 
         public ServiceError(int code, string message)
         {
-            Debug.Assert(message != null);
-
             Code = code;
             Message = message;
         }

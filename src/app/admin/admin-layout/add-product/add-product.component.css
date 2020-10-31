@@ -5,3 +5,7 @@ div {
 div.alert ul {
     margin-left: 40px;
 }
+
+mat-hint {
+    font-size: 12px;
+}

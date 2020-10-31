@@ -16,9 +16,14 @@
         </mat-form-field>
         <button type="submit" [disabled]="form.invalid || submitted" mat-raised-button color="primary">Добавить</button>
     </form>
+    <mat-form-field>
+        <mat-label>Фильтр</mat-label>
+        <input matInput [(ngModel)]="searchItem" placeholder="Пример: Семена">
+      </mat-form-field>
+      {{searchItem}}
     <div *ngIf="productNames.length" class="product-list mat-elevation-z8" fxFlexFill>
-        <h2>Список таблиц</h2>
-        <div fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let productName of productNames;">
+        <h2>Названия продуктов</h2>
+        <div fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let productName of productNames | search : searchItem">
             <span class="w-33">{{productName.name}}</span>
             <span class="w-33">{{productName.productType}}</span>
             <button type="button" (click)="remove(productName.id)" mat-icon-button color="warn">

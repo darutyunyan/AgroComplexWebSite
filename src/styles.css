@@ -50,7 +50,7 @@ h1.mat-display-2{
 
 .product-list {
     background-color: white;
-    max-height: 340px !important;
+    max-height: 250px !important;
     overflow: auto;
 }
 
