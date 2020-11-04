@@ -46,6 +46,29 @@ h1.mat-display-2{
 
 /* End of common styles */
 
+/* Start of material styles */
+
+mat-hint {
+    font-size: 12px;
+}
+
+
+@media (max-width: 670px) {
+    mat-form-field.hint-padding {
+        padding-bottom: 40px;
+    }
+}
+
+
+@media (max-width: 400px) {
+    mat-form-field.hint-padding {
+        padding-bottom: 65px;
+    }
+}
+
+
+/* End of material styles */
+
 /* Start of admin styles */
 
 .product-list {
