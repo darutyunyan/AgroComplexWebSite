@@ -1,4 +1,3 @@
-
 namespace AgroComplexService.Dto.ProductType
 {
 	public class RemoveProductTypeRequest

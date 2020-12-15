@@ -10,6 +10,7 @@ using AgroComplexService.Dto.ProductName;
 using AgroComplexService.Dto.ProductType;
 using AgroComplexService.Models.DataBase;
 using AgroComplexService.Models.Services.ProductService;
+using Microsoft.Extensions.Localization;
 
 namespace AgroComplexService.Controllers
 {
@@ -19,15 +20,14 @@ namespace AgroComplexService.Controllers
 	{
 		#region Constructor
 
-		public ProductController(AgroComplexDBContext context)
+		public ProductController(AgroComplexDBContext context, IStringLocalizer<Resource> localizer)
 		{
-			_productServ = new ProductManagmentService(context);
+			_productServ = new ProductManagmentService(context, localizer);
 		}
 
 		#endregion
 
 		#region Admin public methods
-
 
 		[Route("InitAddProduct")]
 		[HttpGet]
@@ -229,6 +229,7 @@ namespace AgroComplexService.Controllers
 
 			try
 			{
+				//throw new Exception("Erorr on added proudct type");
 				await _productServ.AddProductType(request);
 			}
 			catch (Exception ex)
@@ -248,6 +249,7 @@ namespace AgroComplexService.Controllers
 
 			try
 			{
+				//throw new Exception("Erorr on remove proudct type");
 				await _productServ.RemoveProductType(request);
 			}
 			catch (Exception ex)

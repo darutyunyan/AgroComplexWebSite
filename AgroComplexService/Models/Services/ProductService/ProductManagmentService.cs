@@ -4,7 +4,9 @@ using AgroComplexService.Dto.Product;
 using AgroComplexService.Dto.ProductName;
 using AgroComplexService.Dto.ProductType;
 using AgroComplexService.Models.DataBase;
+using AgroComplexService.Models.Exceptions;
 using AgroComplexService.Models.Repository;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +18,13 @@ namespace AgroComplexService.Models.Services.ProductService
 	{
 		#region Constructor
 
-		public ProductManagmentService(AgroComplexDBContext contect)
+		public ProductManagmentService(AgroComplexDBContext contect, IStringLocalizer<Resource> localizer)
 		{
 			_productRepo = new ProductRepository(contect);
 			_productNameRepo = new ProductNameRepository(contect);
 			_productTypeRepo = new ProductTypeRespository(contect);
 			_columnTypeRepo = new ColumnTypeRepository(contect);
+			_localizer = localizer;
 		}
 
 		#endregion
@@ -203,8 +206,14 @@ namespace AgroComplexService.Models.Services.ProductService
 
 		public async Task AddProductType(AddProductTypeRequest request)
 		{
+			//request = null;
 			if (request == null)
 				throw new ArgumentException("request");
+
+			bool exist = await _productTypeRepo.IsExist(request.Name);
+
+			if (exist)
+				throw new BusinessException(_localizer["AddDublicateProductTypeMessage"]);
 
 			ProductType productType = new ProductType()
 			{
@@ -370,6 +379,8 @@ namespace AgroComplexService.Models.Services.ProductService
 		private IProductTypeRepository _productTypeRepo = null;
 
 		private IColumnTypeRepository _columnTypeRepo = null;
+
+		private readonly IStringLocalizer<Resource> _localizer;
 
 		#endregion
 	}

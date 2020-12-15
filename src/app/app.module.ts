@@ -19,6 +19,7 @@ import { ClientProductService } from './shared/services/client-product.service';
 import { ProductCardComponent } from './main-layout/home/product-card/product-card.component';
 import { LeftMenuComponent } from './main-layout/left-menu/left-menu.component';
 import { TableComponent } from './shared/table/table.component';
+import { ErrorComponent } from './shared/dialogs/error/error.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TableComponent } from './shared/table/table.component';
     FooterComponent,
     ProductCardComponent,
     LeftMenuComponent,
-    TableComponent
+    TableComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

@@ -34,6 +34,11 @@ namespace AgroComplexService.Models.Repository
 			return await _context.ProductType.ToListAsync();
 		}
 
+		public async Task<bool> IsExist(string name)
+		{
+			return await _context.ProductType.AnyAsync(p => p.Name.ToLower() == name.ToLower());
+		}
+
 		public async Task Remove(Guid id)
 		{
 			if (id == Guid.Empty)

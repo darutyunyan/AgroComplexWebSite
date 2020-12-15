@@ -15,8 +15,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { environment } from 'src/environments/environment';
 
@@ -38,8 +39,10 @@ import { environment } from 'src/environments/environment';
     MatInputModule,
     MatTableModule,
     MatSelectModule,
+    MatDialogModule,
     FlexLayoutModule,
   ],
+  declarations: [],
 })
 export class SharedModule {
   public static forRoot(): ModuleWithProviders<any> {

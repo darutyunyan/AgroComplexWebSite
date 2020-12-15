@@ -3,16 +3,16 @@
     <form [formGroup]="form" (ngSubmit)="submit()" class="mat-elevation-z8 p-20" fxLayout="column" >
         <mat-form-field appearance="outline">
             <mat-label>Название</mat-label>
-            <input matInput placeholder="Пример: Семена" formControlName="name">
+            <input matInput placeholder="Пример: Семена" formControlName="name" autocomplete="off">
             <mat-hint>Введите новый вид продукта</mat-hint>
         </mat-form-field>
         <br>
-        <button type="submit" [disabled]="form.invalid || submitted" mat-raised-button color="primary">Добавить</button>
+        <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Добавить</button>
     </form>
-    <div *ngIf="productTypes.length" class="product-list mat-elevation-z8" fxFlexFill> 
+    <div *ngIf="loaded$ | async" class="product-list mat-elevation-z8" fxFlexFill> 
         <h2>Виды продуктов</h2>
         <div fxLayout="row" fxLayoutAlign="space-between center"
-            *ngFor="let productType of productTypes;">
+            *ngFor="let productType of products$ | async">
             <div>
                 {{productType.name}}
             </div>

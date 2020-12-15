@@ -4,11 +4,13 @@ using AgroComplexService.Models.Services.Mail;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using System.Globalization;
 
 namespace AgroComplexService
 {
@@ -27,6 +29,9 @@ namespace AgroComplexService
 			// Sql server.
 			services.AddDbContext<AgroComplexDBContext>(options =>
 				options.UseSqlServer(Configuration.GetConnectionString("AgroComplexDb")));
+
+			// Resourse file.
+			services.AddLocalization(options => options.ResourcesPath = "Resources");
 
 			// Init Mail service.
 			EmailSetting settings = new EmailSetting();

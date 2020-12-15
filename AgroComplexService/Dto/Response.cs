@@ -4,25 +4,25 @@ namespace AgroComplexService.Dto
     {
         public Response() { }
 
-        public Response(ServiceError error)
+        public Response(Error error)
         {
-            ServiceError = error;
+			Error = error;
         }
 
-        public ServiceError ServiceError { get; set; }
+        public Error Error { get; set; }
     }
 
-    public class ServiceError
+    public class Error
     {
-        public ServiceError() { }
+        public Error() { }
 
-        public ServiceError(int code, string message)
+        public Error(string statusCode, string message)
         {
-            Code = code;
+			StatusCode = statusCode;
             Message = message;
         }
 
-        public int Code { get; set; }
+        public string StatusCode { get; set; }
 
         public string Message { get; set; }
     }

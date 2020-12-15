@@ -66,7 +66,7 @@ export class ProductService {
         return this.http.post(`/product/removeProductType`, request);
     }
 
-    public getProductTypes(): Observable<object> {
+    public getProductTypes(): Observable<any> {
         return this.http.get(`/product/getproductTypes`);
     }
 }

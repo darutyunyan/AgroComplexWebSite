@@ -35,7 +35,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 filter(this._isHttpResponse),
                 map((res) => {
                     if (res.body.serviceError != null) {
-                        console.log(res.body.serviceError.message);
+                      //  console.log(res.body.serviceError.message);
                     }
                     this.prodServ.runLoader(false);
                     return res;
@@ -46,7 +46,7 @@ export class AuthInterceptor implements HttpInterceptor {
                         this.router.navigate(['/admin', 'login']);
                     }
 
-                    console.log(error);
+                  //  console.log(error);
                     this.prodServ.runLoader(false);
                     return throwError(error);
                 })
