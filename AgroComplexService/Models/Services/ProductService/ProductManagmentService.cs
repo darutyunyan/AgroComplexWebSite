@@ -152,7 +152,7 @@ namespace AgroComplexService.Models.Services.ProductService
 				});
 			}
 
-			response.ColumnTypes = items.ToArray();
+			response.Types = items.ToArray();
 
 			return response;
 		}
@@ -246,7 +246,7 @@ namespace AgroComplexService.Models.Services.ProductService
 				});
 			}
 
-			response.ProductTypes = items.ToArray();
+			response.Types = items.ToArray();
 
 			return response;
 		}

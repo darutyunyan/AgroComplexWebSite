@@ -7,11 +7,12 @@ import {
     addProductTypeError, addProductTypePending, addProductTypeSuccess,
     getProductTypesError, getProductTypesPending, getProductTypesSuccess,
     removeProductTypeSuccess, removeProductTypeError, removeProductTypePending
-} from '../actions/admins.action';
-import { IResponseError } from '../models/error';
+} from '../../actions/admin/productType.action';
+import { IResponseError } from '../../models/error';
+
 
 @Injectable()
-export class AdminsEffects {
+export class ProductTypeEffects {
     public getProductTypes$: CreateEffectMetadata = createEffect(() => this.actions$.pipe(
         ofType(getProductTypesPending, addProductTypeSuccess, removeProductTypeSuccess),
         mergeMap(() => this.productService.getProductTypes()

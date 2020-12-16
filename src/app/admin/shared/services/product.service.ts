@@ -42,7 +42,7 @@ export class ProductService {
         return this.http.post(`/product/removeColumnType`, request);
     }
 
-    public getColumnTypes(): Observable<object> {
+    public getColumnTypes(): Observable<any> {
         return this.http.get(`/product/getColumnTypes`);
     }
 

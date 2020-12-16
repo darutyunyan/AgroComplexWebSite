@@ -7,16 +7,15 @@
             <mat-hint>Введите имена столбцов через символ '|'</mat-hint>
         </mat-form-field>
         <br>
-        <button type="submit" [disabled]="form.invalid || submitted" mat-raised-button color="primary">Добавить</button>
+        <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Добавить</button>
     </form>
-    <div *ngIf="tables.length" class="product-list mat-elevation-z8" fxFlexFill> 
+    <div *ngIf="loaded$ | async" class="product-list mat-elevation-z8" fxFlexFill>
         <h2>Список таблиц</h2>
-        <div fxLayout="row" fxLayoutAlign="space-between center"
-            *ngFor="let table of tables;">
+        <div fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let type of types$ | async;">
             <div>
-                {{table.name}}
+                {{type.name}}
             </div>
-            <button type="button" (click)="remove(table.id)" mat-icon-button color="warn">
+            <button type="button" (click)="remove(type.id)" mat-icon-button color="warn">
                 <mat-icon>clear</mat-icon>
             </button>
         </div>

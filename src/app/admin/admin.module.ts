@@ -21,9 +21,10 @@ import { SearchPipe } from './shared/search.pipe';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from '../store';
 import { EffectsModule } from '@ngrx/effects';
-import { AdminsEffects } from '../store/effects/admins.effects';
+import { ProductTypeEffects } from '../store/effects/admin/productType.effects';
 import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ColumnTypeEffects } from '../store/effects/admin/columnType.effects';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
         SharedModule,
         AdminRoutingModule,
         StoreModule.forRoot(reducers),
-        EffectsModule.forRoot([AdminsEffects]),
+        EffectsModule.forRoot([ProductTypeEffects, ColumnTypeEffects]),
         StoreDevtoolsModule.instrument({
             maxAge: 25,
             logOnly: environment.production,
