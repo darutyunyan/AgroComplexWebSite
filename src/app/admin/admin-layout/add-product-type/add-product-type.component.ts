@@ -6,7 +6,7 @@ import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
 import { IState } from 'src/app/store';
 import { addProductTypePending, getProductTypesPending, removeProductTypePending } from 'src/app/store/actions/admin/productType.action';
 import { showMessage } from 'src/app/store/actions/message.action';
-import { IItem } from 'src/app/store/models/admins.model';
+import { ITypeItem } from 'src/app/store/models/admins.model';
 import { IError } from 'src/app/store/models/error';
 
 @Component({
@@ -15,7 +15,7 @@ import { IError } from 'src/app/store/models/error';
   styleUrls: ['./add-product-type.component.css']
 })
 export class AddProductTypeComponent implements OnInit, OnDestroy {
-  public types$: Observable<IItem[]>;
+  public items$: Observable<ITypeItem[]>;
   public loaded$: Observable<boolean>;
   public error$: Observable<IError>;
   public successOperation$: Observable<boolean>;
@@ -24,10 +24,10 @@ export class AddProductTypeComponent implements OnInit, OnDestroy {
   public successSub: Subscription;
 
   constructor(private store: Store<IState>) {
-    this.types$ = this.store.select(store => store.productTypeState.types);
-    this.loaded$ = this.store.select(store => store.productTypeState.loaded);
-    this.error$ = this.store.select(store => store.productTypeState.error);
-    this.successOperation$ = this.store.select(store => store.productTypeState.successOperation);
+    this.items$ = this.store.select(s => s.productTypeState.items);
+    this.loaded$ = this.store.select(s => s.productTypeState.loaded);
+    this.error$ = this.store.select(s => s.productTypeState.error);
+    this.successOperation$ = this.store.select(s => s.productTypeState.successOperation);
   }
 
   public ngOnInit(): void {
@@ -38,14 +38,13 @@ export class AddProductTypeComponent implements OnInit, OnDestroy {
     this.store.dispatch(getProductTypesPending());
 
     this.successSub = this.successOperation$.subscribe((success) => {
-      console.log(success)
       if (success) {
         this.store.dispatch(showMessage({
           messageData: {
             statusCode: ErrorComponent.SUCCESS_OPERATION,
             message: null
           }
-        }))
+        }));
       }
     });
 

@@ -25,6 +25,7 @@ import { ProductTypeEffects } from '../store/effects/admin/productType.effects';
 import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ColumnTypeEffects } from '../store/effects/admin/columnType.effects';
+import { ProductNameEffects } from '../store/effects/admin/productName.effects';
 
 @NgModule({
     declarations: [
@@ -42,7 +43,7 @@ import { ColumnTypeEffects } from '../store/effects/admin/columnType.effects';
         SharedModule,
         AdminRoutingModule,
         StoreModule.forRoot(reducers),
-        EffectsModule.forRoot([ProductTypeEffects, ColumnTypeEffects]),
+        EffectsModule.forRoot([ProductTypeEffects, ColumnTypeEffects, ProductNameEffects]),
         StoreDevtoolsModule.instrument({
             maxAge: 25,
             logOnly: environment.production,

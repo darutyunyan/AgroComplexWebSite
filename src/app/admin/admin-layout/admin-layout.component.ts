@@ -42,7 +42,7 @@ export class AdminLayoutComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  public showMessage(data: IMessageData) {
+  public showMessage(data: IMessageData): void {
     if (data.statusCode != null) {
       const dialogConfig = new MatDialogConfig<IMessageData>();
 
@@ -56,5 +56,4 @@ export class AdminLayoutComponent implements OnInit {
     }
   }
 
-  
 }

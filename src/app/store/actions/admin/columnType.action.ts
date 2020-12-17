@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IColumnTypesResponse } from '../../models/admins.model';
+import { ITypesResponse } from '../../models/admins.model';
 import { IError } from '../../models/error';
 
 export enum ColumnTypeActions {
@@ -22,7 +22,7 @@ export const getColumnTypePending = createAction(
 
 export const getColumnTypeSuccess = createAction(
     ColumnTypeActions.GetColumnTypeSuccess,
-    props<{ response: IColumnTypesResponse }>()
+    props<{ response: ITypesResponse }>()
 );
 
 export const getColumnTypeError = createAction(

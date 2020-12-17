@@ -12,11 +12,11 @@
     <div *ngIf="loaded$ | async" class="product-list mat-elevation-z8" fxFlexFill> 
         <h2>Виды продуктов</h2>
         <div fxLayout="row" fxLayoutAlign="space-between center"
-            *ngFor="let type of types$ | async">
+            *ngFor="let item of items$ | async">
             <div>
-                {{type.name}}
+                {{item.name}}
             </div>
-            <button type="button" (click)="remove(type.id)" mat-icon-button color="warn">
+            <button type="button" (click)="remove(item.id)" mat-icon-button color="warn">
                 <mat-icon>clear</mat-icon>
             </button>
         </div>

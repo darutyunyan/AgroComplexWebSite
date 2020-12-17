@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IProductTypesResponse } from '../../models/admins.model';
+import { ITypesResponse } from '../../models/admins.model';
 import { IError } from '../../models/error';
 
 export enum ProductTypeActions {
@@ -22,7 +22,7 @@ export const getProductTypesPending = createAction(
 
 export const getProductTypesSuccess = createAction(
     ProductTypeActions.GetProductTypesSuccess,
-    props<{ response: IProductTypesResponse }>()
+    props<{ response: ITypesResponse }>()
 );
 
 export const getProductTypesError = createAction(

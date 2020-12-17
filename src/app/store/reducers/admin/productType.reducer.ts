@@ -4,10 +4,10 @@ import {
     getProductTypesError, getProductTypesSuccess,
     removeProductTypeError, removeProductTypePending, removeProductTypeSuccess
 } from '../../actions/admin/productType.action';
-import { IProductTypeState } from '../../models/admins.model';
+import { ITypeState } from '../../models/admins.model';
 
-const initialState: IProductTypeState = {
-    types: [],
+const initialState: ITypeState = {
+    items: [],
     error: null,
     loaded: false,
     successOperation: false,
@@ -18,7 +18,7 @@ const productTypesReducer = createReducer(
     on(getProductTypesSuccess, (state, action) => {
         return {
             ...state,
-            types: action.response.types,
+            items: action.response.items,
             error: action.response.error,
             loaded: true,
             successOperation: false
@@ -27,7 +27,7 @@ const productTypesReducer = createReducer(
     on(getProductTypesError, (state, action) => {
         return {
             ...state,
-            types: [],
+            items: [],
             error: action.error,
             loaded: false
         };
@@ -72,6 +72,6 @@ const productTypesReducer = createReducer(
     })
 );
 
-export default function reducer(state: IProductTypeState, action: Action): any {
+export default function reducer(state: ITypeState, action: Action): any {
     return productTypesReducer(state, action);
 }

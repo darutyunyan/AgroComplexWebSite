@@ -6,7 +6,7 @@ import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
 import { IState } from 'src/app/store';
 import { addColumnTypePending, getColumnTypePending, removeColumnTypePending } from 'src/app/store/actions/admin/columnType.action';
 import { showMessage } from 'src/app/store/actions/message.action';
-import { IItem } from 'src/app/store/models/admins.model';
+import { ITypeItem } from 'src/app/store/models/admins.model';
 import { IError } from 'src/app/store/models/error';
 
 @Component({
@@ -16,7 +16,7 @@ import { IError } from 'src/app/store/models/error';
 })
 export class AddColumnTypeComponent implements OnInit, OnDestroy {
 
-  public types$: Observable<IItem[]>;
+  public items$: Observable<ITypeItem[]>;
   public loaded$: Observable<boolean>;
   public error$: Observable<IError>;
   public successOperation$: Observable<boolean>;
@@ -25,10 +25,10 @@ export class AddColumnTypeComponent implements OnInit, OnDestroy {
   public successSub: Subscription;
 
   constructor(private store: Store<IState>) {
-    this.types$ = this.store.select(store => store.columnTypeState.types);
-    this.loaded$ = this.store.select(store => store.columnTypeState.loaded);
-    this.error$ = this.store.select(store => store.columnTypeState.error);
-    this.successOperation$ = this.store.select(store => store.columnTypeState.successOperation);
+    this.items$ = this.store.select(s => s.columnTypeState.items);
+    this.loaded$ = this.store.select(s => s.columnTypeState.loaded);
+    this.error$ = this.store.select(s => s.columnTypeState.error);
+    this.successOperation$ = this.store.select(s => s.columnTypeState.successOperation);
   }
 
 
@@ -40,14 +40,13 @@ export class AddColumnTypeComponent implements OnInit, OnDestroy {
     this.store.dispatch(getColumnTypePending());
 
     this.successSub = this.successOperation$.subscribe((success) => {
-      console.log(success)
       if (success) {
         this.store.dispatch(showMessage({
           messageData: {
             statusCode: ErrorComponent.SUCCESS_OPERATION,
             message: null
           }
-        }))
+        }));
       }
       this.errorSub = this.error$.subscribe((error: IError) => {
         if (error != null) {

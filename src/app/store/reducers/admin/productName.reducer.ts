@@ -1,21 +1,21 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import {
-    addColumnTypePending, addColumnTypeSuccess, addColumnTypeError,
-    removeColumnTypePending, removeColumnTypeSuccess, removeColumnTypeError,
-    getColumnTypeSuccess, getColumnTypeError
-} from '../../actions/admin/columnType.action';
-import { ITypeState } from '../../models/admins.model';
+    addProductNameError, addProductNamePending, addProductNameSuccess,
+    getProductNamesError, getProductNamesSuccess,
+    removeProductNameSuccess, removeProductNameError, removeProductNamePending
+} from '../../actions/admin/productName.action';
+import { INameState } from '../../models/admins.model';
 
-const initialState: ITypeState = {
+const initialState: INameState = {
     items: [],
     error: null,
     loaded: false,
     successOperation: false,
 };
 
-const columnTypesReducer = createReducer(
+const productNamesReducer = createReducer(
     initialState,
-    on(getColumnTypeSuccess, (state, action) => {
+    on(getProductNamesSuccess, (state, action) => {
         return {
             ...state,
             items: action.response.items,
@@ -24,7 +24,7 @@ const columnTypesReducer = createReducer(
             successOperation: false
         };
     }),
-    on(getColumnTypeError, (state, action) => {
+    on(getProductNamesError, (state, action) => {
         return {
             ...state,
             items: [],
@@ -32,38 +32,38 @@ const columnTypesReducer = createReducer(
             loaded: false
         };
     }),
-    on(addColumnTypePending, (state) => {
+    on(addProductNamePending, (state) => {
         return {
             ...state,
             successOperation: false
         };
     }),
-    on(addColumnTypeSuccess, (state) => {
+    on(addProductNameSuccess, (state) => {
         return {
             ...state,
             successOperation: true
         };
     }),
-    on(addColumnTypeError, (state, action) => {
+    on(addProductNameError, (state, action) => {
         return {
             ...state,
             successOperation: false,
             error: action.error
         };
     }),
-    on(removeColumnTypePending, (state) => {
+    on(removeProductNamePending, (state) => {
         return {
             ...state,
             successOperation: false
         };
     }),
-    on(removeColumnTypeSuccess, (state) => {
+    on(removeProductNameSuccess, (state) => {
         return {
             ...state,
             successOperation: true
         };
     }),
-    on(removeColumnTypeError, (state, action) => {
+    on(removeProductNameError, (state, action) => {
         return {
             ...state,
             successOperation: false,
@@ -72,6 +72,6 @@ const columnTypesReducer = createReducer(
     })
 );
 
-export default function reducer(state: ITypeState, action: Action): any {
-    return columnTypesReducer(state, action);
+export default function reducer(state: INameState, action: Action): any {
+    return productNamesReducer(state, action);
 }

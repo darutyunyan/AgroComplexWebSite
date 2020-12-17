@@ -152,7 +152,7 @@ namespace AgroComplexService.Models.Services.ProductService
 				});
 			}
 
-			response.Types = items.ToArray();
+			response.Items = items.ToArray();
 
 			return response;
 		}
@@ -162,14 +162,17 @@ namespace AgroComplexService.Models.Services.ProductService
 			if (request == null)
 				throw new ArgumentException("request");
 
-			if (string.IsNullOrEmpty(request.ProductTypeId))
+			if (string.IsNullOrEmpty(request.Name))
+				throw new ArgumentException("name");
+
+			if (string.IsNullOrEmpty(request.TypeId))
 				throw new ArgumentException("productTypeId");
 
 			ProductName productName = new ProductName()
 			{
 				Id = Guid.NewGuid(),
 				Name = request.Name,
-				ProductTypeId = Guid.Parse(request.ProductTypeId)
+				ProductTypeId = Guid.Parse(request.TypeId)
 			};
 
 			await _productNameRepo.Add(productName);
@@ -194,11 +197,11 @@ namespace AgroComplexService.Models.Services.ProductService
 				{
 					Id = item.Id,
 					Name = item.Name,
-					ProductType = item.ProductType.Name
+					Type = item.ProductType.Name
 				});
 			}
 
-			response.ProductNames = items.ToArray();
+			response.Items = items.ToArray();
 
 			return response;
 		}
@@ -246,7 +249,7 @@ namespace AgroComplexService.Models.Services.ProductService
 				});
 			}
 
-			response.Types = items.ToArray();
+			response.Items = items.ToArray();
 
 			return response;
 		}

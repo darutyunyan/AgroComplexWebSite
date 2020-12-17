@@ -54,7 +54,7 @@ export class ProductService {
         return this.http.post(`/product/removeProductName`, request);
     }
 
-    public getProductNames(): Observable<object> {
+    public getProductNames(): Observable<any> {
         return this.http.get(`/product/getproductNames`);
     }
 

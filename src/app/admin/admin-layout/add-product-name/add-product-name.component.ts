@@ -1,7 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { ProductService } from '../../shared/services/product.service';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
+import { IState } from 'src/app/store';
+import { addProductNamePending, getProductNamesPending, removeProductNamePending } from 'src/app/store/actions/admin/productName.action';
+import { getProductTypesPending } from 'src/app/store/actions/admin/productType.action';
+import { showMessage } from 'src/app/store/actions/message.action';
+import { INameItem, ITypeItem } from 'src/app/store/models/admins.model';
+import { IError } from 'src/app/store/models/error';
 
 @Component({
   selector: 'app-add-product-name',
@@ -10,51 +17,61 @@ import { ProductService } from '../../shared/services/product.service';
 })
 export class AddProductNameComponent implements OnInit, OnDestroy {
 
+  public items$: Observable<INameItem[]>;
+  public types$: Observable<ITypeItem[]>;
+  public loaded$: Observable<boolean>;
+  public typeLoaded$: Observable<boolean>;
+  public error$: Observable<IError>;
+  public successOperation$: Observable<boolean>;
   public form: FormGroup;
-  public submitted: any = false;
-  public productNames: any = [];
-  public productTypes: any = [];
+  public errorSub: Subscription;
+  public successSub: Subscription;
   public searchItem: string;
-  public gSub: Subscription;
-  public rSub: Subscription;
-  public aSub: Subscription;
-  public gSubSecond: Subscription;
 
-  constructor(
-    private productServ: ProductService
-  ) { }
+  constructor(private store: Store<IState>) {
+    this.items$ = this.store.select(s => s.productNameState.items);
+    this.types$ = this.store.select(s => s.productTypeState.items);
+    this.loaded$ = this.store.select(s => s.productNameState.loaded);
+    this.typeLoaded$ = this.store.select(s => s.productTypeState.loaded);
+    this.error$ = this.store.select(s => s.productNameState.error);
+    this.successOperation$ = this.store.select(s => s.productNameState.successOperation);
+  }
 
   public ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       productType: new FormControl(null, [Validators.required])
     });
-    this.getProductNames();
-    this.getProductTypes();
-  }
 
-  public getProductNames(): void {
-    this.gSub = this.productServ.getProductNames().subscribe((res: any) => {
-      this.productNames = [];
-      res.productNames.forEach(element => {
-        this.productNames = this.productNames.concat(element);
-      });
+    this.store.dispatch(getProductTypesPending());
+    this.store.dispatch(getProductNamesPending());
+
+    this.successSub = this.successOperation$.subscribe((success) => {
+      if (success) {
+        this.store.dispatch(showMessage({
+          messageData: {
+            statusCode: ErrorComponent.SUCCESS_OPERATION,
+            message: null
+          }
+        }));
+      }
     });
-  }
 
-  public getProductTypes(): void {
-    this.gSubSecond = this.productServ.getProductTypes().subscribe((res: any) => {
-      this.productTypes = [];
-      res.productTypes.forEach(element => {
-        this.productTypes = this.productTypes.concat(element);
-      });
+    this.errorSub = this.error$.subscribe((error: IError) => {
+      if (error != null) {
+        this.store.dispatch(showMessage(
+          {
+            messageData: {
+              statusCode: error.statusCode,
+              message: error.message
+            }
+          }));
+      }
     });
   }
 
   public remove(id): void {
-    this.rSub = this.productServ.removeProductName({ id }).subscribe((res: any) => {
-      this.productNames = this.productNames.filter(student => student.id !== id);
-    });
+    this.store.dispatch(removeProductNamePending({ id }));
   }
 
   public submit(): void {
@@ -62,36 +79,21 @@ export class AddProductNameComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.submitted = true;
-
-    const request = {
+    this.store.dispatch(addProductNamePending({
       name: this.form.value.name,
-      productTypeId: this.form.value.productType
-    };
+      typeId: this.form.value.productType
+    }));
 
-    this.aSub = this.productServ.addProductName(request).subscribe((res: any) => {
-      if (res.serviceError == null) {
-        this.form.reset();
-        this.getProductNames();
-      }
-
-      this.submitted = false;
-    }, () => {
-      this.submitted = false;
-    });
+    this.form.reset();
   }
 
   public ngOnDestroy(): void {
-    if (this.gSub) {
-      this.gSub.unsubscribe();
+    if (this.successSub) {
+      this.successSub.unsubscribe();
     }
 
-    if (this.rSub) {
-      this.rSub.unsubscribe();
-    }
-
-    if (this.aSub) {
-      this.aSub.unsubscribe();
+    if (this.errorSub) {
+      this.errorSub.unsubscribe();
     }
   }
 }

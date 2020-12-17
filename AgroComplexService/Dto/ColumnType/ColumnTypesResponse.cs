@@ -2,6 +2,6 @@ namespace AgroComplexService.Dto.ColumnType
 {
 	public class ColumnTypesResponse : Response
 	{
-		public ColumnTypeItem[] Types { get; set; }
+		public ColumnTypeItem[] Items { get; set; }
 	}
 }

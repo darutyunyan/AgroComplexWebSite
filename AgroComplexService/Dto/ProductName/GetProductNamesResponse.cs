@@ -2,6 +2,6 @@ namespace AgroComplexService.Dto.ProductName
 {
 	public class GetProductNamesResponse : Response
 	{
-		public ProductNameItem[] ProductNames { get; set; }
+		public ProductNameItem[] Items { get; set; }
 	}
 }
