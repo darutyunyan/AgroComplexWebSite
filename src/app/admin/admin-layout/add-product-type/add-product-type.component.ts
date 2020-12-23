@@ -2,9 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
+import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
 import { IState } from 'src/app/store';
-import { addProductTypePending, getProductTypesPending, removeProductTypePending } from 'src/app/store/actions/admin/productType.action';
+import { addProductTypePending, clearProductTypeError, getProductTypesPending, removeProductTypePending } from 'src/app/store/actions/admin/productType.action';
 import { showMessage } from 'src/app/store/actions/message.action';
 import { ITypeItem } from 'src/app/store/models/admins.model';
 import { IError } from 'src/app/store/models/error';
@@ -14,16 +16,15 @@ import { IError } from 'src/app/store/models/error';
   templateUrl: './add-product-type.component.html',
   styleUrls: ['./add-product-type.component.css']
 })
-export class AddProductTypeComponent implements OnInit, OnDestroy {
+export class AddProductTypeComponent extends UnSubscriber implements OnInit, OnDestroy {
   public items$: Observable<ITypeItem[]>;
   public loaded$: Observable<boolean>;
   public error$: Observable<IError>;
   public successOperation$: Observable<boolean>;
   public form: FormGroup;
-  public errorSub: Subscription;
-  public successSub: Subscription;
 
   constructor(private store: Store<IState>) {
+    super();
     this.items$ = this.store.select(s => s.productTypeState.items);
     this.loaded$ = this.store.select(s => s.productTypeState.loaded);
     this.error$ = this.store.select(s => s.productTypeState.error);
@@ -35,21 +36,23 @@ export class AddProductTypeComponent implements OnInit, OnDestroy {
       name: new FormControl(null, [Validators.required])
     });
 
-    this.store.dispatch(getProductTypesPending());
+    this.successOperation$
+      .pipe(takeUntil(this.unSubscriber$))
+      .subscribe((success) => {
+        if (success) {
+          this.store.dispatch(showMessage({
+            messageData: {
+              statusCode: ErrorComponent.SUCCESS_OPERATION
+            }
+          }));
+        }
+      });
 
-    this.successSub = this.successOperation$.subscribe((success) => {
-      if (success) {
-        this.store.dispatch(showMessage({
-          messageData: {
-            statusCode: ErrorComponent.SUCCESS_OPERATION,
-            message: null
-          }
-        }));
-      }
-    });
-
-    this.errorSub = this.error$.subscribe((error: IError) => {
+    this.error$
+      .pipe(takeUntil(this.unSubscriber$))
+      .subscribe((error: IError) => {
       if (error != null) {
+        this.store.dispatch(clearProductTypeError());
         this.store.dispatch(showMessage(
           {
             messageData: {
@@ -59,6 +62,8 @@ export class AddProductTypeComponent implements OnInit, OnDestroy {
           }));
       }
     });
+
+    this.store.dispatch(getProductTypesPending());
   }
 
   public remove(id): void {
@@ -72,15 +77,5 @@ export class AddProductTypeComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(addProductTypePending({ name: this.form.value.name }));
     this.form.reset();
-  }
-
-  public ngOnDestroy(): void {
-    if (this.successSub) {
-      this.successSub.unsubscribe();
-    }
-
-    if (this.errorSub) {
-      this.errorSub.unsubscribe();
-    }
   }
 }

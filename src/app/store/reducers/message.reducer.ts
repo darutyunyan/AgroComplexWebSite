@@ -16,9 +16,8 @@ const messageReducer = createReducer(
       message: action.messageData.message
     };
   }),
-  on(hideMessage, (state) => {
+  on(hideMessage, () => {
     return {
-      ...state,
       statusCode: null,
       message: null
     };

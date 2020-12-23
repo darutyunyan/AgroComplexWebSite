@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import {
     addProductTypeError, addProductTypePending, addProductTypeSuccess,
+    clearProductTypeError,
     getProductTypesError, getProductTypesSuccess,
     removeProductTypeError, removeProductTypePending, removeProductTypeSuccess
 } from '../../actions/admin/productType.action';
@@ -68,6 +69,12 @@ const productTypesReducer = createReducer(
             ...state,
             successOperation: false,
             error: action.error
+        };
+    }),
+    on(clearProductTypeError, (state) => {
+        return {
+            ...state,
+            error: null
         };
     })
 );

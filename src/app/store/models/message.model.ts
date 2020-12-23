@@ -7,5 +7,6 @@ export enum ErrorType {
 
 export interface IMessageData {
     statusCode: string;
-    message: string;
-};
+    message?: string;
+}
+

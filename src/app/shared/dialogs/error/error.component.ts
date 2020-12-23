@@ -11,13 +11,13 @@ import { ErrorType, IMessageData } from 'src/app/store/models/message.model';
   styleUrls: ['./error.component.css']
 })
 export class ErrorComponent implements OnInit {
+  public static readonly ERROR_COMMON: string = 'ABBCC1121';
+  public static readonly ERROR_BUSINESS: string = 'ABBC1122';
+  public static readonly SUCCESS_OPERATION: string = 'ABBC1123';
 
   public message: string = null;
   public errorType: ErrorType = null;
   private readonly SUCCESS_MESSAGE: string = 'Операция успешно выполнена!';
-  public static readonly ERROR_COMMON: string = 'ABBCC1121';
-  public static readonly ERROR_BUSINESS: string = 'ABBC1122';
-  public static readonly SUCCESS_OPERATION: string = 'ABBC1123';
 
   constructor(
     private store: Store<IState>,
@@ -25,7 +25,7 @@ export class ErrorComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public messageData: IMessageData) { }
 
   public ngOnInit(): void {
-    this.message = this.messageData.statusCode == ErrorComponent.SUCCESS_OPERATION ?
+    this.message = this.messageData.statusCode === ErrorComponent.SUCCESS_OPERATION ?
       this.SUCCESS_MESSAGE :
       this.messageData.message;
 
@@ -38,11 +38,11 @@ export class ErrorComponent implements OnInit {
   }
 
   public getErrorTypeString(): string {
-    if (this.errorType == ErrorType.Warning) {
+    if (this.errorType === ErrorType.Warning) {
       return 'warning';
-    } else if (this.errorType == ErrorType.Error) {
+    } else if (this.errorType === ErrorType.Error) {
       return 'error';
-    } else if (this.errorType == ErrorType.Success) {
+    } else if (this.errorType === ErrorType.Success) {
       return 'done';
     }
   }

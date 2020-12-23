@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
 import { IState } from 'src/app/store';
 import { IMessageData } from 'src/app/store/models/message.model';
@@ -13,18 +13,22 @@ import { AuthService } from '../shared/services/auth.service';
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.css']
 })
-export class AdminLayoutComponent implements OnInit {
+export class AdminLayoutComponent implements OnInit, OnDestroy {
 
-  public message$: Observable<IMessageData> = this.store.select(store => store.messageData);
+  public sub: Subscription;
+  public message$: Observable<IMessageData>;
 
   constructor(
     private store: Store<IState>,
     private auth: AuthService,
     private router: Router,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog) {
+      this.message$ = this.store.select(s => s.messageData);
+
+     }
 
   public ngOnInit(): void {
-    this.message$.subscribe((data: IMessageData) => {
+    this.sub = this.message$.subscribe((data: IMessageData) => {
       this.showMessage(data);
     });
   }
@@ -56,4 +60,9 @@ export class AdminLayoutComponent implements OnInit {
     }
   }
 
+  public ngOnDestroy(): void {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+  }
 }

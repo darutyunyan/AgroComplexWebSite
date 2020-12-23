@@ -43,8 +43,7 @@ export class AddColumnTypeComponent implements OnInit, OnDestroy {
       if (success) {
         this.store.dispatch(showMessage({
           messageData: {
-            statusCode: ErrorComponent.SUCCESS_OPERATION,
-            message: null
+            statusCode: ErrorComponent.SUCCESS_OPERATION
           }
         }));
       }
