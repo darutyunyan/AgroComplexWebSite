@@ -14,6 +14,8 @@ export enum ProductNamesActions {
     RemoveProductNamePending = '[Product Name] Remove product name prending',
     RemoveProductNameSuccess = '[Product Name] Remove product Name success',
     RemoveProductNameError = '[Product Name] Remove product name error',
+
+    ClearProductNameError = '[Product Name] Clear product name error',
 }
 
 export const getProductNamesPending = createAction(
@@ -56,4 +58,8 @@ export const removeProductNameSuccess = createAction(
 export const removeProductNameError = createAction(
     ProductNamesActions.RemoveProductNameError,
     props<{ error: IError }>()
+);
+
+export const clearProductNameError = createAction(
+    ProductNamesActions.ClearProductNameError
 );

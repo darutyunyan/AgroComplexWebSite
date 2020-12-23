@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
     addColumnTypePending, addColumnTypeSuccess, addColumnTypeError,
     removeColumnTypePending, removeColumnTypeSuccess, removeColumnTypeError,
-    getColumnTypeSuccess, getColumnTypeError
+    getColumnTypeSuccess, getColumnTypeError, clearColumnTypeError
 } from '../../actions/admin/columnType.action';
 import { ITypeState } from '../../models/admins.model';
 
@@ -68,6 +68,12 @@ const columnTypesReducer = createReducer(
             ...state,
             successOperation: false,
             error: action.error
+        };
+    }),
+    on(clearColumnTypeError, (state) => {
+        return {
+            ...state,
+            error: null
         };
     })
 );

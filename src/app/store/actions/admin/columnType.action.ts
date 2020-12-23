@@ -14,6 +14,8 @@ export enum ColumnTypeActions {
     RemoveColumnTypePending = '[Column Type] Remove column type prending',
     RemoveColumnTypeSuccess = '[Column Type] Remove column type success',
     RemoveColumnTypeError = '[Column Type] Remove column type error',
+
+    ClearColumnTypeError = '[Column Type] Clear column type error',
 }
 
 export const getColumnTypePending = createAction(
@@ -57,3 +59,8 @@ export const removeColumnTypeError = createAction(
     ColumnTypeActions.RemoveColumnTypeError,
     props<{ error: IError }>()
 );
+
+export const clearColumnTypeError = createAction(
+    ColumnTypeActions.ClearColumnTypeError
+);
+

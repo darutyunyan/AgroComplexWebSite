@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
 import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
@@ -16,7 +16,7 @@ import { IError } from 'src/app/store/models/error';
   templateUrl: './add-product-type.component.html',
   styleUrls: ['./add-product-type.component.css']
 })
-export class AddProductTypeComponent extends UnSubscriber implements OnInit, OnDestroy {
+export class AddProductTypeComponent extends UnSubscriber implements OnInit {
   public items$: Observable<ITypeItem[]>;
   public loaded$: Observable<boolean>;
   public error$: Observable<IError>;

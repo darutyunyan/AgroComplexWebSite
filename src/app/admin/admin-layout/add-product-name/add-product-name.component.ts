@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
 import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
 import { IState } from 'src/app/store';
-import { addProductNamePending, getProductNamesPending, removeProductNamePending } from 'src/app/store/actions/admin/productName.action';
+import { addProductNamePending, clearProductNameError, getProductNamesPending, removeProductNamePending } from 'src/app/store/actions/admin/productName.action';
 import { clearProductTypeError, getProductTypesPending } from 'src/app/store/actions/admin/productType.action';
 import { showMessage } from 'src/app/store/actions/message.action';
 import { INameItem, ITypeItem } from 'src/app/store/models/admins.model';
@@ -17,7 +17,7 @@ import { IError } from 'src/app/store/models/error';
   templateUrl: './add-product-name.component.html',
   styleUrls: ['./add-product-name.component.css']
 })
-export class AddProductNameComponent extends UnSubscriber implements OnInit, OnDestroy {
+export class AddProductNameComponent extends UnSubscriber implements OnInit {
 
   public items$: Observable<INameItem[]>;
   public types$: Observable<ITypeItem[]>;
@@ -64,6 +64,7 @@ export class AddProductNameComponent extends UnSubscriber implements OnInit, OnD
       .pipe(takeUntil(this.unSubscriber$))
       .subscribe((error: IError) => {
         if (error != null) {
+          this.store.dispatch(clearProductNameError());
           this.store.dispatch(showMessage(
             {
               messageData: {

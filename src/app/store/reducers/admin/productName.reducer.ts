@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
     addProductNameError, addProductNamePending, addProductNameSuccess,
     getProductNamesError, getProductNamesSuccess,
-    removeProductNameSuccess, removeProductNameError, removeProductNamePending
+    removeProductNameSuccess, removeProductNameError, removeProductNamePending, clearProductNameError
 } from '../../actions/admin/productName.action';
 import { INameState } from '../../models/admins.model';
 
@@ -68,6 +68,12 @@ const productNamesReducer = createReducer(
             ...state,
             successOperation: false,
             error: action.error
+        };
+    }),
+    on(clearProductNameError, (state) => {
+        return {
+            ...state,
+            error: null
         };
     })
 );
