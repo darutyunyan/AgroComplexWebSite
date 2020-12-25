@@ -1,61 +1,49 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { Subscription } from 'rxjs';
-import { SearchPipe } from '../../shared/search.pipe';
-import { ProductService } from '../../shared/services/product.service';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
+import { IState } from 'src/app/store';
+import { clearProductError, getProductsPending } from 'src/app/store/actions/admin/product.action';
+import { showMessage } from 'src/app/store/actions/message.action';
+import { IProductItem } from 'src/app/store/models/admins.model';
+import { IError } from 'src/app/store/models/error';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent extends UnSubscriber implements OnInit {
 
-  public displayedColumns: string[] = ['productName', 'info', 'type', 'columnType', 'action'];
-  public dataSource: any;
+  public products$: Observable<IProductItem[]>;
+  public error$: Observable<IError>;
+  public loaded$: Observable<boolean>;
 
-  public products: any = [];
-  public productName: string;
-  public gSub: Subscription;
-  public rSub: Subscription;
-  public searchPipe: SearchPipe = new SearchPipe();
-
-  constructor(private productServ: ProductService) { }
+  constructor(private store: Store<IState>) {
+    super();
+    this.products$ = store.select(s => s.productState.items);
+    this.error$ = store.select(s => s.productState.error);
+    this.loaded$ = store.select(s => s.productState.loaded);
+  }
 
   public ngOnInit(): void {
-    this.getAllProduct();
-  }
-
-  public applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource = this.searchPipe.transform(this.products, filterValue);
-  }
-
-  public remove(id: string): void {
-    this.rSub = this.productServ.removeProduct({ id }).subscribe((res: any) => {
-      this.products = this.products.filter(student => student.id !== id);
-      this.dataSource = this.products;
-    });
-  }
-
-  public getAllProduct(): void {
-    this.gSub = this.productServ.getAllProducts().subscribe((res: any) => {
-      this.products = [];
-      res.productItems.forEach(product => {
-        this.products = this.products.concat(product);
+    this.error$
+      .pipe(takeUntil(this.unSubscriber$))
+      .subscribe((error: IError) => {
+        if (error != null) {
+          this.store.dispatch(clearProductError());
+          this.store.dispatch(showMessage(
+            {
+              messageData: {
+                statusCode: error.statusCode,
+                message: error.message
+              }
+            }));
+        }
       });
-      this.dataSource = new MatTableDataSource(this.products);
-    });
-  }
 
-  public ngOnDestroy(): void {
-    if (this.gSub) {
-      this.gSub.unsubscribe();
-    }
-
-    if (this.rSub) {
-      this.rSub.unsubscribe();
-    }
+    this.store.dispatch(getProductsPending());
   }
 
 }

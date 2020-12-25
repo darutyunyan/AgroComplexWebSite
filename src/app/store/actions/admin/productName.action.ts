@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { IProductNamesResponse } from '../../models/admins.model';
 import { IError } from '../../models/error';
 
-export enum ProductNamesActions {
+export enum ProductNameActions {
     GetProductNamesPending = '[Product Name] Get product names pending',
     GetProductNamesSuccess = '[Product Name] Get product names success',
     GetProductNamesError = '[Product Name] Get product names error',
@@ -19,47 +19,47 @@ export enum ProductNamesActions {
 }
 
 export const getProductNamesPending = createAction(
-    ProductNamesActions.GetProductNamesPending
+    ProductNameActions.GetProductNamesPending
 );
 
 export const getProductNamesSuccess = createAction(
-    ProductNamesActions.GetProductNamesSuccess,
+    ProductNameActions.GetProductNamesSuccess,
     props<{ response: IProductNamesResponse }>()
 );
 
 export const getProductNamesError = createAction(
-    ProductNamesActions.GetProductNamesError,
+    ProductNameActions.GetProductNamesError,
     props<{ error: IError }>()
 );
 
 export const addProductNamePending = createAction(
-    ProductNamesActions.AddProductNamePending,
+    ProductNameActions.AddProductNamePending,
     props<{ name: string, typeId: string }>()
 );
 
 export const addProductNameSuccess = createAction(
-    ProductNamesActions.AddProductNameSuccess
+    ProductNameActions.AddProductNameSuccess
 );
 
 export const addProductNameError = createAction(
-    ProductNamesActions.AddProductNameError,
+    ProductNameActions.AddProductNameError,
     props<{ error: IError }>()
 );
 
 export const removeProductNamePending = createAction(
-    ProductNamesActions.RemoveProductNamePending,
+    ProductNameActions.RemoveProductNamePending,
     props<{ id: string }>()
 );
 
 export const removeProductNameSuccess = createAction(
-    ProductNamesActions.RemoveProductNameSuccess
+    ProductNameActions.RemoveProductNameSuccess
 );
 
 export const removeProductNameError = createAction(
-    ProductNamesActions.RemoveProductNameError,
+    ProductNameActions.RemoveProductNameError,
     props<{ error: IError }>()
 );
 
 export const clearProductNameError = createAction(
-    ProductNamesActions.ClearProductNameError
+    ProductNameActions.ClearProductNameError
 );

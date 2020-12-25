@@ -30,3 +30,21 @@ export interface INameItem {
     name: string;
     type: string;
 }
+
+export interface IProductState extends IProductResponse {
+    loaded: boolean;
+    successOperation: boolean;
+}
+
+export interface IProductResponse {
+    items: IProductItem[];
+    error: IError;
+}
+
+export interface IProductItem {
+    id: string;
+    info: string;
+    productType: string;
+    productName: string;
+    columnType: string;
+}

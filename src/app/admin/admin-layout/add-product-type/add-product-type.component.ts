@@ -25,10 +25,10 @@ export class AddProductTypeComponent extends UnSubscriber implements OnInit {
 
   constructor(private store: Store<IState>) {
     super();
-    this.items$ = this.store.select(s => s.productTypeState.items);
-    this.loaded$ = this.store.select(s => s.productTypeState.loaded);
-    this.error$ = this.store.select(s => s.productTypeState.error);
-    this.successOperation$ = this.store.select(s => s.productTypeState.successOperation);
+    this.items$ = store.select(s => s.productTypeState.items);
+    this.loaded$ = store.select(s => s.productTypeState.loaded);
+    this.error$ = store.select(s => s.productTypeState.error);
+    this.successOperation$ = store.select(s => s.productTypeState.successOperation);
   }
 
   public ngOnInit(): void {

@@ -8,18 +8,18 @@
                 <br>Если какое-то значение надо пропустить, то вставте знак #. Пример: Вика яровая|#|от 23 руб/кг.
             </mat-hint>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field *ngIf="namesLoaded$ | async" appearance="outline">
             <mat-label>Выберите название продукта</mat-label>
             <mat-select formControlName="productName">
-                <mat-option *ngFor="let productName of productNames;" [value]="productName.id">
+                <mat-option *ngFor="let productName of names$ | async;" [value]="productName.id">
                     {{productName.name}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="pb-20">
+        <mat-form-field *ngIf="columnsLoaded$ | async" appearance="outline" class="pb-20">
             <mat-label>Выберите вид таблицы</mat-label>
             <mat-select formControlName="columnType">
-                <mat-option *ngFor="let column of columns;" [value]="column.id">
+                <mat-option *ngFor="let column of columns$ | async;" [value]="column.id">
                     {{column.name}}
                 </mat-option>
             </mat-select>
@@ -27,6 +27,6 @@
                 Таблица должна соответствовать введенной информации о продукте.
             </mat-hint>
         </mat-form-field>
-        <button type="submit" [disabled]="form.invalid || submitted" mat-raised-button color="primary">Добавить</button>
+        <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Добавить</button>
     </form>
 </div>

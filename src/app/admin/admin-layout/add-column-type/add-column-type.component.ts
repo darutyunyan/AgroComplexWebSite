@@ -26,10 +26,10 @@ export class AddColumnTypeComponent extends UnSubscriber implements OnInit, OnDe
 
   constructor(private store: Store<IState>) {
     super();
-    this.items$ = this.store.select(s => s.columnTypeState.items);
-    this.loaded$ = this.store.select(s => s.columnTypeState.loaded);
-    this.error$ = this.store.select(s => s.columnTypeState.error);
-    this.successOperation$ = this.store.select(s => s.columnTypeState.successOperation);
+    this.items$ = store.select(s => s.columnTypeState.items);
+    this.loaded$ = store.select(s => s.columnTypeState.loaded);
+    this.error$ = store.select(s => s.columnTypeState.error);
+    this.successOperation$ = store.select(s => s.columnTypeState.successOperation);
   }
 
   public ngOnInit(): void {

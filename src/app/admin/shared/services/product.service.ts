@@ -18,10 +18,6 @@ export class ProductService {
         this.isShowLoader.next(newValue);
     }
 
-    public initAddProduct(): Observable<object> {
-        return this.http.get(`/product/initAddProduct`);
-    }
-
     public addProduct(request): Observable<object> {
         return this.http.post(`/product/addProduct`, request);
     }

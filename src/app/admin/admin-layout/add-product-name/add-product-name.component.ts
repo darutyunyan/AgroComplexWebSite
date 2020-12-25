@@ -31,14 +31,14 @@ export class AddProductNameComponent extends UnSubscriber implements OnInit {
 
   constructor(private store: Store<IState>) {
     super();
-    this.items$ = this.store.select(s => s.productNameState.items);
-    this.loaded$ = this.store.select(s => s.productNameState.loaded);
-    this.error$ = this.store.select(s => s.productNameState.error);
-    this.successOperation$ = this.store.select(s => s.productNameState.successOperation);
+    this.items$ = store.select(s => s.productNameState.items);
+    this.loaded$ = store.select(s => s.productNameState.loaded);
+    this.error$ = store.select(s => s.productNameState.error);
+    this.successOperation$ = store.select(s => s.productNameState.successOperation);
 
-    this.types$ = this.store.select(s => s.productTypeState.items);
-    this.typeLoaded$ = this.store.select(s => s.productTypeState.loaded);
-    this.errorProductType$ = this.store.select(s => s.productTypeState.error);
+    this.types$ = store.select(s => s.productTypeState.items);
+    this.typeLoaded$ = store.select(s => s.productTypeState.loaded);
+    this.errorProductType$ = store.select(s => s.productTypeState.error);
   }
 
   public ngOnInit(): void {
@@ -68,7 +68,8 @@ export class AddProductNameComponent extends UnSubscriber implements OnInit {
           this.store.dispatch(showMessage(
             {
               messageData: {
-                statusCode: error.statusCode
+                statusCode: error.statusCode,
+                message: error.message
               }
             }));
         }

@@ -29,25 +29,6 @@ namespace AgroComplexService.Controllers
 
 		#region Admin public methods
 
-		[Route("InitAddProduct")]
-		[HttpGet]
-		[Authorize(AuthenticationSchemes = "Bearer")]
-		public async Task<InitAddProductResponse> InitAddProduct()
-		{
-			InitAddProductResponse response = new InitAddProductResponse();
-
-			try
-			{
-				response = await _productServ.InitAddProduct();
-			}
-			catch (Exception ex)
-			{
-				SetResponse(response, ex);
-			}
-
-			return response;
-		}
-
 		[Route("AddProduct")]
 		[HttpPost]
 		[Authorize(AuthenticationSchemes = "Bearer")]

@@ -31,36 +31,6 @@ namespace AgroComplexService.Models.Services.ProductService
 
 		#region Admin public methods
 
-		public async Task<InitAddProductResponse> InitAddProduct()
-		{
-			InitAddProductResponse response = new InitAddProductResponse();
-
-			List<ProductNameItem> productNames = new List<ProductNameItem>();
-			foreach (var item in await _productNameRepo.GetAll())
-			{
-				productNames.Add(new ProductNameItem()
-				{
-					Id = item.Id,
-					Name = item.Name
-				});
-			}
-
-			List<ColumnTypeItem> columnTypes = new List<ColumnTypeItem>();
-			foreach (var item in await _columnTypeRepo.GetAll())
-			{
-				columnTypes.Add(new ColumnTypeItem()
-				{
-					Id = item.Id,
-					Name = item.Name
-				});
-			}
-
-			response.ProductNames = productNames.ToArray();
-			response.ColumnTypes = columnTypes.ToArray();
-
-			return response;
-		}
-
 		public async Task AddProduct(AddProductRequest request)
 		{
 			if (request == null)
@@ -103,7 +73,7 @@ namespace AgroComplexService.Models.Services.ProductService
 				});
 			}
 
-			response.ProductItems = items.ToArray();
+			response.Items = items.ToArray();
 
 			return response;
 		}

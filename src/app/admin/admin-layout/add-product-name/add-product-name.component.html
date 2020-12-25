@@ -19,11 +19,11 @@
     <mat-form-field>
         <mat-label>Фильтр</mat-label>
         <input matInput [(ngModel)]="searchItem" placeholder="Пример: Семена">
-      </mat-form-field>
-   
+    </mat-form-field>
     <div *ngIf="loaded$ | async" class="product-list mat-elevation-z8" fxFlexFill>
         <h2>Названия продуктов</h2>
-        <div fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let item of items$ | async | search : searchItem">
+        <div fxLayout="row" fxLayoutAlign="space-between center"
+            *ngFor="let item of items$ | async | search : searchItem">
             <span class="w-33">{{item.name}}</span>
             <span class="w-33">{{item.productType}}</span>
             <button type="button" (click)="remove(item.id)" mat-icon-button color="warn">

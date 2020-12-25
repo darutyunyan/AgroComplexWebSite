@@ -9,8 +9,6 @@ namespace AgroComplexService.Models.Services.ProductService
 {
 	public interface IProductManagmentService
 	{
-		Task<InitAddProductResponse> InitAddProduct();
-
 		Task AddProduct(AddProductRequest request);
 
 		Task<GetAllProductsResponse> GetAllProducts();

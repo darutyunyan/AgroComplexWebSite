@@ -1,0 +1,37 @@
+<mat-form-field>
+    <mat-label>Фильтр</mat-label>
+    <input matInput [(ngModel)]="productName" placeholder="Пример: Семена">
+  </mat-form-field>
+
+  <table class="mat-table cdk-table mat-elevation-z8">
+    <thead>
+        <tr class="mat-header-row">
+            <th class="mat-header-cell">
+                Название продукта
+            </th>
+            <th class="mat-header-cell">
+                Информация о продукте
+            </th>
+            <th class="mat-header-cell">
+                Вид продукта
+            </th>
+            <th class="mat-header-cell">
+                Наименования столбцов таблицы в которой будет отображаться информация о продукте
+            </th>
+            <th class="mat-header-cell"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="mat-row" *ngFor="let product of products | search : productName">
+            <td class="mat-cell">{{product.productName}}</td>
+            <td class="mat-cell">{{product.info}}</td>
+            <td class="mat-cell">{{product.productType}}</td>
+            <td class="mat-cell">{{product.columnType}}</td>
+            <td class="mat-cell">
+                <button (click)="remove(product.id)" mat-icon-button color="warn">
+                    <mat-icon>clear</mat-icon>
+                  </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

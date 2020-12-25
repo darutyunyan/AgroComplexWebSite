@@ -26,6 +26,8 @@ import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ColumnTypeEffects } from '../store/effects/admin/columnType.effects';
 import { ProductNameEffects } from '../store/effects/admin/productName.effects';
+import { ProductEffects } from '../store/effects/admin/product.effects';
+import { TableProductComponent } from './admin-layout/dashboard/table-product/table-product.component';
 
 @NgModule({
     declarations: [
@@ -38,12 +40,13 @@ import { ProductNameEffects } from '../store/effects/admin/productName.effects';
         AddProductTypeComponent,
         LoaderComponent,
         SearchPipe,
+        TableProductComponent
     ],
     imports: [
         SharedModule,
         AdminRoutingModule,
         StoreModule.forRoot(reducers),
-        EffectsModule.forRoot([ProductTypeEffects, ColumnTypeEffects, ProductNameEffects]),
+        EffectsModule.forRoot([ProductTypeEffects, ColumnTypeEffects, ProductNameEffects, ProductEffects]),
         StoreDevtoolsModule.instrument({
             maxAge: 25,
             logOnly: environment.production,
