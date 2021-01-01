@@ -1,7 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
+import { IState } from 'src/app/store';
+import { loginPending } from 'src/app/store/actions/admin/acctount.action';
+import { ILoginResponse } from 'src/app/store/models/admins.model';
 import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
@@ -9,16 +15,17 @@ import { AuthService } from '../../shared/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent extends UnSubscriber implements OnInit {
 
   public form: FormGroup;
-  public submitted: any = false;
-  public lSub: Subscription;
-
+  public loginResponse$: Observable<ILoginResponse>;
   constructor(
+    private store: Store<IState>,
     private auth: AuthService,
     private router: Router
   ) {
+    super();
+    this.loginResponse$ = store.select(s => s.accountState.loginResponse);
     if (auth.isAuthenicated()) {
       this.router.navigate(['/admin', 'dashboard']);
     }
@@ -29,6 +36,15 @@ export class LoginComponent implements OnInit, OnDestroy {
       email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required])
     });
+
+    this.loginResponse$
+      .pipe(takeUntil(this.unSubscriber$))
+      .subscribe((response: ILoginResponse) => {
+        if (response != null && response.error == null) {
+          this.auth.setToken(response);
+          this.router.navigate(['/admin', 'dashboard']);
+        }
+      });
   }
 
   public submit(): void {
@@ -36,32 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.submitted = true;
-
-    const request = {
-      email: this.form.value.email,
-      password: this.form.value.password
-    };
-
-    this.lSub = this.auth.login(request).subscribe((res: any) => {
-
-      if (res.serviceError == null) {
-        if (res.token) {
-          this.auth.setToken(res);
-          this.router.navigate(['/admin', 'dashboard']);
-        }
-        this.form.reset();
-      }
-
-      this.submitted = false;
-    }, () => {
-      this.submitted = false;
-    });
-  }
-
-  public ngOnDestroy(): void {
-    if (this.lSub) {
-      this.lSub.unsubscribe();
-    }
+    this.store.dispatch(loginPending({ email: this.form.value.email, password: this.form.value.password }));
+    this.form.reset();
   }
 }

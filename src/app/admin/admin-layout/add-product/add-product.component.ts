@@ -54,6 +54,18 @@ export class AddProductComponent extends UnSubscriber implements OnInit {
       columnType: new FormControl(null, [Validators.required])
     });
 
+    this.successOperation$
+      .pipe(takeUntil(this.unSubscriber$))
+      .subscribe((success) => {
+        if (success) {
+          this.store.dispatch(showMessage({
+            messageData: {
+              statusCode: ErrorComponent.SUCCESS_OPERATION
+            }
+          }));
+        }
+      });
+
     this.error$
       .pipe(takeUntil(this.unSubscriber$))
       .subscribe((error: IError) => {

@@ -48,3 +48,13 @@ export interface IProductItem {
     productName: string;
     columnType: string;
 }
+
+export interface IAccountState {
+    loginResponse: ILoginResponse;
+}
+
+export interface ILoginResponse {
+    liveTime: string;
+    token: string;
+    error: IError;
+}
