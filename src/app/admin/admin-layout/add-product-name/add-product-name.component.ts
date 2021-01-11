@@ -108,6 +108,6 @@ export class AddProductNameComponent extends UnSubscriber implements OnInit {
       typeId: this.form.value.productType
     }));
 
-    this.form.reset();
+    this.form.controls.name.reset();
   }
 }

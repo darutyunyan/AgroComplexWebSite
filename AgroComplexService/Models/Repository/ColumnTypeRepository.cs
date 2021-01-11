@@ -31,7 +31,12 @@ namespace AgroComplexService.Models.Repository
 
 		public async Task<List<ColumnType>> GetAll()
 		{
-			return await _context.ColumnType.ToListAsync();
+			return await _context.ColumnType.OrderBy(c => c.Name).ToListAsync();
+		}
+
+		public async Task<bool> IsExist(string name)
+		{
+			return await _context.ColumnType.AnyAsync(p => p.Name.ToLower() == name.ToLower());
 		}
 
 		public async Task Remove(Guid id)

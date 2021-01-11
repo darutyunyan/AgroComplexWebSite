@@ -128,20 +128,7 @@ export class AddProductComponent extends UnSubscriber implements OnInit {
       columnTypeId: this.form.value.columnType
     }));
 
-    this.form.reset();
-
-    this.successOperation$
-      .pipe(takeUntil(this.unSubscriber$))
-      .subscribe((success) => {
-        if (success) {
-          this.store.dispatch(showMessage({
-            messageData: {
-              statusCode: ErrorComponent.SUCCESS_OPERATION
-            }
-          }));
-        }
-      });
-
+    this.form.controls.info.reset();
   }
 
 }

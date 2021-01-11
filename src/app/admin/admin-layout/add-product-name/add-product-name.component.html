@@ -16,16 +16,16 @@
         </mat-form-field>
         <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Добавить</button>
     </form>
-    <mat-form-field>
+    <mat-form-field *ngIf="(items$ | async).length > 0">
         <mat-label>Фильтр</mat-label>
         <input matInput [(ngModel)]="searchItem" placeholder="Пример: Семена">
     </mat-form-field>
     <div *ngIf="loaded$ | async" class="product-list mat-elevation-z8" fxFlexFill>
-        <h2>Названия продуктов</h2>
+        <h2>{{(items$ | async).length > 0 ? 'Названия продуктов' : 'Нет данных' }} </h2>
         <div fxLayout="row" fxLayoutAlign="space-between center"
             *ngFor="let item of items$ | async | search : searchItem">
             <span class="w-33">{{item.name}}</span>
-            <span class="w-33">{{item.productType}}</span>
+            <span class="w-33">{{item.type}}</span>
             <button type="button" (click)="remove(item.id)" mat-icon-button color="warn">
                 <mat-icon>clear</mat-icon>
             </button>

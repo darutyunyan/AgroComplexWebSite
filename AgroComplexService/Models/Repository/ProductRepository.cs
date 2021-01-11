@@ -63,6 +63,7 @@ namespace AgroComplexService.Models.Repository
 		public async Task<List<Product>> GetAll()
 		{
 			return await _context.Product
+				.OrderBy(p => p.Info)
 				.Include(pN=>pN.ProductName)
 				.Include(cT=>cT.ColumnType)
 				.Include(pT=>pT.ProductName.ProductType)

@@ -1,9 +1,9 @@
-<mat-form-field>
+<mat-form-field *ngIf="products.length > 0">
     <mat-label>Фильтр</mat-label>
     <input matInput [(ngModel)]="productName" placeholder="Пример: Семена">
-  </mat-form-field>
+</mat-form-field>
 
-  <table class="mat-table cdk-table mat-elevation-z8">
+<table class="mat-table cdk-table mat-elevation-z8" *ngIf="products.length > 0">
     <thead>
         <tr class="mat-header-row">
             <th class="mat-header-cell">
@@ -30,7 +30,7 @@
             <td class="mat-cell">
                 <button (click)="remove(product.id)" mat-icon-button color="warn">
                     <mat-icon>clear</mat-icon>
-                  </button>
+                </button>
             </td>
         </tr>
     </tbody>

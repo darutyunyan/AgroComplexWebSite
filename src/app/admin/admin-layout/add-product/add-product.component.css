@@ -1,7 +1,4 @@
-div {
-    margin: 0.5rem;
+mat-form-field:first-child {
+    margin-bottom: 1rem;
 }
 
-div.alert ul {
-    margin-left: 40px;
-}

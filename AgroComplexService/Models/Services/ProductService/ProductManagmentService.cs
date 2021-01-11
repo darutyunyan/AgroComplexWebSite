@@ -91,6 +91,11 @@ namespace AgroComplexService.Models.Services.ProductService
 			if (request == null)
 				throw new ArgumentException("request");
 
+			bool exist = await _columnTypeRepo.IsExist(request.Name);
+
+			if (exist)
+				throw new BusinessException(_localizer["AddDublicateColumnTypeMessage"]);
+
 			ColumnType columnType = new ColumnType()
 			{
 				Id = Guid.NewGuid(),
@@ -138,6 +143,11 @@ namespace AgroComplexService.Models.Services.ProductService
 			if (string.IsNullOrEmpty(request.TypeId))
 				throw new ArgumentException("productTypeId");
 
+			bool exist = await _productNameRepo.IsExist(request.Name);
+
+			if (exist)
+				throw new BusinessException(_localizer["AddDublicateProductNameMessage"]);
+
 			ProductName productName = new ProductName()
 			{
 				Id = Guid.NewGuid(),
@@ -179,7 +189,6 @@ namespace AgroComplexService.Models.Services.ProductService
 
 		public async Task AddProductType(AddProductTypeRequest request)
 		{
-			//request = null;
 			if (request == null)
 				throw new ArgumentException("request");
 

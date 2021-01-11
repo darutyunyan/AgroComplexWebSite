@@ -31,16 +31,24 @@ namespace AgroComplexService.Models.Repository
 
 		public async Task<List<ProductName>> GetAll()
 		{
-			return await _context.ProductName.Include(pT=>pT.ProductType).ToListAsync();
+			return await _context
+				.ProductName
+				.OrderBy(n => n.Name)
+				.Include(pT => pT.ProductType).ToListAsync();
 		}
 
 		public async Task<List<ProductName>> GetByProductType(string name)
 		{
 			return await _context.ProductName
-				.Include(pT=>pT.ProductType)
+				.Include(pT => pT.ProductType)
 				.Where(pN => pN.ProductType.Name == name)
 				.OrderBy(n => n.Name)
 				.ToListAsync();
+		}
+
+		public async Task<bool> IsExist(string name)
+		{
+			return await _context.ProductName.AnyAsync(p => p.Name.ToLower() == name.ToLower());
 		}
 
 		public async Task Remove(Guid id)

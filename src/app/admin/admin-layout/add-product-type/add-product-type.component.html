@@ -10,7 +10,7 @@
         <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Добавить</button>
     </form>
     <div *ngIf="loaded$ | async" class="product-list mat-elevation-z8" fxFlexFill> 
-        <h2>Виды продуктов</h2>
+        <h2>{{(items$ | async).length > 0 ? 'Виды продуктов' : 'Нет данных' }} </h2>
         <div fxLayout="row" fxLayoutAlign="space-between center"
             *ngFor="let item of items$ | async">
             <div>

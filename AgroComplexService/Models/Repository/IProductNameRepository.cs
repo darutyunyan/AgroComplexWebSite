@@ -14,6 +14,8 @@ namespace AgroComplexService.Models.Repository
 
 		Task<List<ProductName>> GetByProductType(string name);
 
+		Task<bool> IsExist(string name);
+
 		Task Remove(Guid id);
 	}
 }

@@ -61,6 +61,24 @@ namespace AgroComplexService.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Такой вид таблицы уже существует!.
+        /// </summary>
+        public static string AddDublicateColumnTypeMessage {
+            get {
+                return ResourceManager.GetString("AddDublicateColumnTypeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Такое название продукта уже существует!.
+        /// </summary>
+        public static string AddDublicateProductNameMessage {
+            get {
+                return ResourceManager.GetString("AddDublicateProductNameMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Такой вид продукции уже существует!.
         /// </summary>
         public static string AddDublicateProductTypeMessage {

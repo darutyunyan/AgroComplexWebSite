@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddDublicateColumnTypeMessage" xml:space="preserve">
+    <value>Такой вид таблицы уже существует!</value>
+  </data>
+  <data name="AddDublicateProductNameMessage" xml:space="preserve">
+    <value>Такое название продукта уже существует!</value>
+  </data>
   <data name="AddDublicateProductTypeMessage" xml:space="preserve">
     <value>Такой вид продукции уже существует!</value>
   </data>
