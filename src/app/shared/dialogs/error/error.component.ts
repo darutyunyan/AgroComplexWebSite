@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { IState } from 'src/app/store';
+import { IState } from 'src/app/store/reducers/admin';
 import { hideMessage } from 'src/app/store/actions/message.action';
 import { ErrorType, IMessageData } from 'src/app/store/models/message.model';
 

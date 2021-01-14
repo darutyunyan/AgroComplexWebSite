@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
 import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
-import { IState } from 'src/app/store';
+import { IAdminState } from 'src/app/store/reducers/admin';
 import { addColumnTypePending, clearColumnTypeError, getColumnTypePending, removeColumnTypePending } from 'src/app/store/actions/admin/columnType.action';
 import { showMessage } from 'src/app/store/actions/message.action';
 import { ITypeItem } from 'src/app/store/models/admins.model';
@@ -24,12 +24,12 @@ export class AddColumnTypeComponent extends UnSubscriber implements OnInit, OnDe
   public successOperation$: Observable<boolean>;
   public form: FormGroup;
 
-  constructor(private store: Store<IState>) {
+  constructor(private store: Store<IAdminState>) {
     super();
-    this.items$ = store.select(s => s.columnTypeState.items);
-    this.loaded$ = store.select(s => s.columnTypeState.loaded);
-    this.error$ = store.select(s => s.columnTypeState.error);
-    this.successOperation$ = store.select(s => s.columnTypeState.successOperation);
+    this.items$ = store.select(s => s.adminState.columnTypeState.items);
+    this.loaded$ = store.select(s => s.adminState.columnTypeState.loaded);
+    this.error$ = store.select(s => s.adminState.columnTypeState.error);
+    this.successOperation$ = store.select(s => s.adminState.columnTypeState.successOperation);
   }
 
   public ngOnInit(): void {

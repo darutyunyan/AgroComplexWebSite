@@ -264,15 +264,15 @@ namespace AgroComplexService.Controllers
 
 		#region Client public methods
 
-		[Route("InitHomePage")]
+		[Route("GetAll")]
 		[HttpGet]
-		public async Task<InitHomePageResponse> InitHomePage()
+		public async Task<GetAllResponse> GetAll()
 		{
-			InitHomePageResponse response = new InitHomePageResponse();
+			GetAllResponse response = new GetAllResponse();
 
 			try
 			{
-				response = await _productServ.InitHomePage();
+				response = await _productServ.GetAll();
 			}
 			catch (Exception ex)
 			{

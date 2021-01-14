@@ -1,46 +1,32 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ClientProductService } from 'src/app/shared/services/client-product.service';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
+import { getProductsPending } from 'src/app/store/actions/client/client.actions';
+import { IGetAllItem } from 'src/app/store/models/client.model';
+import { IError } from 'src/app/store/models/error';
+import { IStateClient } from 'src/app/store/reducers/client';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent extends UnSubscriber implements OnInit {
 
-  public iSub: Subscription;
-  public seeds: any = [];
-  public planProtectionProducts: any = [];
-  constructor(private prodServ: ClientProductService) { }
+  public product$: Observable<IGetAllItem[]>;
+  public error$: Observable<IError>;
+  public loading$: Observable<boolean>;
+
+  constructor(private store: Store<IStateClient>) {
+    super();
+    this.loading$ = store.select(s => s.clientState.loading);
+    this.error$ = store.select(s => s.clientState.error);
+    this.product$ = store.select(s => s.clientState.items);
+  }
 
   public ngOnInit(): void {
-    this.initHomePage();
-  }
-
-  public initHomePage(): void {
-    this.iSub = this.prodServ.initHomePage().subscribe((res: any) => {
-      if (res.serviceError == null) {
-        this.seeds = [];
-        res.seeds.forEach((element: any) => {
-          this.seeds = this.seeds.concat(element);
-        });
-        this.planProtectionProducts = [];
-        res.planProtectionProducts.forEach((element: any) => {
-          this.planProtectionProducts = this.planProtectionProducts.concat(element);
-        });
-      } else {
-
-      }
-    }, ((error) => {
-
-    }));
-  }
-
-  public ngOnDestroy(): void {
-    if (this.iSub) {
-      this.iSub.unsubscribe();
-    }
+    this.store.dispatch(getProductsPending());
   }
 
 }

@@ -1,27 +1,34 @@
-<div class="main-container" fxFlexFill fxLayout="column" fxLayoutAlign="space-between stretch" 
-fxLayoutGap="20px" fxFlex.lt-md="100%" fxFlex.lt-xl="70%">
+<div class="main-container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="40px"
+    fxFlex.lt-md="100%" fxFlex.lt-xl="70%">
     <h1 fxFlexAlign="center" class="mat-display-2">КАТАЛОГ ПРОДУКЦИИ НА 2020</h1>
-    <mat-card fxLayout="row" fxLayoutAlign="space-between center" class="mat-elevation-z8">
-        <h1 class="mb-0">СЕМЕНА</h1>
-        <a mat-icon-button color="warn" [routerLink]="['/seeds', 'first']">
-            <mat-icon>arrow_forward_ios</mat-icon>
-        </a>
-    </mat-card>
-    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
-        <div class="p-20"  *ngFor="let seed of seeds">
-            <app-product-card [name]="seed.name" [isSeeds]="true" [productId]="seed.id"></app-product-card>
+
+    <ng-container *ngIf="((error$ | async) == null) && !(loading$ | async)">
+        <div *ngFor="let product of product$ | async" fxLayout="column" fxLayoutGap="40px">
+            <mat-card class="mat-elevation-z8">
+                <h1 class="mb-0">{{ product.typeName }}</h1>
+            </mat-card>
+            <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+                <div class="p-10" *ngFor="let item of product.items">
+                    <app-product-card [name]="item.name" [typeName]="product.typeName" [productId]="item.id">
+                    </app-product-card>
+                </div>
+            </div>
         </div>
-    </div>
-    <mat-card fxLoyout="row" fxLayoutAlign="space-between center" class="mat-elevation-z8">
-        <h1 class="mb-0">СЭР</h1>
-        <a mat-icon-button color="warn" [routerLink]="['/cropProtaction', 'first']">
-            <mat-icon>arrow_forward_ios</mat-icon>
-        </a>
-    </mat-card>
-    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
-        <div class="p-20" *ngFor="let productProtect of planProtectionProducts">
-            <app-product-card [name]="productProtect.name" [isSeeds]="false" [productId]="productProtect.id">
-            </app-product-card>
+
+        <div *ngIf="(product$ | async) == null" fxLayoutAlign="center center">
+            Продукция отсутствует. Приносим свои извинения!
         </div>
-    </div>
+    </ng-container>
+
+    <ng-container *ngIf="((error$ | async) != null) && !(loading$ | async)">
+        <div fxLayoutAlign="center center">
+            Произошла ошибка! Свяжитусь с нами!
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="(loading$ | async) && ((error$ | async) == null)">
+        <div fxLayoutAlign="center center">
+            <mat-spinner></mat-spinner>
+        </div>
+    </ng-container>
 </div>

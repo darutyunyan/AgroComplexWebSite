@@ -1,5 +1,5 @@
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,28 +7,49 @@ import { Router } from '@angular/router';
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css']
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent {
 
   @Input()
   public name: string;
 
   @Input()
-  public isSeeds: string;
+  public typeName: string;
 
   @Input()
   public productId: string;
 
   constructor(private route: Router) { }
 
-  public ngOnInit(): void {
+  public getIcon(): string {
+    switch (this.typeName) {
+      case 'Семена':
+        return 'fa-leaf';
 
+      case 'СЗР':
+        return 'fa-shield';
+
+      case 'Мин. удобрения':
+        return 'fa-product-hunt';
+
+      case 'Корма':
+        return 'fa-product-hunt';
+    }
   }
 
   public goToProduct(): void {
-    if (this.isSeeds) {
-      this.route.navigate(['/seeds', this.productId]);
-    } else {
-      this.route.navigate(['/cropProtaction', this.productId]);
+    switch (this.typeName) {
+      case 'Семена':
+        this.route.navigate(['/seeds', this.productId]);
+        break;
+
+      case 'СЗР':
+        this.route.navigate(['/cropProtaction', this.productId]);
+        break;
+
+      case 'Мин. удобрения':
+        break;
+      case 'Корма':
+        break;
     }
   }
 

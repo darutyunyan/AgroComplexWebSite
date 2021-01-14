@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
 import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
-import { IState } from 'src/app/store';
+import { IAdminState } from 'src/app/store/reducers/admin';
 import { addProductTypePending, clearProductTypeError, getProductTypesPending, removeProductTypePending } from 'src/app/store/actions/admin/productType.action';
 import { showMessage } from 'src/app/store/actions/message.action';
 import { ITypeItem } from 'src/app/store/models/admins.model';
@@ -23,12 +23,12 @@ export class AddProductTypeComponent extends UnSubscriber implements OnInit {
   public successOperation$: Observable<boolean>;
   public form: FormGroup;
 
-  constructor(private store: Store<IState>) {
+  constructor(private store: Store<IAdminState>) {
     super();
-    this.items$ = store.select(s => s.productTypeState.items);
-    this.loaded$ = store.select(s => s.productTypeState.loaded);
-    this.error$ = store.select(s => s.productTypeState.error);
-    this.successOperation$ = store.select(s => s.productTypeState.successOperation);
+    this.items$ = store.select(s => s.adminState.productTypeState.items);
+    this.loaded$ = store.select(s => s.adminState.productTypeState.loaded);
+    this.error$ = store.select(s => s.adminState.productTypeState.error);
+    this.successOperation$ = store.select(s => s.adminState.productTypeState.successOperation);
   }
 
   public ngOnInit(): void {

@@ -238,32 +238,32 @@ namespace AgroComplexService.Models.Services.ProductService
 
 		#region Client public methods
 
-		public async Task<InitHomePageResponse> InitHomePage()
+		public async Task<GetAllResponse> GetAll()
 		{
-			InitHomePageResponse response = new InitHomePageResponse();
+			GetAllResponse response = new GetAllResponse();
 
-			List<ProductNameItem> seeds = new List<ProductNameItem>();
-			foreach (var item in await _productNameRepo.GetByProductType(SEED))
+			List<ProductName> allNames = await _productNameRepo.GetAll();
+			List<ProductType> allTypes = await _productTypeRepo.GetAll();
+
+			List<GetAllItem> items = new List<GetAllItem>();
+			foreach (var type in allTypes)
 			{
-				seeds.Add(new ProductNameItem()
+				List<NameItem> names = allNames
+					.Where(n => n.ProductType.Name == type.Name)
+					.Select(i => new NameItem { Id = i.Id.ToString(), Name = i.Name })
+					.ToList();
+
+				if (names.Count > 0)
 				{
-					Id = item.Id,
-					Name = item.Name
-				});
+					items.Add(new GetAllItem
+					{
+						TypeName = type.Name,
+						Items = names.ToArray()
+					});
+				}
 			}
 
-			List<ProductNameItem> planProtectionProducts = new List<ProductNameItem>();
-			foreach (var item in await _productNameRepo.GetByProductType(PPP))
-			{
-				planProtectionProducts.Add(new ProductNameItem()
-				{
-					Id = item.Id,
-					Name = item.Name
-				});
-			}
-
-			response.Seeds = seeds.ToArray();
-			response.PlanProtectionProducts = planProtectionProducts.ToArray();
+			response.Items = items.ToArray();
 
 			return response;
 		}
@@ -349,6 +349,7 @@ namespace AgroComplexService.Models.Services.ProductService
 		private const string SEED = "Семена";
 
 		private const string PPP = "СЗР";
+
 
 		#endregion
 

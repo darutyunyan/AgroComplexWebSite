@@ -5,11 +5,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
-import { IState } from 'src/app/store';
+import { IAdminState } from 'src/app/store/reducers/admin';
 import { loginPending } from 'src/app/store/actions/admin/acctount.action';
 import { ILoginResponse } from 'src/app/store/models/admins.model';
 import { AuthService } from '../../shared/services/auth.service';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,13 +18,14 @@ export class LoginComponent extends UnSubscriber implements OnInit {
 
   public form: FormGroup;
   public loginResponse$: Observable<ILoginResponse>;
+
   constructor(
-    private store: Store<IState>,
+    private store: Store<IAdminState>,
     private auth: AuthService,
     private router: Router
   ) {
     super();
-    this.loginResponse$ = store.select(s => s.accountState.loginResponse);
+    this.loginResponse$ = store.select(s => s.adminState.accountState.loginResponse);
     if (auth.isAuthenicated()) {
       this.router.navigate(['/admin', 'dashboard']);
     }

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
 import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
-import { IState } from 'src/app/store';
+import { IAdminState } from 'src/app/store/reducers/admin';
 import { clearColumnTypeError, getColumnTypePending } from 'src/app/store/actions/admin/columnType.action';
 import { addProductPending, clearProductError } from 'src/app/store/actions/admin/product.action';
 import { clearProductNameError, getProductNamesPending } from 'src/app/store/actions/admin/productName.action';
@@ -33,18 +33,18 @@ export class AddProductComponent extends UnSubscriber implements OnInit {
 
   public form: FormGroup;
 
-  constructor(private store: Store<IState>) {
+  constructor(private store: Store<IAdminState>) {
     super();
-    this.error$ = store.select(s => s.productState.error);
-    this.successOperation$ = store.select(s => s.productState.successOperation);
+    this.error$ = store.select(s => s.adminState.productState.error);
+    this.successOperation$ = store.select(s => s.adminState.productState.successOperation);
 
-    this.names$ = store.select(s => s.productNameState.items);
-    this.namesLoaded$ = store.select(s => s.productNameState.loaded);
-    this.errorProductName$ = store.select(s => s.productNameState.error);
+    this.names$ = store.select(s => s.adminState.productNameState.items);
+    this.namesLoaded$ = store.select(s => s.adminState.productNameState.loaded);
+    this.errorProductName$ = store.select(s => s.adminState.productNameState.error);
 
-    this.columns$ = store.select(s => s.columnTypeState.items);
-    this.columnsLoaded$ = store.select(s => s.columnTypeState.loaded);
-    this.errorColumnError$ = store.select(s => s.columnTypeState.error);
+    this.columns$ = store.select(s => s.adminState.columnTypeState.items);
+    this.columnsLoaded$ = store.select(s => s.adminState.columnTypeState.loaded);
+    this.errorColumnError$ = store.select(s => s.adminState.columnTypeState.error);
   }
 
   public ngOnInit(): void {

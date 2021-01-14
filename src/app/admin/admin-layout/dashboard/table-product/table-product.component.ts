@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
 import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
-import { IState } from 'src/app/store';
+import { IAdminState } from 'src/app/store/reducers/admin';
 import { removeProductPending } from 'src/app/store/actions/admin/product.action';
 import { showMessage } from 'src/app/store/actions/message.action';
 import { IProductItem } from 'src/app/store/models/admins.model';
@@ -21,9 +21,9 @@ export class TableProductComponent extends UnSubscriber implements OnInit {
   public productName: string;
   public successOperation$: Observable<boolean>;
 
-  constructor(private store: Store<IState>) {
+  constructor(private store: Store<IAdminState>) {
     super();
-    this.successOperation$ = store.select(s => s.productState.successOperation);
+    this.successOperation$ = store.select(s => s.adminState.productState.successOperation);
   }
 
   public ngOnInit(): void {

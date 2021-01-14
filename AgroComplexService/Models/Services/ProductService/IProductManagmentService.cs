@@ -37,7 +37,7 @@ namespace AgroComplexService.Models.Services.ProductService
 		Task<GetProductTypesResponse> GetProductTypes();
 
 
-		Task<InitHomePageResponse> InitHomePage();
+		Task<GetAllResponse> GetAll();
 
 		Task<GetProductNamesByTypeResponse> GetProductNamesByType(GetProductNamesByTypeRequest request);
 

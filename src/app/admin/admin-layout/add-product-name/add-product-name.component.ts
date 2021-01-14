@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
 import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
-import { IState } from 'src/app/store';
+import { IAdminState } from 'src/app/store/reducers/admin';
 import { addProductNamePending, clearProductNameError, getProductNamesPending, removeProductNamePending } from 'src/app/store/actions/admin/productName.action';
 import { clearProductTypeError, getProductTypesPending } from 'src/app/store/actions/admin/productType.action';
 import { showMessage } from 'src/app/store/actions/message.action';
@@ -29,16 +29,16 @@ export class AddProductNameComponent extends UnSubscriber implements OnInit {
   public form: FormGroup;
   public searchItem: string;
 
-  constructor(private store: Store<IState>) {
+  constructor(private store: Store<IAdminState>) {
     super();
-    this.items$ = store.select(s => s.productNameState.items);
-    this.loaded$ = store.select(s => s.productNameState.loaded);
-    this.error$ = store.select(s => s.productNameState.error);
-    this.successOperation$ = store.select(s => s.productNameState.successOperation);
+    this.items$ = store.select(s => s.adminState.productNameState.items);
+    this.loaded$ = store.select(s => s.adminState.productNameState.loaded);
+    this.error$ = store.select(s => s.adminState.productNameState.error);
+    this.successOperation$ = store.select(s => s.adminState.productNameState.successOperation);
 
-    this.types$ = store.select(s => s.productTypeState.items);
-    this.typeLoaded$ = store.select(s => s.productTypeState.loaded);
-    this.errorProductType$ = store.select(s => s.productTypeState.error);
+    this.types$ = store.select(s => s.adminState.productTypeState.items);
+    this.typeLoaded$ = store.select(s => s.adminState.productTypeState.loaded);
+    this.errorProductType$ = store.select(s => s.adminState.productTypeState.error);
   }
 
   public ngOnInit(): void {

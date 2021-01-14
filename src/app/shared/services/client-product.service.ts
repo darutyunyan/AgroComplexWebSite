@@ -7,8 +7,8 @@ export class ClientProductService {
 
   constructor(private http: HttpClient) { }
 
-  public initHomePage(): Observable<any> {
-    return this.http.get(`https://localhost:44332/product/initHomePage`);
+  public getAll(): Observable<any> {
+    return this.http.get(`https://localhost:44332/product/getAll`);
   }
 
   public getProductNamesByType(request): Observable<any> {

@@ -18,13 +18,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { ProductService } from './shared/services/product.service';
 import { MyCookieService } from './shared/services/cookie.service';
 import { SearchPipe } from './shared/search.pipe';
-import { StoreModule } from '@ngrx/store';
-import { reducers } from '../store';
-import { EffectsModule } from '@ngrx/effects';
-import { environment } from 'src/environments/environment';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TableProductComponent } from './admin-layout/dashboard/table-product/table-product.component';
-import { adminEffects } from '../store/effects';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { adminReducers } from '../store/reducers/admin';
+import { adminEffects } from '../store/effects/admin';
 
 @NgModule({
     declarations: [
@@ -42,8 +42,8 @@ import { adminEffects } from '../store/effects';
     imports: [
         SharedModule,
         AdminRoutingModule,
-        StoreModule.forRoot(reducers),
-        EffectsModule.forRoot(adminEffects),
+        StoreModule.forFeature('adminState', adminReducers),
+        EffectsModule.forFeature(adminEffects),
         StoreDevtoolsModule.instrument({
             maxAge: 25,
             logOnly: environment.production,

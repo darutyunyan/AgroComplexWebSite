@@ -3,8 +3,7 @@
         <mat-card-title>{{name}}</mat-card-title>
     </mat-card-header>
     <div fxFlexAlign="center">
-        <i *ngIf="isSeeds;else notSeed" class="fa fa-leaf" aria-hidden="true"></i>
-        <ng-template #notSeed><i class="fa fa-shield" aria-hidden="true"></i></ng-template>
+        <i class="fa" [ngClass]="getIcon()"  aria-hidden="true"></i>
     </div>
     <mat-card-actions fxFlexAlign="center">
         <button mat-flat-button color="primary" (click)="goToProduct()">ПЕРЕЙТИ</button>

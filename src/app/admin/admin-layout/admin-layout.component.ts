@@ -2,33 +2,36 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
-import { IState } from 'src/app/store';
+import { IAdminState } from 'src/app/store/reducers/admin/index';
 import { IMessageData } from 'src/app/store/models/message.model';
 import { AuthService } from '../shared/services/auth.service';
+import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-layout',
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.css']
 })
-export class AdminLayoutComponent implements OnInit {
+export class AdminLayoutComponent extends UnSubscriber implements OnInit {
 
-  public sub: Subscription;
   public message$: Observable<IMessageData>;
 
   constructor(
-    private store: Store<IState>,
+    private store: Store<IAdminState>,
     private auth: AuthService,
     private router: Router,
     private dialog: MatDialog) {
-      this.message$ = this.store.select(s => s.messageData);
-
+      super();
+      this.message$ = this.store.select(s => s.adminState.messageData);
      }
 
   public ngOnInit(): void {
-    this.sub = this.message$.subscribe((data: IMessageData) => {
+     this.message$
+     .pipe(takeUntil(this.unSubscriber$))
+     .subscribe((data: IMessageData) => {
       this.showMessage(data);
     });
   }
@@ -60,9 +63,4 @@ export class AdminLayoutComponent implements OnInit {
     }
   }
 
-  public ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
-  }
 }
