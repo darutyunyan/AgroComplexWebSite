@@ -1,49 +1,35 @@
-import { Component, Input, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Item } from 'src/app/shared/interfaces';
-import { ClientProductService } from 'src/app/shared/services/client-product.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
+import { getProductsPending } from 'src/app/store/actions/client/client.actions';
+import { IGetAllItem } from 'src/app/store/models/client.model';
+import { IClientState } from 'src/app/store/reducers/client';
 
 @Component({
   selector: 'app-left-menu',
   templateUrl: './left-menu.component.html',
   styleUrls: ['./left-menu.component.css']
 })
-export class LeftMenuComponent implements OnInit, OnDestroy {
+export class LeftMenuComponent extends UnSubscriber implements OnInit {
 
-  @Input()
-  public productType: string;
+  public products$: Observable<IGetAllItem[]>;
+  public loading$: Observable<boolean>;
 
-  @Output()
-  public loadNewProduct: EventEmitter<string> = new EventEmitter<string>();
-
-  public items: Item[] = [];
-  public lSub: Subscription;
-
-  constructor(private prodServ: ClientProductService, private router: Router) {
+  constructor(
+    private store: Store<IClientState>,
+    private router: Router) {
+    super();
+    this.products$ = this.store.select(s => s.clientState.products.items);
+    this.loading$ = this.store.select(s => s.clientState.loading);
   }
 
   public ngOnInit(): void {
-    this.lSub = this.prodServ.getProductNamesByType({ ProductType: this.productType }).subscribe((res: any) => {
-      this.items = [];
-      res.items.forEach((element: Item) => {
-        this.items = this.items.concat(element);
-      });
-    });
+    this.store.dispatch(getProductsPending());
   }
 
   public loadProduct(id): void {
-    if (this.productType === 'Семена') {
-      this.router.navigate(['/seeds', id]);
-    } else {
-      this.router.navigate(['/cropProtaction', id]);
-    }
-    this.loadNewProduct.emit(id);
-  }
-
-  public ngOnDestroy(): void {
-    if (this.lSub) {
-      this.lSub.unsubscribe();
-    }
+      this.router.navigate(['/products', id]);
   }
 }

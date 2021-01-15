@@ -1,0 +1,19 @@
+<div class="main-container" fxFlexFill fxLayout="column" fxLayoutGap="20px" fxFlex.lt-md="90%" fxFlex.lt-xl="80%">
+  <div fxLayout="row" fxLayoutGap="20px">
+
+    <div fxFlex="25%">
+      <app-left-menu></app-left-menu>
+    </div>
+
+    <div fxFlex="75%">
+      <ng-container *ngIf="(loading$ | async) === false; else loader">
+        <app-table  [product]="product$ | async"></app-table>
+      </ng-container>
+      <ng-template #loader>
+        <div fxFlexFill fxLayoutAlign="center center">
+          <mat-spinner></mat-spinner>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

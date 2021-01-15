@@ -11,10 +11,6 @@ export class ClientProductService {
     return this.http.get(`https://localhost:44332/product/getAll`);
   }
 
-  public getProductNamesByType(request): Observable<any> {
-    return this.http.post('https://localhost:44332/product/getProductNamesByType', request);
-  }
-
   public getProductById(request): Observable<any> {
     return this.http.post('https://localhost:44332/product/getProductById', request);
   }

@@ -3,8 +3,9 @@ import { Actions, createEffect, CreateEffectMetadata, ofType } from '@ngrx/effec
 import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { ClientProductService } from 'src/app/shared/services/client-product.service';
-import { getProductsPending, getProductsSuccess, getProductsError } from '../../actions/client/client.actions';
-import { IGetAllResponse } from '../../models/client.model';
+import { getProductsPending, getProductsSuccess, getProductsError,
+    getProductByIdPending, getProductByIdSuccess, getProductByIdError } from '../../actions/client/client.actions';
+import { IGetAllResponse, IGetProductByIdResponse } from '../../models/client.model';
 
 
 @Injectable()
@@ -22,6 +23,24 @@ export class ClientEffects {
                 }),
                 catchError(
                     (httpError) => of(getProductsError({ error: { statusCode: httpError.status, message: httpError.message } }))
+                )
+            )
+        )
+    ));
+
+    public getProductById$: CreateEffectMetadata = createEffect(() => this.actions$.pipe(
+        ofType(getProductByIdPending),
+        mergeMap((id) => this.productService.getProductById(id)
+            .pipe(
+                map((products: IGetProductByIdResponse) => {
+                    if (products.error == null) {
+                        return getProductByIdSuccess({ response: products });
+                    } else {
+                        return getProductByIdError({ error: products.error });
+                    }
+                }),
+                catchError(
+                    (httpError) => of(getProductByIdError({ error: { statusCode: httpError.status, message: httpError.message } }))
                 )
             )
         )

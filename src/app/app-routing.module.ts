@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
-import { FeedsComponent } from './main-layout/feeds/feeds.component';
-import { CropProtactionComponent } from './main-layout/crop-protaction/crop-protaction.component';
-import { MineralFertilizersComponent } from './main-layout/mineral-fertilizers/mineral-fertilizers.component';
-import { SeedsComponent } from './main-layout/seeds/seeds.component';
 import { AboutComponent } from './main-layout/about/about.component';
 import { ContactUsComponent } from './main-layout/contact-us/contact-us.component';
 import { HomeComponent } from './main-layout/home/home.component';
+import { ProductsComponent } from './main-layout/products/products.component';
 
 const routes: Routes = [
   {
@@ -16,10 +13,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      { path: 'seeds/:id', component: SeedsComponent },
-      { path: 'cropProtaction/:id', component: CropProtactionComponent },
-      { path: 'mineralFertilizers', component: MineralFertilizersComponent },
-      { path: 'feeds', component: FeedsComponent },
+      { path: 'products/:id', component: ProductsComponent },
       { path: 'about', component: AboutComponent },
       { path: 'contactUs', component: ContactUsComponent }
     ]

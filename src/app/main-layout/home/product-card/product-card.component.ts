@@ -37,20 +37,7 @@ export class ProductCardComponent {
   }
 
   public goToProduct(): void {
-    switch (this.typeName) {
-      case 'Семена':
-        this.route.navigate(['/seeds', this.productId]);
-        break;
-
-      case 'СЗР':
-        this.route.navigate(['/cropProtaction', this.productId]);
-        break;
-
-      case 'Мин. удобрения':
-        break;
-      case 'Корма':
-        break;
-    }
+    this.route.navigate(['/products', this.productId]);
   }
 
 }

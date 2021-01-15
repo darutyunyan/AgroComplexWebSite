@@ -1,8 +1,8 @@
 <div class="main-container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="40px"
-    fxFlex.lt-md="100%" fxFlex.lt-xl="70%">
-    <h1 fxFlexAlign="center" class="mat-display-2">КАТАЛОГ ПРОДУКЦИИ НА 2020</h1>
+    fxFlex.lt-md="90%" fxFlex.lt-xl="70%">
+    <h1 fxFlexAlign="center" class="mat-display-2">КАТАЛОГ ПРОДУКЦИИ НА {{getFullYear()}}</h1>
 
-    <ng-container *ngIf="((error$ | async) == null) && !(loading$ | async)">
+    <ng-container *ngIf="((error$ | async) == null) && (loading$ | async) === false">
         <div *ngFor="let product of product$ | async" fxLayout="column" fxLayoutGap="40px">
             <mat-card class="mat-elevation-z8">
                 <h1 class="mb-0">{{ product.typeName }}</h1>
@@ -20,7 +20,7 @@
         </div>
     </ng-container>
 
-    <ng-container *ngIf="((error$ | async) != null) && !(loading$ | async)">
+    <ng-container *ngIf="((error$ | async) != null) && (loading$ | async) === false">
         <div fxLayoutAlign="center center">
             Произошла ошибка! Свяжитусь с нами!
         </div>

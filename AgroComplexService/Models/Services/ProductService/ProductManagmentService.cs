@@ -238,11 +238,15 @@ namespace AgroComplexService.Models.Services.ProductService
 
 		#region Client public methods
 
+		/// <summary>
+		/// Gets products, which contain info.
+		/// </summary>
 		public async Task<GetAllResponse> GetAll()
 		{
 			GetAllResponse response = new GetAllResponse();
 
-			List<ProductName> allNames = await _productNameRepo.GetAll();
+			List<Product> products = await _productRepo.GetAll();
+			List<ProductName> allNames = products.Select(p => p.ProductName).Distinct().ToList();
 			List<ProductType> allTypes = await _productTypeRepo.GetAll();
 
 			List<GetAllItem> items = new List<GetAllItem>();
@@ -263,26 +267,7 @@ namespace AgroComplexService.Models.Services.ProductService
 				}
 			}
 
-			response.Items = items.ToArray();
-
-			return response;
-		}
-
-		public async Task<GetProductNamesByTypeResponse> GetProductNamesByType(GetProductNamesByTypeRequest request)
-		{
-			GetProductNamesByTypeResponse response = new GetProductNamesByTypeResponse();
-
-			List<ProductNameItem> items = new List<ProductNameItem>();
-			foreach (var item in await _productNameRepo.GetByProductType(request.ProductType))
-			{
-				items.Add(new ProductNameItem()
-				{
-					Id = item.Id,
-					Name = item.Name
-				});
-			}
-
-			response.Items = items.OrderBy(i => i.Name).ToArray();
+			response.Items = items.OrderByDescending(i => i.TypeName).ToArray();
 
 			return response;
 		}

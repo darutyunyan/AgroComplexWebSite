@@ -281,24 +281,6 @@ namespace AgroComplexService.Controllers
 
 			return response;
 		}
-		
-		[Route("GetProductNamesByType")]
-		[HttpPost]
-		public async Task<Response> GetProductNamesByType(GetProductNamesByTypeRequest request)
-		{
-			GetProductNamesByTypeResponse response = new GetProductNamesByTypeResponse();
-
-			try
-			{
-				response = await _productServ.GetProductNamesByType(request);
-			}
-			catch (Exception ex)
-			{
-				SetResponse(response, ex);
-			}
-
-			return response;
-		}
 
 		[Route("GetProductById")]
 		[HttpPost]

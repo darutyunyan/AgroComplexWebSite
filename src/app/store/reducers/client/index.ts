@@ -1,8 +1,8 @@
-import { IClientState } from '../../models/client.model';
+import { IProductState } from '../../models/client.model';
 import clientReducer from '../client/client.reducers';
 
-export interface IStateClient {
-    clientState: IClientState;
+export interface IClientState {
+    clientState: IProductState;
 }
 
 export const clientReducers = {

@@ -10,9 +10,8 @@ a:hover {
 /* Start of common styles */
 
 .main-container {
-    margin: 0 auto;
-    margin-bottom: 40px;
-    min-height: 300px;
+    margin: 60px auto;
+    min-height: 600px;
 }
 
 h1.mat-display-2{

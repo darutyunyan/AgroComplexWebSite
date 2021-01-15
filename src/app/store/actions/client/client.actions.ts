@@ -1,11 +1,15 @@
 import { createAction, props } from '@ngrx/store';
-import { IGetAllResponse } from '../../models/client.model';
+import { IGetAllResponse, IGetProductByIdResponse } from '../../models/client.model';
 import { IError } from '../../models/error';
 
 export enum ClientActions {
-    GetProductsPending = '[Product] Get product pending',
-    GetProductsSuccess = '[Product] Get product success',
-    GetProductsError = '[Product] Get product error',
+    GetProductsPending = '[Product] Get products pending',
+    GetProductsSuccess = '[Product] Get products success',
+    GetProductsError = '[Product] Get products error',
+
+    GetProductByIdPending = '[Product] Get product by id pending',
+    GetProductByIdSuccess = '[Product] Get product by id success',
+    GetProductByIdError = '[Product] Get product by id error',
 
     ClearProductError = '[Product] Clear product error',
 }
@@ -21,6 +25,21 @@ export const getProductsSuccess = createAction(
 
 export const getProductsError = createAction(
     ClientActions.GetProductsError,
+    props<{ error: IError }>()
+);
+
+export const getProductByIdPending = createAction(
+    ClientActions.GetProductByIdPending,
+    props<{ id: string }>()
+);
+
+export const getProductByIdSuccess = createAction(
+    ClientActions.GetProductByIdSuccess,
+    props<{ response: IGetProductByIdResponse }>()
+);
+
+export const getProductByIdError = createAction(
+    ClientActions.GetProductByIdError,
     props<{ error: IError }>()
 );
 

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product } from '../interfaces';
+import { IGetProductByIdResponse } from 'src/app/store/models/client.model';
 
 @Component({
   selector: 'app-table',
@@ -8,5 +8,5 @@ import { Product } from '../interfaces';
 })
 export class TableComponent {
   @Input()
-  public product: Product | null;
+  public product: IGetProductByIdResponse | null;
 }
