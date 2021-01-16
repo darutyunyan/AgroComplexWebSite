@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -20,7 +20,8 @@ export class ProductsComponent extends UnSubscriber implements OnInit {
 
   constructor(
     private store: Store<IClientState>,
-    private activateRoute: ActivatedRoute) {
+    private activateRoute: ActivatedRoute,
+    private router: Router) {
     super();
     this.loading$ = this.store.select(s => s.clientState.productById.loading);
     this.product$ = this.store.select(s => s.clientState.productById);
@@ -39,7 +40,7 @@ export class ProductsComponent extends UnSubscriber implements OnInit {
             .pipe(takeUntil(this.unSubscriber$))
             .subscribe(response => {
               if (response && response.length > 0 && response[0].items && response[0].items[0]?.id) {
-                this.store.dispatch(getProductByIdPending({ id: response[0].items[0].id }));
+                this.router.navigate(['/products', response[0].items[0].id]);
               }
             });
         }

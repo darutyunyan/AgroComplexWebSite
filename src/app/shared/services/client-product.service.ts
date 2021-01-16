@@ -15,7 +15,4 @@ export class ClientProductService {
     return this.http.post('https://localhost:44332/product/getProductById', request);
   }
 
-  public getFirstProductByType(request): Observable<any> {
-    return this.http.post('https://localhost:44332/product/getFirstProductByType', request);
-  }
 }

@@ -40,7 +40,5 @@ namespace AgroComplexService.Models.Services.ProductService
 		Task<GetAllResponse> GetAll();
 
 		Task<GetProductByIdResponse> GetProductById(GetProductByIdRequest request);
-
-		Task<GetFirstProductByTypeResponse> GetFirstProductByType(GetFirstProductByTypeRequest name);
 	}
 }

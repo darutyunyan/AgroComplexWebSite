@@ -300,24 +300,6 @@ namespace AgroComplexService.Controllers
 			return response;
 		}
 
-		[Route("GetFirstProductByType")]
-		[HttpPost]
-		public async Task<Response> GetFirstProductByType(GetFirstProductByTypeRequest request)
-		{
-			GetFirstProductByTypeResponse response = new GetFirstProductByTypeResponse();
-
-			try
-			{
-				response = await _productServ.GetFirstProductByType(request);
-			}
-			catch (Exception ex)
-			{
-				SetResponse(response, ex);
-			}
-
-			return response;
-		}
-
 		#endregion
 
 		#region Private property

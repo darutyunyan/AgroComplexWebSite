@@ -296,37 +296,6 @@ namespace AgroComplexService.Models.Services.ProductService
 			return response;
 		}
 
-		public async Task<GetFirstProductByTypeResponse> GetFirstProductByType(GetFirstProductByTypeRequest requet)
-		{
-			GetFirstProductByTypeResponse response = new GetFirstProductByTypeResponse();
-			var productNames = await _productNameRepo.GetAll();
-
-			var firstProductName = productNames
-				.Where(p => p.ProductType.Name == requet.Name)
-				.OrderBy(p => p.Name)
-				.First();
-
-			var products = await _productRepo.GetAll();
-
-			var fristProduct = products
-				.Where(p => p.ProductNameId == firstProductName.Id)
-				.ToList();
-
-
-			List<string[]> rows = new List<string[]>();
-			foreach (var product in fristProduct)
-			{
-				var info = product.Info.Split('|').ToArray();
-				rows.Add(info);
-			}
-
-			response.ProductName = fristProduct.First().ProductName.Name;
-			response.ColumnNames = fristProduct.First().ColumnType.Name.Split('|').ToArray();
-			response.Info = rows.ToArray();
-
-			return response;
-		}
-
 		#endregion
 
 		#region Private constant
