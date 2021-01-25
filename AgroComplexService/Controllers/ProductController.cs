@@ -210,7 +210,6 @@ namespace AgroComplexService.Controllers
 
 			try
 			{
-				//throw new Exception("Erorr on added proudct type");
 				await _productServ.AddProductType(request);
 			}
 			catch (Exception ex)

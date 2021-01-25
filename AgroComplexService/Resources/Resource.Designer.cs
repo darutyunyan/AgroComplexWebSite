@@ -61,29 +61,65 @@ namespace AgroComplexService.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;Имя: {0}&lt;br&gt;Телефон: {1}&lt;br&gt;Почта: {2}&lt;/p&gt;&lt;p&gt;Позиции продуктов: {3}&lt;/p&gt;.
+        /// </summary>
+        public static string ContactUs_FeedbackMessage {
+            get {
+                return ResourceManager.GetString("ContactUs_FeedbackMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Онлайн заявка.
+        /// </summary>
+        public static string ContactUs_FeedbackSubject {
+            get {
+                return ResourceManager.GetString("ContactUs_FeedbackSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;Имя: {0}&lt;br&gt;Телефон: {1}&lt;br&gt;Дополнительная информация:{2}&lt;/p&gt;.
+        /// </summary>
+        public static string COntactUs_ShortFeedbackMessage {
+            get {
+                return ResourceManager.GetString("COntactUs_ShortFeedbackMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пользователь заказал звонок.
+        /// </summary>
+        public static string ContactUs_ShortFeedbackSubject {
+            get {
+                return ResourceManager.GetString("ContactUs_ShortFeedbackSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Такой вид таблицы уже существует!.
         /// </summary>
-        public static string AddDublicateColumnTypeMessage {
+        public static string Product_AddDublicateColumnTypeMessage {
             get {
-                return ResourceManager.GetString("AddDublicateColumnTypeMessage", resourceCulture);
+                return ResourceManager.GetString("Product_AddDublicateColumnTypeMessage", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Такое название продукта уже существует!.
         /// </summary>
-        public static string AddDublicateProductNameMessage {
+        public static string Product_AddDublicateProductNameMessage {
             get {
-                return ResourceManager.GetString("AddDublicateProductNameMessage", resourceCulture);
+                return ResourceManager.GetString("Product_AddDublicateProductNameMessage", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Такой вид продукции уже существует!.
         /// </summary>
-        public static string AddDublicateProductTypeMessage {
+        public static string Product_AddDublicateProductTypeMessage {
             get {
-                return ResourceManager.GetString("AddDublicateProductTypeMessage", resourceCulture);
+                return ResourceManager.GetString("Product_AddDublicateProductTypeMessage", resourceCulture);
             }
         }
         

@@ -33,10 +33,9 @@ namespace AgroComplexService
 			// Resourse file.
 			services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-			// Init Mail service.
+			// App settings(email settings).
 			EmailSetting settings = new EmailSetting();
-			Configuration.GetSection("AppSettings:EmailSetting").Bind(settings);
-			services.AddTransient<IMailService>(x => new MailService(settings));
+			services.Configure<EmailSetting>(Configuration.GetSection("AppSettings:EmailSetting"));
 
 			// Init Cors service.
 			string clientUrl = Configuration.GetValue<string>("AppSettings:ClientUrl:Url");

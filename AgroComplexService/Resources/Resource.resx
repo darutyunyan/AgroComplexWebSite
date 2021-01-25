@@ -117,13 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddDublicateColumnTypeMessage" xml:space="preserve">
+  <data name="ContactUs_FeedbackMessage" xml:space="preserve">
+    <value>&lt;p&gt;Имя: {0}&lt;br&gt;Телефон: {1}&lt;br&gt;Почта: {2}&lt;/p&gt;&lt;p&gt;Позиции продуктов: {3}&lt;/p&gt;</value>
+  </data>
+  <data name="ContactUs_FeedbackSubject" xml:space="preserve">
+    <value>Онлайн заявка</value>
+  </data>
+  <data name="COntactUs_ShortFeedbackMessage" xml:space="preserve">
+    <value>&lt;p&gt;Имя: {0}&lt;br&gt;Телефон: {1}&lt;br&gt;Дополнительная информация:{2}&lt;/p&gt;</value>
+  </data>
+  <data name="ContactUs_ShortFeedbackSubject" xml:space="preserve">
+    <value>Пользователь заказал звонок</value>
+  </data>
+  <data name="Product_AddDublicateColumnTypeMessage" xml:space="preserve">
     <value>Такой вид таблицы уже существует!</value>
   </data>
-  <data name="AddDublicateProductNameMessage" xml:space="preserve">
+  <data name="Product_AddDublicateProductNameMessage" xml:space="preserve">
     <value>Такое название продукта уже существует!</value>
   </data>
-  <data name="AddDublicateProductTypeMessage" xml:space="preserve">
+  <data name="Product_AddDublicateProductTypeMessage" xml:space="preserve">
     <value>Такой вид продукции уже существует!</value>
   </data>
   <data name="ServiceError" xml:space="preserve">

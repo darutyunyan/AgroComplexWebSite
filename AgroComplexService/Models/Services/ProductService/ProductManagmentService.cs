@@ -94,7 +94,7 @@ namespace AgroComplexService.Models.Services.ProductService
 			bool exist = await _columnTypeRepo.IsExist(request.Name);
 
 			if (exist)
-				throw new BusinessException(_localizer["AddDublicateColumnTypeMessage"]);
+				throw new BusinessException(_localizer["Product_AddDublicateColumnTypeMessage"]);
 
 			ColumnType columnType = new ColumnType()
 			{
@@ -146,7 +146,7 @@ namespace AgroComplexService.Models.Services.ProductService
 			bool exist = await _productNameRepo.IsExist(request.Name);
 
 			if (exist)
-				throw new BusinessException(_localizer["AddDublicateProductNameMessage"]);
+				throw new BusinessException(_localizer["Product_AddDublicateProductNameMessage"]);
 
 			ProductName productName = new ProductName()
 			{
@@ -195,7 +195,7 @@ namespace AgroComplexService.Models.Services.ProductService
 			bool exist = await _productTypeRepo.IsExist(request.Name);
 
 			if (exist)
-				throw new BusinessException(_localizer["AddDublicateProductTypeMessage"]);
+				throw new BusinessException(_localizer["Product_AddDublicateProductTypeMessage"]);
 
 			ProductType productType = new ProductType()
 			{
