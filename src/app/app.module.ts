@@ -13,7 +13,7 @@ import { FooterComponent } from './main-layout/footer/footer.component';
 import { ClientProductService } from './shared/services/client-product.service';
 import { ProductCardComponent } from './main-layout/home/product-card/product-card.component';
 import { LeftMenuComponent } from './main-layout/products/left-menu/left-menu.component';
-import { TableComponent } from './shared/table/table.component';
+import { TableComponent } from './main-layout/products/table/table.component';
 import { ErrorComponent } from './shared/dialogs/error/error.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';

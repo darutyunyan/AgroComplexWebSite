@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
 import { getProductByIdPending } from 'src/app/store/actions/client/client.actions';
 import { IGetProductByIdResponse } from 'src/app/store/models/client.model';
+import { IError } from 'src/app/store/models/error';
 import { IClientState } from 'src/app/store/reducers/client';
 
 @Component({
@@ -17,6 +18,7 @@ export class ProductsComponent extends UnSubscriber implements OnInit {
 
   public loading$: Observable<boolean>;
   public product$: Observable<IGetProductByIdResponse>;
+  public error$: Observable<IError>;
 
   constructor(
     private store: Store<IClientState>,
@@ -25,6 +27,7 @@ export class ProductsComponent extends UnSubscriber implements OnInit {
     super();
     this.loading$ = this.store.select(s => s.clientState.productById.loading);
     this.product$ = this.store.select(s => s.clientState.productById);
+    this.error$ = this.store.select(s => s.clientState.error);
   }
 
   public ngOnInit(): void {
