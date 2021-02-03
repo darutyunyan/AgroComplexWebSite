@@ -3,7 +3,7 @@ import { Actions, createEffect, CreateEffectMetadata, ofType } from '@ngrx/effec
 import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { AuthService } from 'src/app/admin/shared/services/auth.service';
-import { loginError, loginPending, loginSuccess } from '../../actions/admin/acctount.action';
+import { loginError, loginPending, loginSuccess } from '../../actions/admin/account.action';
 import { ILoginResponse } from '../../models/admins.model';
 
 

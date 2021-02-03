@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { environment } from 'src/environments/environment';
 
+
 @NgModule({
   exports: [
     CommonModule,
@@ -41,8 +42,7 @@ import { environment } from 'src/environments/environment';
     MatSelectModule,
     MatDialogModule,
     FlexLayoutModule,
-  ],
-  declarations: [],
+  ]
 })
 export class SharedModule {
   public static forRoot(): ModuleWithProviders<any> {

@@ -34,7 +34,7 @@
             <a mat-button [routerLink]="['/about']"> О КОМПАНИИ </a>
             <a mat-button [routerLink]="['/contactUs']"> КОНТАКТЫ </a>
         </div>
-        <button mat-raised-button color="warn">ОНЛАЙН ЗАЯВКА</button>
+        <button mat-raised-button color="warn" (click)="openOnlineRequest()" >ОНЛАЙН ЗАЯВКА</button>
     </mat-toolbar>
 </div>
 

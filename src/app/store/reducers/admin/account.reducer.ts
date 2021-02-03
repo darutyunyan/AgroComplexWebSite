@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { loginError, loginSuccess } from '../../actions/admin/acctount.action';
+import { loginError, loginSuccess } from '../../actions/admin/account.action';
 import { IAccountState } from '../../models/admins.model';
 
 const initialState: IAccountState = {

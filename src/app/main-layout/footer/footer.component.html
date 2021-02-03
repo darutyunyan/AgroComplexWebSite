@@ -1,50 +1,8 @@
 <footer>
-    <div fxLayout="row" fxLayoutAlign="space-around stretch" fxLayoutGap="20px">
-        <div fxLayout="column" fxLayoutGap="20px">
-            <span class="logo">AGRO_OMPLEX</span>
-
-            <span fxLayoutAlign="start center" fxLayoutGap="5px">
-                <mat-icon>phone</mat-icon>
-                <span>8 800 555 79 88</span>
-            </span>
-            <span fxLayoutAlign="start center" fxLayoutGap="5px">
-                <mat-icon>location_on</mat-icon>
-                <span>2903 Avenue Z, Brooklyn, NY, USA</span>
-            </span>
-            <span fxLayoutAlign="start center" fxLayoutGap="5px">
-                <mat-icon>mail_outline</mat-icon>
-                <span>darutyunyan95@mail.ru</span>
-            </span>
-            <div class="social" fxLayoutGap="30px">
-                <a href="https://instagram.com/autovikuprus.ru?igshid=1ijtabxir4uxs" class="fa fa-instagram"
-                    target="_blank"></a>
-                <a href="https://wa.me/79383000735" class="fa fa-whatsapp" target="_blank"></a>
-                <a href="tg://resolve?domain=autovikuprus" class="fa fa-telegram" target="_blank"></a>
-            </div>
-        </div>
-        <div fxLayout="column" fxLayoutGap="10px">
-            <span class="feedback">ЗАКАЗАТЬ ЗВОНОК</span>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Ваше имя</mat-label>
-                <input matInput>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Ваш телефон</mat-label>
-                <input matInput>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Дополнительная информация</mat-label>
-                <input matInput>
-            </mat-form-field>
-
-            <button mat-raised-button color="primary">ОТПРАВИТЬ</button>
-        </div>
-        <div>
-            <span class="location">РАСПОЛОЖЕНИЕ</span>
-        </div>
+    <div fxLayout="row" fxLayoutAlign="space-around stretch">
+        <app-socials-info></app-socials-info>
+        <app-short-feedback></app-short-feedback>
+        <app-location></app-location>
     </div>
 
     <div>

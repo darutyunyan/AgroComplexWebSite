@@ -12,6 +12,7 @@ namespace AgroComplexService.Dto
 
         public string Email { get; set; }
 
-        public string ProductPosition { get; set; }
+		[Required]
+		public string ProductPosition { get; set; }
     }
 }

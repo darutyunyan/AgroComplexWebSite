@@ -45,7 +45,7 @@ namespace AgroComplexService.Models.Services.Mail
 			emailMessage.Subject = _resource["ContactUs_ShortFeedbackSubject"];
 			emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
 			{
-				Text = string.Format(_resource["ContactUs_ShortFeedbackSubject"], request.Name, request.Phone, request.Message)
+				Text = string.Format(_resource["COntactUs_ShortFeedbackMessage"], request.Name, request.Phone, request.Message)
 			};
 
 			using (var client = new SmtpClient())

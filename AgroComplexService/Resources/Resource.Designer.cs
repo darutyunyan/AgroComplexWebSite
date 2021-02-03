@@ -79,7 +79,7 @@ namespace AgroComplexService.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;p&gt;Имя: {0}&lt;br&gt;Телефон: {1}&lt;br&gt;Дополнительная информация:{2}&lt;/p&gt;.
+        ///   Looks up a localized string similar to &lt;p&gt;Имя: {0}&lt;br&gt;Телефон: {1}&lt;br&gt;Дополнительная информация: {2}&lt;/p&gt;.
         /// </summary>
         public static string COntactUs_ShortFeedbackMessage {
             get {

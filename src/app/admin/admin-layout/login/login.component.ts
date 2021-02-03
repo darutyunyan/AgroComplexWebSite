@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
 import { IAdminState } from 'src/app/store/reducers/admin';
-import { loginPending } from 'src/app/store/actions/admin/acctount.action';
+import { loginPending } from 'src/app/store/actions/admin/account.action';
 import { ILoginResponse } from 'src/app/store/models/admins.model';
 import { AuthService } from '../../shared/services/auth.service';
 @Component({

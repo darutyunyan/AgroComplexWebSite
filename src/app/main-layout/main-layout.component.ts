@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { OnlineRequestComponent } from '../shared/dialogs/online-request/online-request.component';
 
 @Component({
   selector: 'app-main-layout',
@@ -8,12 +10,18 @@ import { Router } from '@angular/router';
 })
 export class MainLayoutComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private dialog: MatDialog) { }
 
   public ngOnInit(): void {
   }
 
   public toHome(): void {
     this.router.navigate(['/home']);
+  }
+
+  public openOnlineRequest(): void {
+    this.dialog.open(OnlineRequestComponent);
   }
 }

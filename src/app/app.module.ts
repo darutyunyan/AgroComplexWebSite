@@ -21,6 +21,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { clientEffects } from './store/effects/client/index';
 import { clientReducers } from './store/reducers/client';
+import { ContactUsService } from './shared/services/contact-us.service';
+import { ShortFeedbackComponent } from './main-layout/footer/short-feedback/short-feedback.component';
+import { SocialsInfoComponent } from './main-layout/footer/socials-info/socials-info.component';
+import { LocationComponent } from './main-layout/footer/location/location.component';
+import { OnlineRequestComponent } from './shared/dialogs/online-request/online-request.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +39,11 @@ import { clientReducers } from './store/reducers/client';
     LeftMenuComponent,
     TableComponent,
     ErrorComponent,
-    ProductsComponent
+    ProductsComponent,
+    ShortFeedbackComponent,
+    SocialsInfoComponent,
+    LocationComponent,
+    OnlineRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +58,8 @@ import { clientReducers } from './store/reducers/client';
     }),
   ],
   providers: [
-    ClientProductService
+    ClientProductService,
+    ContactUsService
   ],
   bootstrap: [AppComponent]
 })

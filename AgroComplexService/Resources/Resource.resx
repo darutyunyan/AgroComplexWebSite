@@ -124,7 +124,7 @@
     <value>Онлайн заявка</value>
   </data>
   <data name="COntactUs_ShortFeedbackMessage" xml:space="preserve">
-    <value>&lt;p&gt;Имя: {0}&lt;br&gt;Телефон: {1}&lt;br&gt;Дополнительная информация:{2}&lt;/p&gt;</value>
+    <value>&lt;p&gt;Имя: {0}&lt;br&gt;Телефон: {1}&lt;br&gt;Дополнительная информация: {2}&lt;/p&gt;</value>
   </data>
   <data name="ContactUs_ShortFeedbackSubject" xml:space="preserve">
     <value>Пользователь заказал звонок</value>

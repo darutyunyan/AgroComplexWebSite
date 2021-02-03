@@ -1,11 +1,14 @@
 import { IError } from './error';
 
-export interface IProductState {
+export interface IClientInitialState {
     products: IGetAllResponse;
+    productById: IGetProductByIdResponse;
+    feedback: IFeedbackState;
+    shortFeedback: IShortFeedbackState;
     loading: boolean;
     error: IError;
-    productById: IGetProductByIdResponse;
 }
+
 export interface IGetAllResponse {
     items: IGetAllItem[];
     error: IError;
@@ -29,3 +32,12 @@ export interface IGetProductByIdResponse {
     error: IError;
 }
 
+export interface IFeedbackState {
+    feedbackSending: boolean;
+    feedbackError: boolean;
+}
+
+export interface IShortFeedbackState {
+    shortFeedbackSending: boolean;
+    shortFeedbackError: boolean;
+}
