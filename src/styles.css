@@ -47,6 +47,10 @@ h1.mat-display-2{
     margin-bottom: 0 !important;
 }
 
+.router-link-active {
+    background-color: rgb(211, 203, 203) !important;
+}
+
 /* End of common styles */
 
 /* Start of material styles */

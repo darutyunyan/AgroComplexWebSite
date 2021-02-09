@@ -14,7 +14,7 @@ import { ClientProductService } from './shared/services/client-product.service';
 import { ProductCardComponent } from './main-layout/home/product-card/product-card.component';
 import { LeftMenuComponent } from './main-layout/products/left-menu/left-menu.component';
 import { TableComponent } from './main-layout/products/table/table.component';
-import { ErrorComponent } from './shared/dialogs/error/error.component';
+import { ErrorComponent } from './shared/templates/error/error.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -26,9 +26,9 @@ import { LocationService } from './shared/services/location.service';
 import { ShortFeedbackComponent } from './main-layout/footer/short-feedback/short-feedback.component';
 import { SocialsInfoComponent } from './main-layout/footer/socials-info/socials-info.component';
 import { LocationComponent } from './main-layout/footer/location/location.component';
-import { OnlineRequestComponent } from './shared/dialogs/online-request/online-request.component';
+import { OnlineRequestComponent } from './shared/templates/online-request/online-request.component';
 import { AngularYandexMapsModule, YA_CONFIG } from 'angular8-yandex-maps';
-import { MapComponent } from './main-layout/footer/location/map/map.component';
+import { MapComponent } from './shared/templates/map/map.component';
 import { TermsComponent } from './main-layout/terms/terms.component';
 
 

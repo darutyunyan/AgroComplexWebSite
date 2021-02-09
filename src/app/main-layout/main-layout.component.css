@@ -5,7 +5,7 @@ mat-icon {
 /* Styles of first menu */
 
 mat-toolbar {
-    background-color: #1976d2;
+    background: rgba(33,33,33,.93);
 }
 
 div mat-toolbar:first-child {

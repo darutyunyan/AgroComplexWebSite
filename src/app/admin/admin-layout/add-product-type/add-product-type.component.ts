@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
+import { ErrorComponent } from 'src/app/shared/templates/error/error.component';
 import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
 import { IAdminState } from 'src/app/store/reducers/admin';
 import { addProductTypePending, clearProductTypeError, getProductTypesPending, removeProductTypePending } from 'src/app/store/actions/admin/productType.action';

@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { ICoordinates } from 'src/app/store/models/client.model';
-import { IClientState } from 'src/app/store/reducers/client';
 
 @Component({
   selector: 'app-location',
@@ -11,11 +7,10 @@ import { IClientState } from 'src/app/store/reducers/client';
 })
 export class LocationComponent implements OnInit {
 
-  public coordinates$: Observable<ICoordinates>;
   public options: ymaps.IMapOptions;
   public state: ymaps.IMapState;
 
-  constructor(private store: Store<IClientState>) { }
+  constructor() { }
 
   public ngOnInit(): void {
 
@@ -29,7 +24,5 @@ export class LocationComponent implements OnInit {
     this.state = {
       controls: []
     };
-
-    this.coordinates$ = this.store.select(s => s.locationState.coordinates);
   }
 }

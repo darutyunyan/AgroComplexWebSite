@@ -27,14 +27,14 @@
     <mat-toolbar fxLayout="row" fxLayoutAlign="space-around center">
         <span class="logo" (click)="toHome()">AGRO COMPLEX</span>
         <div>
-            <a mat-icon-button [routerLink]="['/home']">
+            <a mat-icon-button [routerLink]="['/home']" routerLinkActive="router-link-active">
                 <mat-icon>home</mat-icon>
             </a>
-            <a mat-button [routerLink]="['/products', 'first']"> ПРОДУКЦИЯ </a>
-            <a mat-button [routerLink]="['/about']"> О КОМПАНИИ </a>
-            <a mat-button [routerLink]="['/contactUs']"> КОНТАКТЫ </a>
+            <a mat-button [routerLink]="['/products', 'first']" routerLinkActive="router-link-active">ПРОДУКЦИЯ</a>
+            <a mat-button [routerLink]="['/about']" routerLinkActive="router-link-active">О КОМПАНИИ</a>
+            <a mat-button [routerLink]="['/contactUs']" routerLinkActive="router-link-active">КОНТАКТЫ</a>
         </div>
-        <button mat-raised-button color="warn" (click)="openOnlineRequest()" >ОНЛАЙН ЗАЯВКА</button>
+        <button mat-flat-button color="primary" (click)="openOnlineRequest()" >ОНЛАЙН ЗАЯВКА</button>
     </mat-toolbar>
 </div>
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { OnlineRequestComponent } from '../shared/dialogs/online-request/online-request.component';
+import { OnlineRequestComponent } from '../shared/templates/online-request/online-request.component';
 
 @Component({
   selector: 'app-main-layout',

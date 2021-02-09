@@ -3,7 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ErrorComponent } from 'src/app/shared/dialogs/error/error.component';
+import { ErrorComponent } from 'src/app/shared/templates/error/error.component';
 import { IAdminState } from 'src/app/store/reducers/admin/index';
 import { IMessageData } from 'src/app/store/models/message.model';
 import { AuthService } from '../shared/services/auth.service';

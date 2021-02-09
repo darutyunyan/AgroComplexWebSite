@@ -29,7 +29,6 @@ mat-icon {
   }
 
   mat-icon:hover {
-    cursor: pointer;
     color: #0056b3;
 }
 

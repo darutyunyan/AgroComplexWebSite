@@ -1,0 +1,5 @@
+<div [class]="getMapSize()" class="map-width">
+  <ya-map [zoom]="zoom" [options]="options" [state]="state" [center]="[(coordinates$| async).lat, (coordinates$| async).lng]">
+    <ya-placemark [geometry]="[(coordinates$| async).lat , (coordinates$| async).lng]"></ya-placemark>
+  </ya-map>
+</div>
