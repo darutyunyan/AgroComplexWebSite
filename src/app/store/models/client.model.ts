@@ -55,6 +55,6 @@ export interface ICoordinates {
 
 export interface ILocationState {
     coordinates: ICoordinates;
-    loading: boolean;    
+    loading: boolean;
     error: IError;
 }

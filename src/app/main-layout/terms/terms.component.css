@@ -1,0 +1,12 @@
+.terms {
+    background: rgba(33,33,33,.93);
+    color: white;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    margin: 40px 0;
+}
+
+.material-icons {
+    font-size: 80px;
+}

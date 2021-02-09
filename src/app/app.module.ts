@@ -29,6 +29,7 @@ import { LocationComponent } from './main-layout/footer/location/location.compon
 import { OnlineRequestComponent } from './shared/dialogs/online-request/online-request.component';
 import { AngularYandexMapsModule, YA_CONFIG } from 'angular8-yandex-maps';
 import { MapComponent } from './main-layout/footer/location/map/map.component';
+import { TermsComponent } from './main-layout/terms/terms.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { MapComponent } from './main-layout/footer/location/map/map.component';
     SocialsInfoComponent,
     LocationComponent,
     OnlineRequestComponent,
-    MapComponent
+    MapComponent,
+    TermsComponent
   ],
   imports: [
     BrowserModule,
