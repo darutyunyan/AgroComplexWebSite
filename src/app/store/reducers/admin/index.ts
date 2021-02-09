@@ -1,7 +1,6 @@
 import { IAccountState, INameState, IProductState, ITypeState } from '../../models/admins.model';
 import { IMessageData } from '../../models/message.model';
 
-
 import accountReducer from './account.reducer';
 import productReducer from './product.reducers';
 import productTypesReducer from './productType.reducer';

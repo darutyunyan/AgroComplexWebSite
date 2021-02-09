@@ -22,10 +22,14 @@ import { environment } from 'src/environments/environment';
 import { clientEffects } from './store/effects/client/index';
 import { clientReducers } from './store/reducers/client';
 import { ContactUsService } from './shared/services/contact-us.service';
+import { LocationService } from './shared/services/location.service';
 import { ShortFeedbackComponent } from './main-layout/footer/short-feedback/short-feedback.component';
 import { SocialsInfoComponent } from './main-layout/footer/socials-info/socials-info.component';
 import { LocationComponent } from './main-layout/footer/location/location.component';
 import { OnlineRequestComponent } from './shared/dialogs/online-request/online-request.component';
+import { AngularYandexMapsModule, YA_CONFIG } from 'angular8-yandex-maps';
+import { MapComponent } from './main-layout/footer/location/map/map.component';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +47,8 @@ import { OnlineRequestComponent } from './shared/dialogs/online-request/online-r
     ShortFeedbackComponent,
     SocialsInfoComponent,
     LocationComponent,
-    OnlineRequestComponent
+    OnlineRequestComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +57,7 @@ import { OnlineRequestComponent } from './shared/dialogs/online-request/online-r
     SharedModule.forRoot(),
     StoreModule.forRoot(clientReducers),
     EffectsModule.forRoot(clientEffects),
+    AngularYandexMapsModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
@@ -59,7 +65,15 @@ import { OnlineRequestComponent } from './shared/dialogs/online-request/online-r
   ],
   providers: [
     ClientProductService,
-    ContactUsService
+    ContactUsService,
+    LocationService,
+    {
+      provide: YA_CONFIG,
+      useValue: {
+        apikey: '70dc92e1-6451-41a2-ac56-3897ba0ef065',
+        lang: 'ru_RU',
+      }
+    }
   ],
   bootstrap: [AppComponent]
 })

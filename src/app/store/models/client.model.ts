@@ -41,3 +41,20 @@ export interface IShortFeedbackState {
     shortFeedbackSending: boolean;
     shortFeedbackError: boolean;
 }
+
+export interface ILocationResponse {
+    lat: string;
+    lng: string;
+    error: IError;
+}
+
+export interface ICoordinates {
+    lat: string;
+    lng: string;
+}
+
+export interface ILocationState {
+    coordinates: ICoordinates;
+    loading: boolean;    
+    error: IError;
+}

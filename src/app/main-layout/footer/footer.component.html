@@ -2,7 +2,7 @@
     <div fxLayout="row" fxLayoutAlign="space-around stretch">
         <app-socials-info></app-socials-info>
         <app-short-feedback></app-short-feedback>
-        <app-location></app-location>
+        <app-location *ngIf="(error$ | async) == null && (mapLoading$ | async) === false"></app-location>
     </div>
 
     <div>

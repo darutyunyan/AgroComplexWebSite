@@ -38,6 +38,7 @@ namespace AgroComplexService.Controllers
 		private const string ERROR_BUSINESS = "ABBC1122";
 
 		private const string SERVICE_ERROR_MESSAGE = "asdasd";
+
 		#endregion
 	}
 }
