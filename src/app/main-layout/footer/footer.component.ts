@@ -24,4 +24,8 @@ export class FooterComponent implements OnInit {
     this.store.dispatch(getLocationPending());
   }
 
+  public getFullYear(): string {
+    return new Date().getFullYear().toString();
+  }
+
 }

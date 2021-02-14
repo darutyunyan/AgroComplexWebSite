@@ -1,12 +1,12 @@
 <div class="main-container" fxFlexFill fxLayout="column" fxLayoutGap="20px" fxFlex.lt-md="90%" fxFlex.lt-xl="80%">
-  <div fxLayout="row" fxLayoutGap="20px">
+  <div fxLayout="row" fxLayoutGap="20px" class="overflow-auto">
 
-    <ng-container *ngIf="(error$ | async) === null; else errorMessage">
-      <div fxFlex="25%">
+    <ng-container *ngIf="(error$ | async) === null; else errorMessage" class="width-700">
+      <div  fxFlex.lg="25%" fxFlex.lt-lg="35%" fxFlex.lt-sm="200px">
         <app-left-menu></app-left-menu>
       </div>
 
-      <div fxFlex="75%">
+      <div  fxFlex.lg="75%" fxFlex.lt-lg="65%" fxFlex.lt-sm="600px">
         <ng-container *ngIf="(loading$ | async) === false; else loader">
           <app-table [product]="product$ | async"></app-table>
         </ng-container>

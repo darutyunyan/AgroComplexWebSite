@@ -35,8 +35,8 @@ h1.mat-display-2{
     padding: 20px;
 }
 
-.p-10 {
-    padding: 10px;
+.p-40 {
+    padding: 40px;
 }
 
 .pb-20 {
@@ -49,6 +49,10 @@ h1.mat-display-2{
 
 .router-link-active {
     background-color: rgb(211, 203, 203) !important;
+}
+
+.overflow-auto {
+    overflow: auto;
 }
 
 /* End of common styles */
