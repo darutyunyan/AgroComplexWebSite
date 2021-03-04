@@ -13,6 +13,9 @@
                 <a mat-button [routerLink]="['/admin','add-column-type']"> Доб. тип таблицы </a>
                 <a mat-button [routerLink]="['/admin','add-product-type']"> Доб. вид продукции </a>
             </div>
+            <button mat-icon-button (click)="goLocationSettings()">
+                <mat-icon>location_on</mat-icon>
+            </button>
             <button mat-icon-button (click)="logout()">
                 <mat-icon>exit_to_app</mat-icon>
             </button>

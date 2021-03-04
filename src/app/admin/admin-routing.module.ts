@@ -8,6 +8,7 @@ import { DashboardComponent } from './admin-layout/dashboard/dashboard.component
 import { LoginComponent } from './admin-layout/login/login.component';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { AuthGuard } from './shared/auth.guard';
+import { AddLocationComponent } from './admin-layout/add-location/add-location.component';
 
 const routes: Route[] = [
   {
@@ -18,7 +19,8 @@ const routes: Route[] = [
       { path: 'add-product-name', component: AddProductNameComponent, canActivate: [AuthGuard] },
       { path: 'add-product', component: AddProductComponent, canActivate: [AuthGuard] },
       { path: 'add-column-type', component: AddColumnTypeComponent, canActivate: [AuthGuard] },
-      { path: 'add-product-type', component: AddProductTypeComponent, canActivate: [AuthGuard] }
+      { path: 'add-product-type', component: AddProductTypeComponent, canActivate: [AuthGuard] },
+      { path: 'add-location', component: AddLocationComponent, canActivate: [AuthGuard] }
     ]
   }
 ];

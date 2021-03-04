@@ -1,5 +1,6 @@
 using AgroComplexService.Dto;
 using AgroComplexService.Dto.Client;
+using AgroComplexService.Dto.Shared;
 using AgroComplexService.Models.DataBase;
 using AgroComplexService.Models.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,24 @@ namespace AgroComplexService.Controllers
 				Location location = await _locationRepo.Get();
 				response.Lat = location.Lat;
 				response.Lng = location.Lng;
+			}
+			catch (Exception ex)
+			{
+				SetResponse(response, ex);
+			}
+
+			return response;
+		}
+
+		[Route("AddOrUpdateCoordinates")]
+		[HttpPost]
+		public async Task<Response> AddOrUpdateCoordinates(AddOrUpdateCoordinatesReqeust request)
+		{
+			Response response = new Response();
+
+			try
+			{
+				await _locationRepo.AddOrUpdate(request);
 			}
 			catch (Exception ex)
 			{

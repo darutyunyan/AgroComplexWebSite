@@ -18,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { AngularYandexMapsModule, YA_CONFIG } from 'angular8-yandex-maps';
 import { environment } from 'src/environments/environment';
 
 
@@ -42,7 +42,16 @@ import { environment } from 'src/environments/environment';
     MatSelectModule,
     MatDialogModule,
     FlexLayoutModule,
-  ]
+    AngularYandexMapsModule,
+  ],
+  providers: [
+    {
+      provide: YA_CONFIG,
+      useValue: {
+        apikey: '70dc92e1-6451-41a2-ac56-3897ba0ef065',
+        lang: 'ru_RU',
+      }
+    }]
 })
 export class SharedModule {
   public static forRoot(): ModuleWithProviders<any> {

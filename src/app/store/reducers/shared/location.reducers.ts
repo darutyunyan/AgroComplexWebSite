@@ -1,5 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { getLocationError, getLocationPending, getLocationSuccess } from '../../actions/client/location.action';
+import { addOrUpdateLocationError, addOrUpdateLocationPending, addOrUpdateLocationSuccess,
+    getLocationError, getLocationPending, getLocationSuccess } from '../../actions/shared/location.action';
 import { ILocationState } from '../../models/client.model';
 
 const initialState: ILocationState = {
@@ -7,12 +8,32 @@ const initialState: ILocationState = {
         lat: null,
         lng: null,
     },
+    successOperation: false,
     loading: false,
     error: null
 };
 
 const locationReducer = createReducer(
     initialState,
+    on(addOrUpdateLocationPending, (state) => {
+        return {
+            ...state,
+            successOperation: false
+        };
+    }),
+    on(addOrUpdateLocationSuccess, (state) => {
+        return {
+            ...state,
+            successOperation: true
+        };
+    }),
+    on(addOrUpdateLocationError, (state, action) => {
+        return {
+            ...state,
+            successOperation: false,
+            error: action.error
+        };
+    }),
     on(getLocationPending, (state) => {
         return {
             ...state,

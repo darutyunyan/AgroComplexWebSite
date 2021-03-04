@@ -1,5 +1,3 @@
-using AgroComplexService.Dto.ProductName;
-
 namespace AgroComplexService.Dto.Client
 {
 	public class GetAllResponse : Response

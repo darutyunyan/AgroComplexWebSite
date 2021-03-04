@@ -25,6 +25,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { adminReducers } from '../store/reducers/admin';
 import { adminEffects } from '../store/effects/admin';
+import { AddLocationComponent } from './admin-layout/add-location/add-location.component';
 
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import { adminEffects } from '../store/effects/admin';
         AddProductTypeComponent,
         LoaderComponent,
         SearchPipe,
-        TableProductComponent
+        TableProductComponent,
+        AddLocationComponent
     ],
     imports: [
         SharedModule,

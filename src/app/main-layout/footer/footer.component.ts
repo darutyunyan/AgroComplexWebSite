@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getLocationPending } from 'src/app/store/actions/client/location.action';
+import { getLocationPending } from 'src/app/store/actions/shared/location.action';
 import { IError } from 'src/app/store/models/error';
 import { IClientState } from 'src/app/store/reducers/client';
 

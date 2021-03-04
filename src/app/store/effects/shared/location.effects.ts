@@ -3,14 +3,33 @@ import { Actions, createEffect, CreateEffectMetadata, ofType } from '@ngrx/effec
 import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { LocationService } from 'src/app/shared/services/location.service';
-import { getLocationError, getLocationPending, getLocationSuccess } from '../../actions/client/location.action';
+import { addOrUpdateLocationError, addOrUpdateLocationPending, addOrUpdateLocationSuccess,
+    getLocationError, getLocationPending, getLocationSuccess } from '../../actions/shared/location.action';
 import { ILocationResponse } from '../../models/client.model';
+import { IResponseError } from '../../models/error';
 
 
 @Injectable()
 export class LocationEffects {
+    public addOrUpdateCoordinates: CreateEffectMetadata = createEffect(() => this.actions$.pipe(
+        ofType(addOrUpdateLocationPending),
+        mergeMap((coordinates) => this.locationService.addOrUpdateCoordinates(coordinates)
+            .pipe(map((response: IResponseError) => {
+                if (response.error == null) {
+                    return addOrUpdateLocationSuccess();
+                } else {
+                    return addOrUpdateLocationError({ error: response.error });
+                }
+            }),
+                catchError(
+                    (httpError) => of(addOrUpdateLocationError({ error: { statusCode: httpError.status, message: httpError.message } }))
+                )
+            )
+        )
+    ));
+
     public getCoordinates$: CreateEffectMetadata = createEffect(() => this.actions$.pipe(
-        ofType(getLocationPending),
+        ofType(getLocationPending, addOrUpdateLocationSuccess),
         mergeMap(() => this.locationService.getCoordinates()
             .pipe(
                 map((location: ILocationResponse) => {

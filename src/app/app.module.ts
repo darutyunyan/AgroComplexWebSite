@@ -27,7 +27,7 @@ import { ShortFeedbackComponent } from './main-layout/footer/short-feedback/shor
 import { SocialsInfoComponent } from './main-layout/footer/socials-info/socials-info.component';
 import { LocationComponent } from './main-layout/footer/location/location.component';
 import { OnlineRequestComponent } from './shared/templates/online-request/online-request.component';
-import { AngularYandexMapsModule, YA_CONFIG } from 'angular8-yandex-maps';
+
 import { MapComponent } from './shared/templates/map/map.component';
 import { TermsComponent } from './main-layout/terms/terms.component';
 
@@ -59,7 +59,6 @@ import { TermsComponent } from './main-layout/terms/terms.component';
     SharedModule.forRoot(),
     StoreModule.forRoot(clientReducers),
     EffectsModule.forRoot(clientEffects),
-    AngularYandexMapsModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
@@ -68,14 +67,7 @@ import { TermsComponent } from './main-layout/terms/terms.component';
   providers: [
     ClientProductService,
     ContactUsService,
-    LocationService,
-    {
-      provide: YA_CONFIG,
-      useValue: {
-        apikey: '70dc92e1-6451-41a2-ac56-3897ba0ef065',
-        lang: 'ru_RU',
-      }
-    }
+    LocationService
   ],
   bootstrap: [AppComponent]
 })

@@ -3,6 +3,7 @@ import { AccountEffects } from './account.effects';
 import { ColumnTypeEffects } from './columnType.effects';
 import { ProductEffects } from './product.effects';
 import { ProductNameEffects } from './productName.effects';
+import { LocationEffects } from '../shared/location.effects';
 
 export const adminEffects = [
     ProductTypeEffects,
@@ -10,4 +11,5 @@ export const adminEffects = [
     ProductNameEffects,
     ProductEffects,
     AccountEffects,
+    LocationEffects
 ];
