@@ -298,15 +298,6 @@ namespace AgroComplexService.Models.Services.ProductService
 
 		#endregion
 
-		#region Private constant
-
-		private const string SEED = "Семена";
-
-		private const string PPP = "СЗР";
-
-
-		#endregion
-
 		#region Private property
 
 		private IProductRepository _productRepo = null;

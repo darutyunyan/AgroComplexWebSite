@@ -11,7 +11,7 @@ namespace AgroComplexService.Controllers
     [Route("[controller]")]
     public class AccountController : BaseController
     {
-        public AccountController(AgroComplexDBContext context)
+        public AccountController(AgroComplexDBContext context) : base(context)
         {
             _accountServ = new AccountManagmentService(context);
         }

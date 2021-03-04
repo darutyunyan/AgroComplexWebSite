@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
+using AgroComplexService.Models.DataBase;
 
 namespace AgroComplexService.Controllers
 {
@@ -12,7 +13,7 @@ namespace AgroComplexService.Controllers
 	[Route("[controller]")]
 	public class ContactUsController : BaseController
 	{
-		public ContactUsController(IOptions<EmailSetting> op, IStringLocalizer<Resource> localizer)
+		public ContactUsController(IOptions<EmailSetting> op, IStringLocalizer<Resource> localizer, AgroComplexDBContext context) : base (context)
 		{
 			_mailServ = new MailService(op.Value, localizer);
 		}

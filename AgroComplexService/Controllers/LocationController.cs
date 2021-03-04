@@ -15,7 +15,7 @@ namespace AgroComplexService.Controllers
 	{
 		#region Constructor
 
-		public LocationController(AgroComplexDBContext context)
+		public LocationController(AgroComplexDBContext context) : base(context)
 		{
 			_locationRepo = new LocationRepository(context);
 		}

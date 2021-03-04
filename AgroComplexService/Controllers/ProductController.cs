@@ -20,7 +20,7 @@ namespace AgroComplexService.Controllers
 	{
 		#region Constructor
 
-		public ProductController(AgroComplexDBContext context, IStringLocalizer<Resource> localizer)
+		public ProductController(AgroComplexDBContext context, IStringLocalizer<Resource> localizer) : base(context)
 		{
 			_productServ = new ProductManagmentService(context, localizer);
 		}

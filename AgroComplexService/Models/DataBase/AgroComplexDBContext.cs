@@ -15,6 +15,7 @@ namespace AgroComplexService.Models.DataBase
 		public virtual DbSet<ProductType> ProductType { get; set; }
 		public virtual DbSet<ColumnType> ColumnType { get; set; }
 		public virtual DbSet<Location> Location { get; set; }
+		public virtual DbSet<Log> Log { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
