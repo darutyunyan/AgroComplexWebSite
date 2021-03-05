@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -18,6 +18,7 @@ import { IError } from 'src/app/store/models/error';
 })
 export class AddColumnTypeComponent extends UnSubscriber implements OnInit, OnDestroy {
 
+  @ViewChild('formDirective') private formDirective: NgForm;
   public items$: Observable<ITypeItem[]>;
   public loaded$: Observable<boolean>;
   public error$: Observable<IError>;
@@ -76,7 +77,7 @@ export class AddColumnTypeComponent extends UnSubscriber implements OnInit, OnDe
     }
 
     this.store.dispatch(addColumnTypePending({ name: this.form.value.name }));
-    this.form.reset();
+    this.formDirective.resetForm();
   }
 
 }

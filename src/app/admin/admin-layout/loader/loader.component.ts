@@ -7,6 +7,7 @@ import { ProductService } from '../../shared/services/product.service';
   styleUrls: ['./loader.component.css']
 })
 export class LoaderComponent implements OnInit {
+
   public isShow: boolean;
 
   constructor(private productServ: ProductService) {

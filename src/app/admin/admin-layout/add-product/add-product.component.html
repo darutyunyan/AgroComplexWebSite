@@ -1,6 +1,6 @@
 <div  fxLayout="column" fxLayoutAlign="space-between stretch">
     <h1 fxFlexAlign.lt-md="center" fxFlexAlign.lt-xl="end">Добавление продука</h1>
-    <form [formGroup]="form" (ngSubmit)="submit()" class="mat-elevation-z8 p-20" fxLayout="column">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="mat-elevation-z8 p-20" fxLayout="column" #formDirective="ngForm">
         <mat-form-field appearance="outline" class="hint-padding">
             <mat-label>Информация о продукте</mat-label>
             <input matInput placeholder="Пример: Вика яровая|Льговская 22|от 23 руб/кг" formControlName="info">

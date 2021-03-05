@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -16,6 +16,7 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class LoginComponent extends UnSubscriber implements OnInit {
 
+  @ViewChild('formDirective') private formDirective: NgForm;
   public form: FormGroup;
   public loginResponse$: Observable<ILoginResponse>;
 
@@ -53,6 +54,6 @@ export class LoginComponent extends UnSubscriber implements OnInit {
     }
 
     this.store.dispatch(loginPending({ email: this.form.value.email, password: this.form.value.password }));
-    this.form.reset();
+    this.formDirective.resetForm();
   }
 }

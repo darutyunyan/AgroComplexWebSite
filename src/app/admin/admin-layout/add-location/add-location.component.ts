@@ -20,7 +20,6 @@ import { IAdminState } from 'src/app/store/reducers/admin';
 export class AddLocationComponent extends UnSubscriber implements OnInit {
 
   public form: FormGroup;
-
   public coordinates$: Observable<ICoordinates>;
   public loading$: Observable<boolean>;
   public error$: Observable<IError>;

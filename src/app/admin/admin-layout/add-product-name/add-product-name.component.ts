@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -19,6 +19,7 @@ import { IError } from 'src/app/store/models/error';
 })
 export class AddProductNameComponent extends UnSubscriber implements OnInit {
 
+  @ViewChild('formDirective') private formDirective: NgForm;
   public items$: Observable<INameItem[]>;
   public types$: Observable<ITypeItem[]>;
   public loaded$: Observable<boolean>;
@@ -35,7 +36,6 @@ export class AddProductNameComponent extends UnSubscriber implements OnInit {
     this.loaded$ = store.select(s => s.adminState.productNameState.loaded);
     this.error$ = store.select(s => s.adminState.productNameState.error);
     this.successOperation$ = store.select(s => s.adminState.productNameState.successOperation);
-
     this.types$ = store.select(s => s.adminState.productTypeState.items);
     this.typeLoaded$ = store.select(s => s.adminState.productTypeState.loaded);
     this.errorProductType$ = store.select(s => s.adminState.productTypeState.error);
@@ -108,6 +108,6 @@ export class AddProductNameComponent extends UnSubscriber implements OnInit {
       typeId: this.form.value.productType
     }));
 
-    this.form.controls.name.reset();
+    this.formDirective.resetForm();
   }
 }

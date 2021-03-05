@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="submit()" fxFlexFill fxLayout="row"
-    fxLayoutAlign="center center">
+    fxLayoutAlign="center center" #formDirective="ngForm">
     <mat-card fxLayout="column" fxFlex.lt-sm="100">
         <mat-card-header fxLayoutAlign="center">
             <mat-card-title>Admin panel</mat-card-title>
@@ -15,7 +15,6 @@
             <input type="password" matInput placeholder="Password" formControlName="password">
         </mat-form-field>
 
-        <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Log
-            in</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Log in</button>
     </mat-card>
 </form>

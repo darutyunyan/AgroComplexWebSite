@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -20,28 +20,24 @@ import { IError } from 'src/app/store/models/error';
 })
 export class AddProductComponent extends UnSubscriber implements OnInit {
 
+  @ViewChild('formDirective') private formDirective: NgForm;
+  public form: FormGroup;
   public error$: Observable<IError>;
   public successOperation$: Observable<boolean>;
-
   public names$: Observable<INameItem[]>;
   public namesLoaded$: Observable<boolean>;
   public errorProductName$: Observable<IError>;
-
   public columns$: Observable<ITypeItem[]>;
   public columnsLoaded$: Observable<boolean>;
   public errorColumnError$: Observable<IError>;
-
-  public form: FormGroup;
 
   constructor(private store: Store<IAdminState>) {
     super();
     this.error$ = store.select(s => s.adminState.productState.error);
     this.successOperation$ = store.select(s => s.adminState.productState.successOperation);
-
     this.names$ = store.select(s => s.adminState.productNameState.items);
     this.namesLoaded$ = store.select(s => s.adminState.productNameState.loaded);
     this.errorProductName$ = store.select(s => s.adminState.productNameState.error);
-
     this.columns$ = store.select(s => s.adminState.columnTypeState.items);
     this.columnsLoaded$ = store.select(s => s.adminState.columnTypeState.loaded);
     this.errorColumnError$ = store.select(s => s.adminState.columnTypeState.error);
@@ -128,7 +124,7 @@ export class AddProductComponent extends UnSubscriber implements OnInit {
       columnTypeId: this.form.value.columnType
     }));
 
-    this.form.controls.info.reset();
+    this.formDirective.resetForm();
   }
 
 }

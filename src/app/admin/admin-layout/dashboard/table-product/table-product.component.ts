@@ -15,9 +15,9 @@ import { IProductItem } from 'src/app/store/models/admins.model';
   styleUrls: ['./table-product.component.css']
 })
 export class TableProductComponent extends UnSubscriber implements OnInit {
+
   @Input()
   public products: IProductItem[];
-
   public productName: string;
   public successOperation$: Observable<boolean>;
 

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -17,6 +17,8 @@ import { IError } from 'src/app/store/models/error';
   styleUrls: ['./add-product-type.component.css']
 })
 export class AddProductTypeComponent extends UnSubscriber implements OnInit {
+
+  @ViewChild('formDirective') private formDirective: NgForm;
   public items$: Observable<ITypeItem[]>;
   public loaded$: Observable<boolean>;
   public error$: Observable<IError>;
@@ -76,6 +78,6 @@ export class AddProductTypeComponent extends UnSubscriber implements OnInit {
     }
 
     this.store.dispatch(addProductTypePending({ name: this.form.value.name }));
-    this.form.reset();
+    this.formDirective.resetForm();
   }
 }
