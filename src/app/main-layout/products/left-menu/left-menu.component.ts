@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
@@ -18,8 +17,7 @@ export class LeftMenuComponent extends UnSubscriber implements OnInit {
   public loading$: Observable<boolean>;
 
   constructor(
-    private store: Store<IClientState>,
-    private router: Router) {
+    private store: Store<IClientState>) {
     super();
     this.products$ = this.store.select(s => s.clientState.products.items);
     this.loading$ = this.store.select(s => s.clientState.loading);
@@ -29,7 +27,4 @@ export class LeftMenuComponent extends UnSubscriber implements OnInit {
     this.store.dispatch(getProductsPending());
   }
 
-  public loadProduct(id): void {
-      this.router.navigate(['/products', id]);
-  }
 }

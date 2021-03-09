@@ -31,8 +31,6 @@ export class ProductsComponent extends UnSubscriber implements OnInit {
   }
 
   public ngOnInit(): void {
-    window.scroll(0, 0);
-
     this.activateRoute.params
       .pipe(takeUntil(this.unSubscriber$))
       .subscribe(({ id }) => {
@@ -47,6 +45,8 @@ export class ProductsComponent extends UnSubscriber implements OnInit {
               }
             });
         }
+
+        document.querySelector('mat-sidenav-content').scrollTop = 0;
       });
   }
 
