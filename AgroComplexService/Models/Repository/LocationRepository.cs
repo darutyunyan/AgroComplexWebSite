@@ -1,7 +1,7 @@
-using AgroComplexService.Dto.Shared;
 using AgroComplexService.Models.DataBase;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace AgroComplexService.Models.Repository
@@ -19,26 +19,27 @@ namespace AgroComplexService.Models.Repository
 
 		#region Public methods
 
-		public async Task AddOrUpdate(AddOrUpdateCoordinatesReqeust request)
+		public async Task AddOrUpdate(Location location, bool isAddMode)
 		{
-			Location location = await _context.Location.FirstOrDefaultAsync();
-			if (location != null)
+			Debug.Assert(location.Id != Guid.Empty);
+			Debug.Assert(!string.IsNullOrEmpty(location.Lat));
+			Debug.Assert(!string.IsNullOrEmpty(location.Lng));
+
+			if (isAddMode)
 			{
-				location.Lat = request.Lat;
-				location.Lng = request.Lng;
-				_context.Location.Update(location);
+				await _context.Location.AddAsync(location);
 				await _context.SaveChangesAsync();
 			}
 			else
 			{
-				location = new Location();
-				location.Id = Guid.NewGuid();
-				location.Lat = request.Lat;
-				location.Lng = request.Lng;
-
-				await _context.Location.AddAsync(location);
+				_context.Location.Update(location);
 				await _context.SaveChangesAsync();
 			}
+		}
+
+		public async Task<Location> FirstOrDefault()
+		{
+			return await _context.Location.FirstOrDefaultAsync();
 		}
 
 		public async Task<Location> Get()

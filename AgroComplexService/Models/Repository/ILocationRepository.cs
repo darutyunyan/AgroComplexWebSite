@@ -6,7 +6,9 @@ namespace AgroComplexService.Models.Repository
 {
 	public interface ILocationRepository
 	{
-		Task AddOrUpdate(AddOrUpdateCoordinatesReqeust request);
+		Task AddOrUpdate(Location location, bool isAddMode);
+
+		Task<Location> FirstOrDefault();
 
 		Task<Location> Get();
 	}

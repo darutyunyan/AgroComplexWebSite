@@ -2,6 +2,7 @@ using AgroComplexService.Models.DataBase;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,8 +23,10 @@ namespace AgroComplexService.Models.Repository
 
 		public async Task Add(Product product)
 		{
-			if (product == null)
-				throw new ArgumentNullException("product");
+			Debug.Assert(product.Id != Guid.Empty);
+			Debug.Assert(!string.IsNullOrEmpty(product.Info));
+			Debug.Assert(product.ProductNameId != Guid.Empty);
+			Debug.Assert(product.ColumnTypeId != Guid.Empty);
 
 			await _context.Product.AddAsync(product);
 			await _context.SaveChangesAsync();
@@ -31,8 +34,10 @@ namespace AgroComplexService.Models.Repository
 
 		public async Task Update(Product product)
 		{
-			if (product == null)
-				throw new ArgumentNullException("product");
+			Debug.Assert(product.Id != Guid.Empty);
+			Debug.Assert(!string.IsNullOrEmpty(product.Info));
+			Debug.Assert(product.ProductNameId != Guid.Empty);
+			Debug.Assert(product.ColumnTypeId != Guid.Empty);
 
 			_context.Update(product);
 			await _context.SaveChangesAsync();
@@ -40,8 +45,7 @@ namespace AgroComplexService.Models.Repository
 
 		public async Task<Product> GetById(Guid id)
 		{
-			if (id == Guid.Empty)
-				throw new ArgumentException("id");
+			Debug.Assert(id != Guid.Empty);
 
 			return await _context.Product
 				.Where(p => p.Id == id)
@@ -50,8 +54,7 @@ namespace AgroComplexService.Models.Repository
 
 		public async Task<List<Product>> GetProductsByProductTypeId(Guid id)
 		{
-			if (id == Guid.Empty)
-				throw new ArgumentException("id");
+			Debug.Assert(id != Guid.Empty);
 
 			return await _context.Product
 				.Include(pN => pN.ProductName)
@@ -72,9 +75,7 @@ namespace AgroComplexService.Models.Repository
 
 		public async Task Remove(Guid id)
 		{
-			if (id == Guid.Empty)
-				throw new ArgumentException("id");
-
+			Debug.Assert(id != Guid.Empty);
 
 			Product product = await _context
 				.Product

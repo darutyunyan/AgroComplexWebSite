@@ -2,6 +2,7 @@ using AgroComplexService.Models.DataBase;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,8 +23,9 @@ namespace AgroComplexService.Models.Repository
 
 		public async Task Add(ProductName productName)
 		{
-			if (productName == null)
-				throw new ArgumentNullException("productName");
+			Debug.Assert(productName.Id != Guid.Empty);
+			Debug.Assert(!string.IsNullOrEmpty(productName.Name));
+			Debug.Assert(productName.ProductTypeId != Guid.Empty);
 
 			await _context.ProductName.AddAsync(productName);
 			await _context.SaveChangesAsync();
@@ -39,6 +41,8 @@ namespace AgroComplexService.Models.Repository
 
 		public async Task<List<ProductName>> GetByProductType(string name)
 		{
+			Debug.Assert(!string.IsNullOrEmpty(name));
+
 			return await _context.ProductName
 				.Include(pT => pT.ProductType)
 				.Where(pN => pN.ProductType.Name == name)
@@ -48,13 +52,14 @@ namespace AgroComplexService.Models.Repository
 
 		public async Task<bool> IsExist(string name)
 		{
+			Debug.Assert(!string.IsNullOrEmpty(name));
+
 			return await _context.ProductName.AnyAsync(p => p.Name.ToLower() == name.ToLower());
 		}
 
 		public async Task Remove(Guid id)
 		{
-			if (id == Guid.Empty)
-				throw new ArgumentException("id");
+			Debug.Assert(id != Guid.Empty);
 
 			ProductName productName = await _context
 				.ProductName

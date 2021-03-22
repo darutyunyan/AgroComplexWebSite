@@ -52,7 +52,24 @@ namespace AgroComplexService.Controllers
 
 			try
 			{
-				await _locationRepo.AddOrUpdate(request);
+				Location location = await _locationRepo.FirstOrDefault();
+
+				if (location != null)
+				{
+					location.Lat = request.Lat;
+					location.Lng = request.Lng;
+
+					await _locationRepo.AddOrUpdate(location, false);
+				}
+				else
+				{
+					location = new Location();
+					location.Id = Guid.NewGuid();
+					location.Lat = request.Lat;
+					location.Lng = request.Lng;
+
+					await _locationRepo.AddOrUpdate(location, true);
+				}
 			}
 			catch (Exception ex)
 			{

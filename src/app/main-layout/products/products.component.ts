@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -22,8 +22,7 @@ export class ProductsComponent extends UnSubscriber implements OnInit {
 
   constructor(
     private store: Store<IClientState>,
-    private activateRoute: ActivatedRoute,
-    private router: Router) {
+    private activateRoute: ActivatedRoute) {
     super();
     this.loading$ = this.store.select(s => s.clientState.productById.loading);
     this.product$ = this.store.select(s => s.clientState.productById);
@@ -34,18 +33,7 @@ export class ProductsComponent extends UnSubscriber implements OnInit {
     this.activateRoute.params
       .pipe(takeUntil(this.unSubscriber$))
       .subscribe(({ id }) => {
-        if (id !== 'first') {
-          this.store.dispatch(getProductByIdPending({ id }));
-        } else {
-          this.store.select(s => s.clientState.products?.items)
-            .pipe(takeUntil(this.unSubscriber$))
-            .subscribe(response => {
-              if (response && response.length > 0 && response[0].items && response[0].items[0]?.id) {
-                this.router.navigate(['/products', response[0].items[0].id]);
-              }
-            });
-        }
-
+        this.store.dispatch(getProductByIdPending({ id }));
         document.querySelector('mat-sidenav-content').scrollTop = 0;
       });
   }

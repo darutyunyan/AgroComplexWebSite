@@ -1,5 +1,5 @@
 using AgroComplexService.Models.DataBase;
-using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace AgroComplexService.Models.Repository
@@ -19,8 +19,7 @@ namespace AgroComplexService.Models.Repository
 
 		public async Task Add(Log log)
 		{
-			if (log == null)
-				throw new ArgumentNullException("log");
+			Debug.Assert(log != null);
 
 			await _context.Log.AddAsync(log);
 			await _context.SaveChangesAsync();

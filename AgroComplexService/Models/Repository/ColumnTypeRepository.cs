@@ -2,6 +2,7 @@ using AgroComplexService.Models.DataBase;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,8 +23,8 @@ namespace AgroComplexService.Models.Repository
 
 		public async Task Add(ColumnType columnType)
 		{
-			if (columnType == null)
-				throw new ArgumentNullException("columnType");
+			Debug.Assert(columnType.Id != Guid.Empty);
+			Debug.Assert(!string.IsNullOrEmpty(columnType.Name));
 
 			await _context.ColumnType.AddAsync(columnType);
 			await _context.SaveChangesAsync();
@@ -36,14 +37,14 @@ namespace AgroComplexService.Models.Repository
 
 		public async Task<bool> IsExist(string name)
 		{
+			Debug.Assert(!string.IsNullOrEmpty(name));
+
 			return await _context.ColumnType.AnyAsync(p => p.Name.ToLower() == name.ToLower());
 		}
 
 		public async Task Remove(Guid id)
 		{
-			if (id == Guid.Empty)
-				throw new ArgumentException("id");
-
+			Debug.Assert(id != Guid.Empty);
 
 			ColumnType columnType = await _context
 				.ColumnType

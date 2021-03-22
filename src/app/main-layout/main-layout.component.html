@@ -52,9 +52,9 @@
                     <a mat-icon-button [routerLink]="['/home']" routerLinkActive="router-link-active">
                         <mat-icon>home</mat-icon>
                     </a>
-                    <a mat-button [routerLink]="['/products', 'first']"
+                    <a *ngIf="(firstProductId$ | async) != null" mat-button [routerLink]="['/products', firstProductId$ | async]"
                         routerLinkActive="router-link-active">ПРОДУКЦИЯ</a>
-                    <a mat-button [routerLink]="['/about']" routerLinkActive="router-link-active">О КОМПАНИИ</a>
+                    <a mat-button [routerLink]="['/about']" routerLinkActive="router-link-active">О КОМПАНИИ </a>
                     <a mat-button [routerLink]="['/contactUs']" routerLinkActive="router-link-active">КОНТАКТЫ</a>
                 </div>
                 <button fxHide.lt-sm="true" mat-flat-button color="primary" (click)="openOnlineRequest()">ОНЛАЙН
