@@ -14,11 +14,11 @@
     <form [formGroup]="form" (ngSubmit)="submit()" class="mat-elevation-z8 p-20" fxLayout="column">
         <mat-form-field appearance="outline">
             <mat-label>Lat</mat-label>
-            <input matInput formControlName="lat">
+            <input matInput formControlName="lat" autocomplete="off">
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Lng</mat-label>
-            <input matInput formControlName="lng">
+            <input matInput formControlName="lng" autocomplete="off">
         </mat-form-field>
         <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Добавить/Обновить</button>
     </form>

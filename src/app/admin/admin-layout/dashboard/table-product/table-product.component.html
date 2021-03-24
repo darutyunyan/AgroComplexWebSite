@@ -1,6 +1,6 @@
 <mat-form-field *ngIf="products.length > 0">
     <mat-label>Фильтр</mat-label>
-    <input matInput [(ngModel)]="productName" placeholder="Пример: Семена">
+    <input matInput [(ngModel)]="productName" placeholder="Пример: Семена" autocomplete="off">
 </mat-form-field>
 
 <table class="mat-table cdk-table mat-elevation-z8" *ngIf="products.length > 0">
