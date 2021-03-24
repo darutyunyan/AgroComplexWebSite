@@ -3,7 +3,7 @@
     <form [formGroup]="form" (ngSubmit)="submit()" class="mat-elevation-z8 p-20" fxLayout="column" #formDirective="ngForm">
         <mat-form-field appearance="outline">
             <mat-label>Название</mat-label>
-            <input matInput placeholder="Пример: Имя|Сорт|Цена" formControlName="name">
+            <input matInput placeholder="Пример: Имя|Сорт|Цена" formControlName="name" autocomplete="off">
             <mat-hint>Введите имена столбцов через символ '|'</mat-hint>
         </mat-form-field>
         <br>
