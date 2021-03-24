@@ -7,9 +7,9 @@ export enum ProductActions {
     GetProductsSuccess = '[Product] Get product success',
     GetProductsError = '[Product] Get product error',
 
-    AddProductPending = '[Product] Add product pending',
-    AddProductSuccess = '[Product] Add product success',
-    AddProductError = '[Product] Add product error',
+    AddUpdateProductPending = '[Product] Add or update product pending',
+    AddUpdateProductSuccess = '[Product] Add or update product success',
+    AddUpdateProductError = '[Product] Add or update product error',
 
     RemoveProductPending = '[Product] Remove product pending',
     RemoveProductSuccess = '[Product] Remove product success',
@@ -32,17 +32,17 @@ export const getProductsError = createAction(
     props<{ error: IError }>()
 );
 
-export const addProductPending = createAction(
-    ProductActions.AddProductPending,
-    props<{ info: string, productNameId: string, columnTypeId: string }>()
+export const addUpdateProductPending = createAction(
+    ProductActions.AddUpdateProductPending,
+    props<{ id?: string, info: string, productNameId: string, columnTypeId: string }>()
 );
 
-export const addProductSuccess = createAction(
-    ProductActions.AddProductSuccess
+export const addUpdateProductSuccess = createAction(
+    ProductActions.AddUpdateProductSuccess
 );
 
-export const addProductError = createAction(
-    ProductActions.AddProductError,
+export const addUpdateProductError = createAction(
+    ProductActions.AddUpdateProductError,
     props<{ error: IError }>()
 );
 

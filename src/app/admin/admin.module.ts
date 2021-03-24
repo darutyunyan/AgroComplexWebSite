@@ -26,6 +26,7 @@ import { environment } from 'src/environments/environment';
 import { adminReducers } from '../store/reducers/admin';
 import { adminEffects } from '../store/effects/admin';
 import { AddLocationComponent } from './admin-layout/add-location/add-location.component';
+import { EditProductComponent } from './admin-layout/dashboard/table-product/edit-product/edit-product.component';
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import { AddLocationComponent } from './admin-layout/add-location/add-location.c
         LoaderComponent,
         SearchPipe,
         TableProductComponent,
-        AddLocationComponent
+        AddLocationComponent,
+        EditProductComponent
     ],
     imports: [
         SharedModule,

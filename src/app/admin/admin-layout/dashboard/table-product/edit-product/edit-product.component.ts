@@ -1,29 +1,26 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ErrorComponent } from 'src/app/shared/templates/error/error.component';
 import { UnSubscriber } from 'src/app/shared/utils/Unsubscriber';
-import { IAdminState } from 'src/app/store/reducers/admin';
 import { clearColumnTypeError, getColumnTypePending } from 'src/app/store/actions/admin/columnType.action';
-import { addUpdateProductPending, clearProductError } from 'src/app/store/actions/admin/product.action';
+import { addUpdateProductPending } from 'src/app/store/actions/admin/product.action';
 import { clearProductNameError, getProductNamesPending } from 'src/app/store/actions/admin/productName.action';
 import { showMessage } from 'src/app/store/actions/message.action';
-import { INameItem, ITypeItem } from 'src/app/store/models/admins.model';
+import { INameItem, IProductItem, ITypeItem } from 'src/app/store/models/admins.model';
 import { IError } from 'src/app/store/models/error';
+import { IAdminState } from 'src/app/store/reducers/admin';
 
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.css']
+  selector: 'app-edit-product',
+  templateUrl: './edit-product.component.html',
+  styleUrls: ['./edit-product.component.css']
 })
-export class AddProductComponent extends UnSubscriber implements OnInit {
+export class EditProductComponent extends UnSubscriber implements OnInit {
 
-  @ViewChild('formDirective') private formDirective: NgForm;
   public form: FormGroup;
-  public error$: Observable<IError>;
-  public successOperation$: Observable<boolean>;
   public names$: Observable<INameItem[]>;
   public namesLoaded$: Observable<boolean>;
   public errorProductName$: Observable<IError>;
@@ -31,10 +28,11 @@ export class AddProductComponent extends UnSubscriber implements OnInit {
   public columnsLoaded$: Observable<boolean>;
   public errorColumnError$: Observable<IError>;
 
-  constructor(private store: Store<IAdminState>) {
+  constructor(
+    private store: Store<IAdminState>,
+    public dialogRef: MatDialogRef<EditProductComponent>,
+    @Inject(MAT_DIALOG_DATA) public product: IProductItem) {
     super();
-    this.error$ = store.select(s => s.adminState.productState.error);
-    this.successOperation$ = store.select(s => s.adminState.productState.successOperation);
     this.names$ = store.select(s => s.adminState.productNameState.items);
     this.namesLoaded$ = store.select(s => s.adminState.productNameState.loaded);
     this.errorProductName$ = store.select(s => s.adminState.productNameState.error);
@@ -45,37 +43,10 @@ export class AddProductComponent extends UnSubscriber implements OnInit {
 
   public ngOnInit(): void {
     this.form = new FormGroup({
-      info: new FormControl(null, [Validators.required]),
-      productName: new FormControl(null, [Validators.required]),
-      columnType: new FormControl(null, [Validators.required])
+      info: new FormControl(this.product.info, [Validators.required]),
+      productName: new FormControl(this.product.productNameId, [Validators.required]),
+      columnType: new FormControl(this.product.columnTypeId, [Validators.required])
     });
-
-    this.successOperation$
-      .pipe(takeUntil(this.unSubscriber$))
-      .subscribe((success) => {
-        if (success) {
-          this.store.dispatch(showMessage({
-            messageData: {
-              statusCode: ErrorComponent.SUCCESS_OPERATION
-            }
-          }));
-        }
-      });
-
-    this.error$
-      .pipe(takeUntil(this.unSubscriber$))
-      .subscribe((error: IError) => {
-        if (error != null) {
-          this.store.dispatch(clearProductError());
-          this.store.dispatch(showMessage(
-            {
-              messageData: {
-                statusCode: error.statusCode,
-                message: error.message
-              }
-            }));
-        }
-      });
 
     this.errorColumnError$
       .pipe(takeUntil(this.unSubscriber$))
@@ -113,18 +84,22 @@ export class AddProductComponent extends UnSubscriber implements OnInit {
     this.store.dispatch(getColumnTypePending());
   }
 
+  public close(): void {
+    this.dialogRef.close();
+  }
+
   public submit(): void {
     if (this.form.invalid) {
       return;
     }
 
     this.store.dispatch(addUpdateProductPending({
+      id: this.product.id,
       info: this.form.value.info,
       productNameId: this.form.value.productName,
       columnTypeId: this.form.value.columnType
     }));
 
-    this.formDirective.resetForm();
+    this.close();
   }
-
 }

@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { catchError, filter, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { ProductService } from './services/product.service';
+import { IAdminState } from 'src/app/store/reducers/admin';
+import { Store } from '@ngrx/store';
+import { hideLoader, showLoader } from 'src/app/store/actions/admin/loader.action';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -12,11 +15,11 @@ export class AuthInterceptor implements HttpInterceptor {
         private auth: AuthService,
         private router: Router,
         @Inject('baseUrl') private baseUrl: string,
-        private prodServ: ProductService
+        private store: Store<IAdminState>
     ) { }
 
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this.prodServ.runLoader(true);
+        this.store.dispatch(showLoader());
 
         if (this.auth.isAuthenicated()) {
             req = req.clone({
@@ -34,10 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
             .pipe(
                 filter(this._isHttpResponse),
                 map((res) => {
-                    if (res.body.serviceError != null) {
-                      //  console.log(res.body.serviceError.message);
-                    }
-                    this.prodServ.runLoader(false);
+                    this.store.dispatch(hideLoader());
                     return res;
                 }),
                 catchError(error => {
@@ -45,9 +45,7 @@ export class AuthInterceptor implements HttpInterceptor {
                         this.auth.logout();
                         this.router.navigate(['/admin', 'login']);
                     }
-
-                  //  console.log(error);
-                    this.prodServ.runLoader(false);
+                    this.store.dispatch(hideLoader());
                     return throwError(error);
                 })
             );

@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { addProductError, addProductPending, addProductSuccess,
+import { addUpdateProductError, addUpdateProductPending, addUpdateProductSuccess,
         clearProductError, getProductsError, getProductsSuccess, removeProductError, removeProductPending, removeProductSuccess } from '../../actions/admin/product.action';
 import { IProductState } from '../../models/admins.model';
 
@@ -29,19 +29,19 @@ const productReducer = createReducer(
             loaded: false
         };
     }),
-    on(addProductPending, (state) => {
+    on(addUpdateProductPending, (state) => {
         return {
             ...state,
             successOperation: false
         };
     }),
-    on(addProductSuccess, (state) => {
+    on(addUpdateProductSuccess, (state) => {
         return {
             ...state,
             successOperation: true
         };
     }),
-    on(addProductError, (state, action) => {
+    on(addUpdateProductError, (state, action) => {
         return {
             ...state,
             successOperation: false,

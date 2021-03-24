@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
     addProductNameError, addProductNamePending, addProductNameSuccess,
     getProductNamesError, getProductNamesSuccess,
-    removeProductNameSuccess, removeProductNameError, removeProductNamePending, clearProductNameError
+    removeProductNameSuccess, removeProductNameError, removeProductNamePending, clearProductNameError, getProductNamesPending
 } from '../../actions/admin/productName.action';
 import { INameState } from '../../models/admins.model';
 

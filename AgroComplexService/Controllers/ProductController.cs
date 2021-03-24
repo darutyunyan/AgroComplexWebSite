@@ -29,16 +29,16 @@ namespace AgroComplexService.Controllers
 
 		#region Admin public methods
 
-		[Route("AddProduct")]
+		[Route("AddUpdateProduct")]
 		[HttpPost]
 		[Authorize(AuthenticationSchemes = "Bearer")]
-		public async Task<Response> AddProduct(AddProductRequest request)
+		public async Task<Response> AddUpdateProduct(AddUpdateProductRequest request)
 		{
 			Response response = new Response();
 
 			try
 			{
-				await _productServ.AddProduct(request);
+				await _productServ.AddUpdateProduct(request);
 			}
 			catch (Exception ex)
 			{

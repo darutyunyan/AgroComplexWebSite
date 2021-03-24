@@ -10,7 +10,6 @@ import {
 } from '../../actions/admin/productName.action';
 import { IResponseError } from '../../models/error';
 
-
 @Injectable()
 export class ProductNameEffects {
     public getProductNames$: CreateEffectMetadata = createEffect(() => this.actions$.pipe(

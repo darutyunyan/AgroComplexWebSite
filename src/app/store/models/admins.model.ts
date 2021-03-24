@@ -47,6 +47,8 @@ export interface IProductItem {
     productType: string;
     productName: string;
     columnType: string;
+    productNameId: string;
+    columnTypeId: string;
 }
 
 export interface IAccountState {

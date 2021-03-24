@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { ProductService } from 'src/app/admin/shared/services/product.service';
 import {
-    addProductError, addProductPending, addProductSuccess, getProductsError,
+    addUpdateProductError, addUpdateProductPending, addUpdateProductSuccess, getProductsError,
     getProductsPending, getProductsSuccess, removeProductError, removeProductPending,
     removeProductSuccess
 } from '../../actions/admin/product.action';
@@ -28,19 +28,19 @@ export class ProductEffects {
         )
     ));
 
-    public addProduct$: CreateEffectMetadata = createEffect(() => this.actions$.pipe(
-        ofType(addProductPending),
-        mergeMap((request) => this.productService.addProduct(request)
+    public addUpdateProduct$: CreateEffectMetadata = createEffect(() => this.actions$.pipe(
+        ofType(addUpdateProductPending),
+        mergeMap((request) => this.productService.addUpdateProduct(request)
             .pipe(
                 map((response: IResponseError) => {
                     if (response.error == null) {
-                        return addProductSuccess();
+                        return addUpdateProductSuccess();
                     } else {
-                        return addProductError({ error: response.error });
+                        return addUpdateProductError({ error: response.error });
                     }
                 }),
                 catchError(
-                    (httpError) => of(addProductError({ error: { statusCode: httpError.status, message: httpError.message } }))
+                    (httpError) => of(addUpdateProductError({ error: { statusCode: httpError.status, message: httpError.message } }))
                 )
             )
         )

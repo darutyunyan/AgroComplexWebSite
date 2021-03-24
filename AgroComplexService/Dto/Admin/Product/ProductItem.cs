@@ -1,10 +1,8 @@
-using System;
-
 namespace AgroComplexService.Dto.Product
 {
 	public class ProductItem
 	{
-		public Guid Id { get; set; }
+		public string Id { get; set; }
 
 		public string Info { get; set; }
 
@@ -13,5 +11,9 @@ namespace AgroComplexService.Dto.Product
 		public string ProductName { get; set; }
 
 		public string ColumnType { get; set; }
+
+		public string ProductNameId { get; set; }
+
+		public string ColumnTypeId { get; set; }
 	}
 }

@@ -31,7 +31,7 @@ namespace AgroComplexService.Models.Services.ProductService
 
 		#region Admin public methods
 
-		public async Task AddProduct(AddProductRequest request)
+		public async Task AddUpdateProduct(AddUpdateProductRequest request)
 		{
 			if (request == null)
 				throw new ArgumentException("request");
@@ -45,15 +45,34 @@ namespace AgroComplexService.Models.Services.ProductService
 			if (string.IsNullOrEmpty(request.ColumnTypeId))
 				throw new ArgumentException("columnTypeId");
 
-			Product product = new Product()
+			Product product = null;
+			if (!string.IsNullOrEmpty(request.Id))
 			{
-				Id = Guid.NewGuid(),
-				Info = request.Info,
-				ColumnTypeId = Guid.Parse(request.ColumnTypeId),
-				ProductNameId = Guid.Parse(request.ProductNameId)
-			};
+				product = await _productRepo.GetById(Guid.Parse(request.Id));
 
-			await _productRepo.Add(product);
+				if (product == null)
+					throw new ArgumentNullException("");
+			}
+
+			bool isNewProduct = product == null;
+			if (isNewProduct)
+			{
+				product = new Product();
+				product.Id = Guid.NewGuid();
+			}
+
+			product.Info = request.Info;
+			product.ColumnTypeId = Guid.Parse(request.ColumnTypeId);
+			product.ProductNameId = Guid.Parse(request.ProductNameId);
+
+			if (isNewProduct)
+			{
+				await _productRepo.Add(product);
+			}
+			else
+			{
+				await _productRepo.Update(product);
+			}			
 		}
 
 		public async Task<GetAllProductsResponse> GetAllProducts()
@@ -65,11 +84,13 @@ namespace AgroComplexService.Models.Services.ProductService
 			{
 				items.Add(new ProductItem()
 				{
-					Id = item.Id,
+					Id = item.Id.ToString(),
 					Info = item.Info,
 					ProductType = item.ProductName.ProductType.Name,
 					ProductName = item.ProductName.Name,
-					ColumnType = item.ColumnType.Name
+					ColumnType = item.ColumnType.Name,
+					ProductNameId = item.ProductNameId.ToString(),
+					ColumnTypeId = item.ColumnTypeId.ToString()
 				});
 			}
 

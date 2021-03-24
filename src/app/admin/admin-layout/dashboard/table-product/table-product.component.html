@@ -19,6 +19,7 @@
                 Наименования столбцов таблицы в которой будет отображаться информация о продукте
             </th>
             <th class="mat-header-cell"></th>
+            <th class="mat-header-cell"></th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +28,11 @@
             <td class="mat-cell">{{product.info}}</td>
             <td class="mat-cell">{{product.productType}}</td>
             <td class="mat-cell">{{product.columnType}}</td>
+            <td class="mat-cell">
+                <button (click)="update(product)" mat-icon-button color="primary">
+                    <mat-icon>system_update_alt</mat-icon>
+                </button>
+            </td>
             <td class="mat-cell">
                 <button (click)="remove(product.id)" mat-icon-button color="warn">
                     <mat-icon>clear</mat-icon>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../shared/services/product.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { IAdminState } from 'src/app/store/reducers/admin';
 
 @Component({
   selector: 'app-loader',
@@ -8,15 +10,12 @@ import { ProductService } from '../../shared/services/product.service';
 })
 export class LoaderComponent implements OnInit {
 
-  public isShow: boolean;
+  public isShow$: Observable<boolean>;
 
-  constructor(private productServ: ProductService) {
-  }
+  constructor(private store: Store<IAdminState>) { }
 
   public ngOnInit(): void {
-    this.productServ.getLoaderStatus().subscribe((value) => {
-      this.isShow = value;
-    });
+    this.isShow$ = this.store.select(s => s.adminState.loader.isShow);
   }
 
 }

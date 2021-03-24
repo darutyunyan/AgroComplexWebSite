@@ -8,6 +8,8 @@ import { IAdminState } from 'src/app/store/reducers/admin';
 import { removeProductPending } from 'src/app/store/actions/admin/product.action';
 import { showMessage } from 'src/app/store/actions/message.action';
 import { IProductItem } from 'src/app/store/models/admins.model';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 @Component({
   selector: 'app-table-product',
@@ -21,7 +23,9 @@ export class TableProductComponent extends UnSubscriber implements OnInit {
   public productName: string;
   public successOperation$: Observable<boolean>;
 
-  constructor(private store: Store<IAdminState>) {
+  constructor(
+    private store: Store<IAdminState>,
+    private dialog: MatDialog) {
     super();
     this.successOperation$ = store.select(s => s.adminState.productState.successOperation);
   }
@@ -38,6 +42,18 @@ export class TableProductComponent extends UnSubscriber implements OnInit {
           }));
         }
       });
+  }
+
+  public update(product: IProductItem): void {
+    const dialogConfig = new MatDialogConfig<IProductItem>();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '600px';
+
+    dialogConfig.data = product;
+
+    this.dialog.open(EditProductComponent, dialogConfig);
   }
 
   public remove(id): void {

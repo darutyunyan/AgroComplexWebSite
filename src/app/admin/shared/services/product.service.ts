@@ -1,25 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {  Observable } from 'rxjs';
 
 @Injectable()
 export class ProductService {
-    public isShowLoader: BehaviorSubject<boolean>;
 
-    constructor(private http: HttpClient) {
-        this.isShowLoader = new BehaviorSubject<boolean>(false);
-    }
+    constructor(private http: HttpClient) { }
 
-    public getLoaderStatus(): Observable<boolean> {
-        return this.isShowLoader.asObservable();
-    }
-
-    public runLoader(newValue): void {
-        this.isShowLoader.next(newValue);
-    }
-
-    public addProduct(request): Observable<object> {
-        return this.http.post(`/product/addProduct`, request);
+    public addUpdateProduct(request): Observable<object> {
+        return this.http.post(`/product/addUpdateProduct`, request);
     }
 
     public getAllProducts(): Observable<object> {
